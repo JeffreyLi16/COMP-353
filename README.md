@@ -7,6 +7,7 @@ this project, we will provide a relational database design and your team is requ
 to (1) create the tables in MySQL, (2) populate them with "enough", typical data,
 and (3) formulate and run a given set of queries against the database and report
 the results.
+
 b. In part II of the course project, called the main project, we will provide a description
 of a "realistic" application for which your team should design a database schema.
 You need to show details of the steps from the E/R diagram to the refined and
