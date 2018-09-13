@@ -47,3 +47,160 @@ include as the cover page, the "Expectations of Originality" form available from
 web page.
 4. Recommendation: We encourage a collaborative learning approach in this course. We
 also recommend to start working on the projects and assignments as early as possible! 
+
+
+DATABASE INFO:
+The ENCS usernames in this group are
+
+   a_ariyan,jas_chun,l_jef,s_chian,t_mei
+
+You have been given the "group account" xdc353_2 to do your project work
+for this course. "group accounts" are needed so that you can share files
+with your partners easily.
+
+2 email aliases have been setup for your group. Sending email to either
+xdc353_2@encs.concordia.ca or xd_comp353_2@encs.concordia.ca will send email
+to each one of you.
+
+Though you have a group account you do not have to login to it. You have
+been added to the "xdc353_2" linux group and you can write in the following
+directories:
+
+
+    /groups/x/xd_comp353_2       This directory is where you should cd into
+                                 and use while working on the project.
+                                 It is *NOT* available on the web server!
+
+
+    /www/groups/x/xd_comp353_2   This is the directory where you should place
+                                 *ALL* the files to be viewable on the web.
+
+
+You as a user do not have any disk quota on the above directories but the
+linux group "xdc353_2" does. The above directories have the sgid bit set
+(the 's' in 'rws' below) which means that any files or directories created
+below these ones will automatically belong to the "xdc353_2" group
+
+   permissions     owner       group        location
+    drwxrws---    xdc353_2   xdc353_2      /groups/x/xd_comp353_2
+    dr-xrws---    nul-web    xdc353_2      /www/groups/x/xd_comp353_2
+
+(The web server initially runs as "nul-web" before switching to "xdc353_2".)
+
+
+If you change the permissions of any directory under these make sure that
+the 's' bit is on (use "chmod g+s name_of_subdirectory" to do so). If you
+ever get a message that you are over quota please check the permissions of
+the directory you are trying to write into.
+
+The server used for the project runs Scientific Linux 7.4
+The version of MYSQL in use this term is 5.6.39 and PHP is version 7.2.5
+
+You can run the command "mysql" on any linux machine in the faculty.
+
+Your MYSQL username is xdc353_2
+The name of the MYSQL server is xdc353.encs.concordia.ca
+The name of the database you can use is also xdc353_2
+The password for your database is AJJST353  (case sensitive)
+You cannot change this password.
+
+
+To run mysql use the following:
+
+[login] 101 => mysql -h xdc353.encs.concordia.ca -u xdc353_2 -p xdc353_2
+Enter password: AJJST353
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 350
+Server version: 5.6.39 Source distribution
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create table employees(SIN dec(9));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_xdc353_2 |
++--------------------+
+| employees          |
++--------------------+
+1 row in set (0.01 sec)
+
+mysql> alter table employees add Name char(25);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| SIN   | decimal(9,0) | YES  |     | NULL    |       |
+| Name  | char(25)     | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> drop table employees;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> exit
+Bye
+
+
+The User ID  for web access is xdc353_2
+The password for web access is AJJST353
+
+The base URL for your web pages is
+
+    https://xdc353.encs.concordia.ca/
+
+Note: it is https not http! The web server will automatically redirect
+       to https if the URL starts with http.
+
+
+As an example you can create a foo.php in /www/groups/x/xd_comp353_2
+that contains:
+
+<HTML>
+<HEAD>
+   <TITLE>Date/Time Functions Demo</TITLE>
+</HEAD>
+<BODY>
+<H1>Date/Time Functions Demo</H1>
+<P>The current date and time is
+<EM><?echo date("D M d, Y H:i:s", time())?></EM>
+<P>Current PHP version:
+<EM><?echo  phpversion()?></EM>
+</BODY>
+</HTML>
+
+
+Using the URL https://xdc353.encs.concordia.ca/foo.php
+you would see something like
+
+     Date/Time Functions Demo
+
+     The current date and time is Wed Sep 12, 2018 15:41:43
+
+     Current PHP version: 7.2.5
+
+
+Stan
+
+*****************************************************************************
+* Stan Swiercz              * Tel: (514) 848-2424 ext 3054   Fax: 848-2830  *
+* Manager Apps and Info Sys * Room:EV-7.165 Email:stan.swiercz@concordia.ca *
+* ENCS -- AITS              * WWW: http://users.encs.concordia.ca/~stan     *
+* Concordia University      *************************************************
+* Montreal, Canada          *  A clean desk is a sure sign of a sick mind!  *
+*****************************************************************************
+
