@@ -172,7 +172,7 @@ Note: it is https not http! The web server will automatically redirect
 
 As an example you can create a foo.php in /www/groups/x/xd_comp353_2
 that contains:
-
+```
 <HTML>
 <HEAD>
    <TITLE>Date/Time Functions Demo</TITLE>
@@ -185,7 +185,7 @@ that contains:
 <EM><?echo  phpversion()?></EM>
 </BODY>
 </HTML>
-
+```
 
 Using the URL https://xdc353.encs.concordia.ca/foo.php
 you would see something like
