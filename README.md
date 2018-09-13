@@ -126,11 +126,13 @@ mysql> create table employees(SIN dec(9));
 Query OK, 0 rows affected (0.03 sec)
 
 mysql> show tables;
+```
 +--------------------+
 | Tables_in_xdc353_2 |
 +--------------------+
 | employees          |
 +--------------------+
+```
 1 row in set (0.01 sec)
 
 mysql> alter table employees add Name char(25);
@@ -138,6 +140,7 @@ Query OK, 0 rows affected (0.03 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
 mysql> desc employees;
+```
 +-------+--------------+------+-----+---------+-------+
 | Field | Type         | Null | Key | Default | Extra |
 +-------+--------------+------+-----+---------+-------+
@@ -145,7 +148,7 @@ mysql> desc employees;
 | Name  | char(25)     | YES  |     | NULL    |       |
 +-------+--------------+------+-----+---------+-------+
 2 rows in set (0.00 sec)
-
+```
 mysql> drop table employees;
 Query OK, 0 rows affected (0.02 sec)
 
