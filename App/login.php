@@ -28,6 +28,12 @@
          $_SESSION['cardNumber'] = $mycardNumber;
          $_SESSION['FirstName'] = $row['FirstName'];
          $_SESSION['LastName'] = $row['LastName'];
+         $_SESSION['birthDate'] = $row['Birthday'];
+         $_SESSION['joinDate'] = $row['JoinDate'];
+         $_SESSION['address'] = $row['Address'];
+         $_SESSION['email'] = $row['Email'];
+         $_SESSION['phoneNumber'] = $row['PhoneNumber'];
+         $_SESSION['lastTransDate'] = $row['LastTransDate'];
          header("location: homepage.php");
       }else {
          $error = "Your Login Name or Password is invalid";

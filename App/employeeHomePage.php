@@ -7,6 +7,13 @@
     $ID = $_SESSION["employeeID"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
+    $title = $_SESSION['title'];
+    $address = $_SESSION['address'];
+    $startDate = $_SESSION['startDate'];
+    $salary = $_SESSION['salary'];
+    $email = $_SESSION['email'];
+    $phoneNumber = $_SESSION['phoneNumber'];
+    $branchID = $_SESSION['branchID'];
 ?>
 
 <html>
@@ -25,9 +32,26 @@
     </ul>
   </div>
 </nav>
-      <div id="main-wrapper"><h2><center>welcome <?php echo $firstName;?></center></h2>
-
-      <div><a href="openClientAccount.php">Create client account</a></div>
+      <div id="main-wrapper">
+        <h2>
+          <center>Welcome <?php echo $firstName;?></center>
+        </h2>
+        <div>
+          <?php 
+            echo "<b>Employee Information</b></br>
+                  ID: " . $ID . "</br>
+                  Title : " . $title . "</br> 
+                  First name : " . $firstName . "</br>
+                  Last Name : " . $lastName . "</br>
+                  Address : " . $address . "</br>
+                  Start Date : " . $startDate . "</br>
+                  Salary : " . $salary . "</br>
+                  Email : " . $email . "</br>
+                  Phone number : " . $phoneNumber . "</br>
+                  Branch ID : " . $branchID . "</br>"
+          ?>
+        </div>
+      <div></br><a href="openClientAccount.php">Create client account</a></div>
 
       </div>
    </body>
