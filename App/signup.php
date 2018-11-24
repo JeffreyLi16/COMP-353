@@ -68,7 +68,7 @@
       <a href="login.php"><button type="button" class="back_btn">Return to Login</button></a>
   </form>
   </div>
-<div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
+<div style = "font-size:11px; color:#cc0000; margin-top:10px"></div>
   </div>
 </body>
 </html>
