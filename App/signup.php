@@ -42,7 +42,9 @@
         echo '<script type="text/javascript">alert("Your confirm password does not match")</script>';
       }
 
+
     }
+
 
 ?>
 
@@ -68,8 +70,16 @@
       <a href="login.php"><button type="button" class="back_btn">Return to Login</button></a>
   </form>
   </div>
+<<<<<<< HEAD
 <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
   </div>
+=======
+</form>
+
+<div style = "font-size:11px; color:#cc0000; margin-top:10px"></div>
+
+>>>>>>> 481fc6f2b03e3e93b0d24f858c73041a80a9cb05
 </body>
 </html>
 
+    
