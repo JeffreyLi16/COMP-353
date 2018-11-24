@@ -30,33 +30,31 @@
 ?>
 
 <html>
-   <body bgcolor = "#FFFFFF">
-	
-      <div align = "center">
-         <div style = "width:300px; border: solid 1px #333333; " align = "left">
-            <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
-				
-            <div style = "margin:30px">
+   <head>   
+      <title>Login</title>
+      <link rel="stylesheet" href="css/login.css"
+   </head>
+   <body>
+      <div id="main-wrapper"><h2><center>Login</center></h2>
+
+         <div style = "margin:30px">
                
-               <form action = "" method = "post">
-                  <label>Card Number  :</label><input type = "text" name = "cardNumber" class = "box"/><br /><br />
-                  <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
-                  <input type = "submit" value = " Submit "/><br />
-               </form>
+            <form action = "" method = "post">
+               <label><strong>Card Number :</strong></label>
+               <input type = "text" name = "cardNumber" placeholder="Card Number" required/> <br> <br>
                
-               <div style = "font-size:11px; color:#cc0000; margin-top:10px">
-                    <?php 
-                        if($error = null) 
-                            echo $error; 
-                    ?>
-                </div>
-					
-            </div>
-				
+               <label><strong>Password :</strong></label>
+               <input type = "password" name = "password" placeholder="Enter your password" required/><br/><br />
+               
+               <button class="login_button" name="login" type="submit">Login</button>
+               <a href="signup.php"><button type="button" class="register_btn">Register</button></a>
+            </form>
+               					
          </div>
-			
+
       </div>
+      
+      <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
 
    </body>
 </html>
-
