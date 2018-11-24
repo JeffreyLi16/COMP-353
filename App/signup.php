@@ -5,10 +5,16 @@
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form 
       
-      $myusername = $_POST['username'];
-      $mypassword = $_POST['password'];
+      $accountID = $_POST['accountID'];
+      $password = $_POST['password'];
 
-      $sql = "SELECT AccountID FROM Account WHERE username = '$myusername'";
+      $sql = "SELECT AccountID FROM Client, Account WHERE Client.ClientID = Account.ClientID and AccountID = $accountID";
+
+      $user_get = mysqli_query($db, $sql);
+
+      $user = mysqli_fetch_array($user_get);
+
+      echo $user['username']; // This will echo the Username
       $result = mysqli_query($db,$sql);
 
       $count = mysqli_num_rows($result);
@@ -30,7 +36,7 @@
 </style>
 <body>
 
-<form action="/login.php" style="border:1px solid #ccc">
+<form action="" style="border:1px solid #ccc">
   <div class="container">
     <h1>Sign Up</h1>
 
