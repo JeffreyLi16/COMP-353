@@ -7,6 +7,14 @@
     $ID = $_SESSION["employeeID"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
+
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+      
+      $clientID = $_POST['clientID'];
+
+      $sql = "SELECT * FROM Client, Account WHERE Client.ClientID = '$clientID'";
+      
+   }
 ?>
 
 <html>
@@ -26,10 +34,25 @@
     </ul>
   </div>
 </nav>
-      <div id="main-wrapper"><h2><center>welcome <?php echo $firstName;?></center></h2>
 
-      <div><a href="openClientAccount.php">Create client account</a></div>
-
+    <div class="container">
+    <form action="" method="post">
+      <div class="form-group">
+        <label>Select New Account Type:</label>
+          <select name="accountType" class="form-control">
+            <option value="Checking">Checking</option>
+            <option value="Savings">Savings</option>
+          </select>
       </div>
+        <div class="form-group">
+          <label>ClientID</label>
+          <input type="text" class="form-control" name="clientID">
+        </div>
+            <button type="submit" class="btn btn-secondary">Submit</button>
+    </form>
+    </div>
+
+
+      
    </body>
 </html>
