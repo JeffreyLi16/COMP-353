@@ -19,7 +19,7 @@
         <ul class="nav navbar-nav navbar-right">
           <!-- <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
           <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
-          <li><a href="userInfo.php"><span class="glyphicon glyphicon-user"></span> Setting</a></li>
+          <li><a href="userInfo.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
           <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
