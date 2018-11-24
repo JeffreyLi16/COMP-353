@@ -1,5 +1,5 @@
 <?php
-   include("config.php");
+   include("config.local.php");
    session_start();
    
    if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,12 +22,12 @@
       if($count == 1){
       	$sql = "SELECT ClientID FROM BelongsTo WHERE AccountID = '$myusername'";
       	$result = mysqli_query($db,$sql);
-      	$sql = "UPDATE Client SET Password = '$mypassword' WHERE ClientID = '$result'"
+      	$sql = "UPDATE Client SET Password = '$mypassword' WHERE ClientID = '$result'";
       }
       else {
       	$error = "Invalid AccountID";
       }
-         
+    } 
       
 ?>
 <!DOCTYPE html>
@@ -51,8 +51,9 @@
   </div>
 </form>
 
-<div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
+<div style = "font-size:11px; color:#cc0000; margin-top:10px"></div>
 
 </body>
 </html>
 
+    
