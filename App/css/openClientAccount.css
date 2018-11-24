@@ -1,0 +1,13 @@
+#open-client-account .title {
+    font-size: 24px;
+    text-align: center;
+    margin: 24px 0;
+}
+
+#open-client-account .btn-new-account {
+    margin: 18px;
+}
+
+#open-client-account .new-account-form {
+    margin: 14px;
+}
