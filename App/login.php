@@ -1,14 +1,15 @@
 <?php
-   include("config.php");
+   //include("config.php");
+   include("config.local.php");
    session_start();
    
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form 
       
-      $myusername = $_POST['username'];
+      $mycardNumber = $_POST['cardNumber'];
       $mypassword = $_POST['password']; 
       
-      $sql = "SELECT id FROM Employee WHERE username = '$myusername' and passcode = '$mypassword'";
+      $sql = "SELECT FirstName FROM Client, Account WHERE Client.ClientID = Account.ClientID and CardNumber = $mycardNumber and Password = $mypassword";
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $active = $row['active'];
@@ -17,9 +18,9 @@
       
       // If result matched $myusername and $mypassword, table row must be 1 row
 		
-      if($count == 1) {
-         session_register("myusername");
-         $_SESSION['login_user'] = $myusername;
+      if($count == 2) {
+         session_register("cardNumber");
+         $_SESSION['login_user'] = $mycardNumber;
          
          header("location: welcome.php");
       }else {
@@ -38,12 +39,17 @@
             <div style = "margin:30px">
                
                <form action = "" method = "post">
-                  <label>UserName  :</label><input type = "text" name = "username" class = "box"/><br /><br />
+                  <label>Card Number  :</label><input type = "text" name = "cardNumber" class = "box"/><br /><br />
                   <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
                   <input type = "submit" value = " Submit "/><br />
                </form>
                
-               <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
+               <div style = "font-size:11px; color:#cc0000; margin-top:10px">
+                    <?php 
+                        if($error = null) 
+                            echo $error; 
+                    ?>
+                </div>
 					
             </div>
 				
