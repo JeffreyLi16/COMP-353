@@ -61,25 +61,37 @@
 
 <head>
   <link rel="stylesheet" href="css/openClientAccount.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
+
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">WebSiteName</a>
-      </div>
-      <ul class="nav navbar-nav navbar-right">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Bank of Concordia</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="employeeHomePage.php">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="openClientAccount.php">Open Account</a>
+        </li>
       </ul>
+      <div class="navbar-nav ml-4">
+        <a class="nav-item nav-link" href="employeeSetting.php"> Account </a>
+        <a class="nav-item nav-link" href="logout.php"> Logout </a>
+      </div>
     </div>
   </nav>
 
   <div class="container" id="open-client-account">
- 
+
     <!-- Print success message -->
     <?php if(isset($clientAccountInfo)) {  
       echo("
@@ -89,10 +101,10 @@
       ");
     }
     ?>
-    
+
     <div class="title"> Create New Account</div>
-    <div class="panel panel-default">
-      <div class="panel-body new-account-form">
+    <div class="card">
+      <div class="card-body new-account-form">
         <form action="" method="post">
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -138,19 +150,19 @@
 
           <div class="form-row">
             <div class="form-group col-md-12">
-                <label>Select Service Type:</label>
-                <select name="serviceType" class="form-control">
-                  <option></option>
-                  <option value="Banking">Banking</option>
-                  <option value="Insurance">Insurance</option>
-                  <option value="Investment">Investment</option>
-                  <option value="Mortgage">Mortgage</option>
-                </select>
-              </div>
+              <label>Select Service Type:</label>
+              <select name="serviceType" class="form-control">
+                <option></option>
+                <option value="Banking">Banking</option>
+                <option value="Insurance">Insurance</option>
+                <option value="Investment">Investment</option>
+                <option value="Mortgage">Mortgage</option>
+              </select>
+            </div>
           </div>
 
           <div class="pull-right"><button type="submit" class="btn btn-info btn-new-account">Submit</button>
-          <a href="employeeHomePage.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a></div>
+            <a href="employeeHomePage.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a></div>
         </form>
       </div>
     </div>
