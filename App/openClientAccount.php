@@ -72,8 +72,7 @@
         <a class="navbar-brand" href="#">WebSiteName</a>
       </div>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="employeeLogin.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
         <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
@@ -150,7 +149,8 @@
               </div>
           </div>
 
-          <div class="pull-right"><button type="submit" class="btn btn-info btn-new-account">Submit</button></div>
+          <div class="pull-right"><button type="submit" class="btn btn-info btn-new-account">Submit</button>
+          <a href="employeeHomePage.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a></div>
         </form>
       </div>
     </div>

@@ -32,9 +32,10 @@
    <nav class="navbar navbar-inverse">
     <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+      <a class="navbar-brand">Bank Of Concordia</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
+      <li><a href="employeeSetting.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
@@ -47,12 +48,9 @@
         <button class="submit_btn" name="submit" type="submit">Submit</button>
       </form>
 
-      <div><a href="">Create client account</a></div>
+      <div><a href="openClientAccount.php">Create client account</a></div>
       
       <div id="main-wrapper">
-        <h2>
-          <center>Welcome <?php echo $firstName;?></center>
-        </h2>
         <div>
           <?php 
             echo "<b>Employee Information</b></br>
@@ -66,9 +64,10 @@
                   Email : " . $email . "</br>
                   Phone number : " . $phoneNumber . "</br>
                   Branch ID : " . $branchID . "</br>"
+
           ?>
         </div>
-      <div></br><a href="openClientAccount.php">Create client account</a></div>
+
 
       </div>
    </body>

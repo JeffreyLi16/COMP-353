@@ -11,20 +11,15 @@
     $address = $row["Address"];
     $phoneNumber = $row["PhoneNumber"];
     $email = $row["Email"];
-
-    // echo "First Name: " . $row["FirstName"] . "</br>
-    //         Last Name: " . $row["LastName"] . " </br>
-    //         Birthday: " . $row["Birthday"]. " </br>
-    //         Password: " . $row["Password"]. " </br>
-    //         Join Date: " . $row["JoinDate"]. " </br>
-    //         Address: " . $row["Address"]. " </br>
-    //         Email: " . $row["Email"]. " </br>
-    //         Phone Number: " .$row["PhoneNumber"]. "</br>";
+    $firstName = $row["FirstName"];
+    $lastName = $row["LastName"];
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         if (isset($_SESSION["employeeID"])){
             $mynewpassword = null;
+            $mynewfirstname = $_POST['newFirstName']; 
+            $mynewlastname = $_POST['newLastName']; 
         } 
         else{
             $mynewpassword = $_POST['newPassword']; 
@@ -34,13 +29,30 @@
         $mynewphonenumber = $_POST['newPhoneNumber']; 
         $alertMessageChanged = "";
 
+        if($mynewfirstname === $firstName){
+
+        }
+        else{
+            $sql = "UPDATE Client SET FirstName = '$mynewfirstname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
+            $result = mysqli_query($db, $sql);
+            $alertMessageChanged = "First Name - ";
+        }
+        if($mynewlastname === $lastName){
+
+        }
+        else{
+            $sql = "UPDATE Client SET LastName = '$mynewlastname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
+            $result = mysqli_query($db, $sql);
+            $alertMessageChanged = "Last Name - " . $alertMessageChanged;
+        }
+
         if ($mynewpassword == null){
             // $alertMessage = "password remained the same";
         }
         else {
             $sql = "UPDATE Client SET Password = '$mynewpassword' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "PASSWORD ";
+            $alertMessageChanged = "PASSWORD - ";
         }
 
         if ($mynewaddress === $address){
@@ -49,7 +61,7 @@
         else {
             $sql = "UPDATE Client SET Address = '$mynewaddress' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "ADDRESS " . $alertMessageChanged;
+            $alertMessageChanged = "ADDRESS - " . $alertMessageChanged;
         }
 
         if ($mynewemail === $email){
@@ -58,7 +70,7 @@
         else {
             $sql = "UPDATE Client SET Email = '$mynewemail' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "E-MAIL " . $alertMessageChanged;
+            $alertMessageChanged = "E-MAIL - " . $alertMessageChanged;
         }
 
         if ($mynewphonenumber === $phoneNumber){
@@ -67,7 +79,7 @@
         else {
             $sql = "UPDATE Client SET  PhoneNumber = '$mynewphonenumber' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "PHONE NUMBER " . $alertMessageChanged;
+            $alertMessageChanged = "PHONE NUMBER - " . $alertMessageChanged;
         }
 
         echo $alertMessageChanged = "Your " . $alertMessageChanged . "has been updated.";
@@ -103,24 +115,8 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <!-- <a class="navbar-brand" href="#">My Account Setting</a> -->
-
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle navbar-brand" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>My Account</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <!-- <h6 class="dropdown-header">My Account Info:</h6> -->
-                            <a class="dropdown-item" href="#">My Account</a>
-                            <a class="dropdown-item" href="#">Change Password</a>
-                            <div class="dropdown-divider"></div>
-
-                        </div>
-                    </li>
+                    <a class="navbar-brand">My Account</a>
                 </div>
-                
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                 </ul>
@@ -130,42 +126,23 @@
         <div id="main-wrapper"><h2><center>Update your Account Information</center></h2><br>
             <div><h3><center>
                 <form action = "" method = "post">
-                    <!-- <table >
-                        <tr>
-                            <td><label><strong>First Name : </strong></label></td>
-                            <td><input type="text" value = "<?php echo $row["FirstName"];?>" disabled/></td>
-                        </tr>
-                        <tr>
-                            <td><label><strong>Last Name : </strong></label></td>
-                            <td><input type="text" value = "<?php echo $row["LastName"];?>" disabled/></td>
-                        </tr>
-                        <tr>
-                            <td><label><strong>Joined Date : </strong></label></td>
-                            <td><input type="text" value = "<?php echo $row["JoinDate"];?>" disabled/></td>
-                        </tr>
-                        <tr>
-                            <td><label><strong>Password : </strong></label></td>
-                            <td><input type = "password" name = "newPassword" placeholder="Enter your new password"/></td>
-                        </tr>
-                        <tr>
-                            <td><label><strong>Address : </strong></label></td>
-                            <td><input type = "text" name = "newAddress" value="<?php echo $row["Address"];?>"/></td>
-                        </tr>
-                        <tr>
-                            <td><label><strong>E-Mail : </strong></label></td>
-                            <td><input type = "text" name = "newEmail" value="<?php echo $row["Email"];?>"/></td>
-                        </tr>
-                        <tr>
-                            <td><label><strong>Phone Number : </strong></label></td>
-                            <td><input type = "text" name = "newPhoneNumber" value="<?php echo $row["PhoneNumber"];?>"/></td>
-                        </tr>
 
-                    </table> -->
-                    <label><strong>First Name :</strong></label> 
-                    <input type="text" value = "<?php echo $row["FirstName"];?>" disabled/><br><br>
-
-                    <label><strong>Last Name :</strong></label>
-                    <input type="text" value = "<?php echo $row["LastName"];?>" disabled/><br><br>
+                    <?php
+                        if (isset($_SESSION["employeeID"])){
+                            echo "<label><strong>First Name :</strong></label> 
+                            <input type=\"text\" name= \"newFirstName\" value = \"$firstName\" /><br><br>";
+    
+                            echo "<label><strong>Last Name :</strong></label>
+                            <input type=\"text\" name= \"newLastName\"value = \"$lastName\" /><br><br>";
+                        } 
+                        else{
+                            echo "<label><strong>First Name :</strong></label> 
+                            <input type=\"text\" value = \"$firstName\" disabled/><br><br>";
+    
+                            echo "<label><strong>Last Name :</strong></label>
+                            <input type=\"text\" value = \"$lastName\" disabled/><br><br>";
+                        }
+                    ?>
                     
                     <label><strong>Joined Date :</strong></label>
                     <input type="text" value = "<?php echo $row["JoinDate"];?>" disabled/><br><br>
@@ -178,7 +155,6 @@
                     <input type = \"password\" name = \"newPassword\" placeholder=\"Enter your new password\"/><br/><br />";
                     }
                     ?>
-                    
                     
                     <label><strong>Address :</strong></label>
                     <input type = "text" name = "newAddress" value="<?php echo $row["Address"];?>"/> <br> <br>
@@ -198,4 +174,3 @@
         </div>
     </body>
 </html>
-

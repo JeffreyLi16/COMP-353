@@ -66,6 +66,6 @@
          </div>
 
       </div>
-      <a href="login.php"><button type="button" class="ClientLogin_btn">ClientLogin</button></a>
+      <a href="login.php"><button type="button" class="ClientLogin_btn">Client Login</button></a>
    </body>
 </html>
