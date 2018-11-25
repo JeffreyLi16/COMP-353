@@ -66,6 +66,7 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="employeeSetting.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
+          <li><a href="myschedule.php"><span class="glyphicon glyphicon-calendar"></span> My Schedule</a></li>
           <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
@@ -109,5 +110,5 @@
       </div>
     </div> -->
 
-   </body>
+  </body>
 </html>
