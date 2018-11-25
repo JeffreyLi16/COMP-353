@@ -37,6 +37,7 @@
     <ul class="nav navbar-nav navbar-right">
       <li><a href="employeeSetting.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="myschedule.php"><span class=""></span>My schedule</a></li>
     </ul>
   </div>
 </nav>
