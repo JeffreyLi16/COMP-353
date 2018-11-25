@@ -37,25 +37,6 @@
 ?>
 
 <html>
-<<<<<<< HEAD
-<head>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">   
-</head>
-   <body>
-   <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand">Bank Of Concordia</a>
-    </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="employeeSetting.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-      <li><a href="myschedule.php"><span class=""></span> My Schedule</a></li>
-    </ul>
-  </div>
-</nav>
-      <div id="main-wrapper"><h2><center>Hello <?php echo $firstName . $lastName;?></center></h2>
-=======
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="css/employee.css">
@@ -69,13 +50,13 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="employeeSetting.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
+          <li><a href="myschedule.php"><span class="glyphicon glyphicon-calendar"></span> My Schedule</a></li>
           <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
       </div>
     </nav>
     <h2><center>Hello <?php echo $firstName . $lastName;?></center></h2>
     <div id="main-wrapper">
->>>>>>> adac841d38814954750309451a58df69821d9340
 
       <form action = "" method = "post">
         <label>ENTER CLIENT CARD NUMBER: </label>
@@ -104,5 +85,5 @@
       </div>
     </div> -->
 
-   </body>
+  </body>
 </html>
