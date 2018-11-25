@@ -29,12 +29,7 @@
           <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-  </div>
+
 </nav>
       <div id="main-wrapper">
         <h2>
@@ -54,6 +49,46 @@
           ?>
         </div>  
       </div>
+
+      <hr>
+<?php 
+echo "List of Accounts: ";
+$sql = "SELECT Account.* FROM Account WHERE Account.ClientID =  (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
+$result = mysqli_query($db, $sql);
+
+// CardNumber VARCHAR(16) NOT NULL UNIQUE,
+//     AccountType VARCHAR(20) NOT NULL,
+//     AccountOption VARCHAR(20) NOT NULL,
+//     AccountLevel VARCHAR(20) NOT NULL,
+//     Balance DECIMAL(20,2) NOT NULL,
+//     BranchID INT NOT NULL,
+//     ClientID INT NOT NULL,
+//     ServiceID 
+while ($row = mysqli_fetch_assoc($result)){
+  echo "<table style=\" background-repeat:no-repeat; width:450px;margin:10;\" cellpadding=\"10\" cellspacing=\"10\" border=\"1\">
+          <tr>
+          <th>Card Number</th>
+          <th>Account Type</th>
+          <th>Account Option</th>
+          <th>Account Level</th>
+          <th>Balance</th>
+          </tr>
+          ";
+  echo  "<td>" . $row["CardNumber"] . "</td>";        
+  echo  "<td>" . $row["AccountType"] . "</td>";
+  echo  "<td>" . $row["AccountOption"] . "</td>";
+  echo  "<td>" . $row["AccountLevel"] . "</td>";
+  echo  "<td>" . $row["Balance"] . "</td>";
+  echo "</table> </br>";
+       
+}
+
+echo "<hr>";
+echo "List of Transactions: ";
+
+?>
+
+
    </body>
 </html>
 
