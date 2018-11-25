@@ -86,7 +86,7 @@
         $url = "";
         
         if (isset($_SESSION["employeeID"])){
-            $url = "employeeHomePage.php";
+            $url = "userInfo.php";
             function myAlert($alertMessageChanged, $url){
                 echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
                 echo "<script>document.location = '$url'</script>";
