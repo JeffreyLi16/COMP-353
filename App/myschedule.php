@@ -26,22 +26,110 @@
     }
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $alertMessageChanged = "";
+        $url = "myschedule.php";
         if($_POST['submit'] == "workday"){
             $newDate = $_POST['newDate'];
             $newStart = Date("G:i:s", strtotime($_POST['newStart']));
             $newEnd = Date("G:i:s", strtotime($_POST['newEnd']));
 
-            $sql = "INSERT INTO Schedule (EmployeeID, Date, StartTime, EndTime, isHoliday, isSick) VALUES
-                ('$ID', '$newDate', '$newStart', '$newEnd', '0', '0');";
+            if(validDate($newDate, $rows) && validTime($_POST['newStart'], $_POST['newEnd'])){
+                $sql = "INSERT INTO Schedule (EmployeeID, Date, StartTime, EndTime, isHoliday, isSick) VALUES
+                    ('$ID', '$newDate', '$newStart', '$newEnd', '0', '0');";
+                $result = mysqli_query($db, $sql);
+            }
+            else{
+                if(!validDate($newDate, $rows)){
+                    $alertMessageChanged = "Invalid date: Date already exist";
+                    myAlert($alertMessageChanged, $url);
+                }
+                else{
+                    $alertMessageChanged = "Invalid time: Start time must be before end time";
+                    myAlert($alertMessageChanged, $url);
+                }
+            }
+        }
+        else if($_POST['submit'] == "leave"){
+            $newDate = $_POST['newLeaveDate'];
+            $newReason = $_POST['newReason'];
+
+            if(validDate($newDate, $rows)){
+                if($newReason === 'isSick'){
+                    $sql = "INSERT INTO Schedule (EmployeeID, Date, isHoliday, isSick) VALUES
+                    ('$ID', '$newDate', '0', '1');";
+                }
+                else{
+                    $sql = "INSERT INTO Schedule (EmployeeID, Date, isHoliday, isSick) VALUES
+                    ('$ID', '$newDate', '1', '0');";
+                }
+                $result = mysqli_query($db, $sql);
+            }
+            else{
+                $alertMessageChanged = "Invalid date or reason";
+                myAlert($alertMessageChanged, $url);
+            }
+        }
+
+        else if($_POST['submit'] == "editWorkday"){
+            $scheduleID = $_POST['scheduleID'];
+            $editDate = $_POST['editDate'];
+            $editStart = Date("G:i:s", strtotime($_POST['editStart']));
+            $editEnd = Date("G:i:s", strtotime($_POST['editEnd']));
+
+            if(validEditDate($editDate, $rows, $scheduleID) && validTime($editStart, $editEnd)){
+                $sql = "UPDATE Schedule SET Date = '$editDate' , StartTime = '$editStart' , EndTime = '$editEnd'
+                        WHERE ScheduleID = $scheduleID;";
+                $result = mysqli_query($db, $sql);
+            }
+            else{
+                if(!validEditDate($editDate, $rows, $scheduleID)){
+                    $alertMessageChanged = "Invalid date: Date already exist";
+                    myAlert($alertMessageChanged, $url);
+                }
+                else if(!validTime($editStart, $editEnd)){
+                    $alertMessageChanged = "Invalid time: Start time must be before end time $editStart, $editEnd";
+                    myAlert($alertMessageChanged, $url);
+                }
+                else{
+                    $alertMessageChanged = "something went wrong $scheduleID $editDate $editStart $editEnd";
+                    myAlert($alertMessageChanged, $url);
+                }
+            }
+        }
+        else if($_POST['submit'] == "editLeave"){
+            $scheduleID = $_POST['scheduleID'];
+            $editDate = $_POST['editDate'];
+            $editReason = $_POST['editReason'];
+
+            if(validEditDate($editDate, $rows, $scheduleID)){
+                if($editReason === 'isSick'){
+                    $sql = "UPDATE Schedule SET Date = '$editDate' , isSick = '1' , isHoliday = '0'
+                    WHERE ScheduleID = $scheduleID;";
+                }
+                else if($editReason === 'isHoliday'){
+                    $sql = "UPDATE Schedule SET Date = '$editDate' , isSick = '0' , isHoliday = '1'
+                    WHERE ScheduleID = $scheduleID;";
+                }
+                else{//no change to reason, only date
+                    $sql = "UPDATE Schedule SET Date = '$editDate'
+                    WHERE ScheduleID = $scheduleID;";
+                }
+                $result = mysqli_query($db, $sql);
+            }
+            else{
+                    $alertMessageChanged = "Invalid date: Date already exist";
+                    myAlert($alertMessageChanged, $url);
+            }
+        }
+        else if($_POST['submit'] == "deleteFromSchedule"){
+            $scheduleID = $_POST['scheduleID'];
+            $sql = "DELETE FROM Schedule WHERE ScheduleID = $scheduleID;";
             $result = mysqli_query($db, $sql);
         }
-        else{
 
-        }
         $alertMessageChanged = "Your schedule has been updated.";
         $url = "myschedule.php";
         myAlert($alertMessageChanged, $url);
-    }
+    }   
     //alert/confirm schedule change
     function myAlert($alertMessageChanged, $url){
                 echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
@@ -53,6 +141,32 @@
         $endTimeStamp = strtotime($endTime);
         $difference = (abs($endTimeStamp - $startTimeStamp)/3600);
         return $difference;
+    }
+    function validTime($startTime,$endTime){
+        $startTimeStamp = strtotime($startTime);
+        $endTimeStamp = strtotime($endTime);
+        if($startTimeStamp<$endTimeStamp){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    function validDate($date, $rows){
+        foreach($rows as $row){
+            if($date==$row['Date']){
+                return false;
+            }
+        }
+        return true;
+    }
+    function validEditDate($date, $rows, $ID){
+        foreach($rows as $row){
+            if($date==$row['Date'] && $ID!=$row['ScheduleID']){
+                return false;
+            }
+        }
+        return true;
     }
 ?>
 
@@ -86,17 +200,23 @@
             </tr>
             <?php
                 foreach($rows as $row){
-                    if($row['isSick'] == 0 && $row['isHoliday'] == 0){
+                    if($row['isSick'] == 0 && $row['isHoliday'] == 0){ //Work schedule
                         $date = $row['Date'];
                         $startTime = $row['StartTime'];
                         $endTime = $row['EndTime'];
                         $hour = HourDiff($startTime, $endTime);
+                        $scheduleID = $row['ScheduleID'];
                         echo 
                         "<tr>
-                            <td>$date</td>
-                            <td>$startTime</td>
-                            <td>$endTime</td>
-                            <td>$hour</td> 
+                            <form action=\"\" method=\"post\">
+                            <input type=\"\" name=\"scheduleID\" value=$scheduleID hidden>
+                                <td><input type=\"date\" name=\"editDate\" value=\"$date\"></td>
+                                <td>$startTime</br><input type=\"time\" name=\"editStart\" ></td>
+                                <td>$endTime</br><input type=\"time\" name=\"editEnd\" ></td>
+                                <td>$hour</td>
+                                <td><button class=\"\" name=\"submit\" type=\"submit\" value=\"editWorkday\">Edit</button></td>
+                                <td><button class=\"\" name=\"submit\" type=\"submit\" value=\"deleteFromSchedule\">Delete</button></td>
+                            </form>
                         </tr>";
                     }
                 }
@@ -106,7 +226,8 @@
                     <td><input type="date" name="newDate" required/></td>
                     <td><input type="text" id="time2" name="newStart" placeholder="Time" disabled style="width:50%;"}><a id="link2" class="icon">Click to choose</a></td>
                     <td><input type="text" id="time" name="newEnd" placeholder="Time" disabled style="width:50%;"}><a id="link" class="icon">Click to choose</a></td>
-                    <button class="" name="submit" type="submit" value="workday">Add</button>
+                    <td></td>
+                    <td><button class="" name="submit" type="submit" value="workday">Add</button><td>
                 </form>
             </tr>
         </table>
@@ -119,29 +240,39 @@
             </tr>
             <?php
                 foreach($rows as $row){
-                    if($row['isSick'] == 1 || $row['isHoliday'] == 1){
-                        if($row['isSick'] === 1){
-                            $reason = 'Sick Day';
+                    $scheduleID = $row['ScheduleID'];
+                    if($row['isSick'] == 1 || $row['isHoliday'] == 1){ //sickday/holiday schedule
+                        if($row['isSick'] == 1){
+                            $reason = 'Sick leave';
                         }
                         else{
                             $reason = 'Holiday';
                         }
                         echo 
                         "<tr>
-                            <td>$row[Date]</td>
-                            <td>$reason</td>
+                        <form action=\"\" method=\"post\">
+                            <input type=\"\" name=\"scheduleID\" value=$scheduleID hidden>
+                            <td><input type=\"date\" name=\"editDate\" value=\"$row[Date]\"></td>
+                            <td><select name=\"editReason\">
+                                <option value=\"\" disabled selected>$reason</option>
+                                <option value = \"isSick\">Sick leave</option>
+                                <option value = \"isHoliday\">Holiday</option>    
+                            </td>
+                            <td><button class=\"\" name=\"submit\" type=\"submit\" value=\"editLeave\">Edit</button></td>
+                            <td><button class=\"\" name=\"submit\" type=\"submit\" value=\"deleteFromSchedule\">Delete</button></td>
+                        </form>
                         </tr>";
                     }
                 }
             ?>
             <tr>
                 <form action="" method = "post">
-                    <td>Date: <input type="date" name="newDate" required/></td>
+                    <td>Date: <input type="date" name="newLeaveDate" required/></td>
                     <td>Reason: <select name="newReason">
                         <option value = "isSick">Sick leave</option>
                         <option value = "isHoliday">Holiday</option>    
                     </td>
-                    <button class="" name="submit" type="submit" value="leave">Add</button>
+                    <td><button class="" name="submit" type="submit" value="leave">Add</button></td>
                 </form>
             </tr>
         </table>
