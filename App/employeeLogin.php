@@ -28,6 +28,13 @@
          $_SESSION['employeeID'] = $employeeID;
          $_SESSION['FirstName'] = $row['FirstName'];
          $_SESSION['LastName'] = $row['LastName'];
+         $_SESSION['title'] = $row['Title'];
+         $_SESSION['address'] = $row['Address'];
+         $_SESSION['startDate'] = $row['StartDate'];
+         $_SESSION['salary'] = $row['Salary'];
+         $_SESSION['email'] = $row['Email'];
+         $_SESSION['phoneNumber'] = $row['PhoneNumber'];
+         $_SESSION['branchID'] = $row['BranchID'];
          header("location: employeeHomePage.php");
       }else {
          $error = "Your Login Name or Password is invalid";
