@@ -150,7 +150,7 @@
           </div>
 
           <div class="pull-right"><button type="submit" class="btn btn-info btn-new-account">Submit</button>
-          <a href="employeeHomePage.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a></div>
+          <a href="userInfo.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a></div>
         </form>
       </div>
     </div>
