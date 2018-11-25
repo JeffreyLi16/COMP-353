@@ -167,7 +167,14 @@
                     
 
                     <button class="save_btn" name="save" type="submit">Update</button>
-                    <a href="homePage.php"><button type="button" class="back_btn">Cancel</button></a>
+                    <?php
+                        if (isset($_SESSION["employeeID"])){
+                            echo "<a href=\"employeeHomePage.php\"><button type=\"button\" class=\"back_btn\">Cancel</button></a>";
+                        }
+                        else{
+                            echo "<a href=\"homePage.php\"><button type=\"button\" class=\"back_btn\">Cancel</button></a>";
+                        } 
+                    ?>
                 </form>
             </center></h3></div>
 

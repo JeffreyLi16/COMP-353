@@ -15,7 +15,7 @@
 <head>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">   
 </head>
-   <body>
+   <body style="background-color: lightgray;">
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -29,11 +29,7 @@
           <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
-<<<<<<< HEAD
-
-=======
    
->>>>>>> master
 </nav>
       <div id="main-wrapper">
         <h2>
