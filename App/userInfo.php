@@ -115,7 +115,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand">My Account</a>
+                    <a class="navbar-brand">Bank Of Concordia</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -166,13 +166,14 @@
                     <input type = "text" name = "newPhoneNumber" value="<?php echo $row["PhoneNumber"];?>"/> <br> <br>
                     
 
-                    <button class="save_btn" name="save" type="submit">Update</button>
+                    <button class="btn btn-success save_btn" name="save" type="submit">Update</button>
                     <?php
                         if (isset($_SESSION["employeeID"])){
-                            echo "<a href=\"employeeHomePage.php\"><button type=\"button\" class=\"back_btn\">Cancel</button></a>";
+                            echo "<a href=\"openClientAccount.php\"><button type=\"button\" class=\"btn btn-info\">Create new account</button></a>";
+                            echo "<a href=\"employeeHomePage.php\"><button type=\"button\" class=\"btn btn-danger back_btn\">Leave</button></a>";
                         }
                         else{
-                            echo "<a href=\"homePage.php\"><button type=\"button\" class=\"back_btn\">Cancel</button></a>";
+                            echo "<a href=\"homePage.php\"><button type=\"button\" class=\"btn btn-danger back_btn\">Cancel</button></a>";
                         } 
                     ?>
                 </form>

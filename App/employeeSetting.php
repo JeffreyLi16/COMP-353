@@ -125,8 +125,8 @@
                     <input type = "text" name = "newPhoneNumber" value="<?php echo $phoneNumber;?>"/> <br> <br>
                     
 
-                    <button class="save_btn" name="save" type="submit">Update</button>
-                    <a href="EmployeeHomePage.php"><button type="button" class="back_btn">Cancel</button></a>
+                    <button class="save_btn btn btn-success" name="save" type="submit">Update</button>
+                    <a href="EmployeeHomePage.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a>
                 </form>
             </center></h3></div>
 
