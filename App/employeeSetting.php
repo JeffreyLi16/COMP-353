@@ -13,12 +13,12 @@
     }
 
     $sql = "SELECT * FROM Employee WHERE (EmployeeID = '$ID')";
-    $row = mysqli_fetch_assoc($result);
     $result = mysqli_query($db, $sql);
+    $row = mysqli_fetch_assoc($result);
     $firstName = $row['FirstName'];
     $lastName = $row['LastName'];
-    $startDate = $row['startDate'];
-    $salary = $row['salary'];
+    $startDate = $row['StartDate'];
+    $salary = $row['Salary'];
     $address = $row["Address"];
     $phoneNumber = $row["PhoneNumber"];
     $email = $row["Email"];
