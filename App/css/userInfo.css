@@ -1,0 +1,20 @@
+#main-wrapper{
+	border-radius : 10px;
+	/* background-color: white; */
+	/* border: 3px solid #f1f1f1; */
+	width: 500px;
+    margin: 0 auto;
+}
+
+form{
+    text-align: center;
+
+}
+.back_btn{
+    margin-left: 10px;
+}
+
+body {
+  height: 100%;
+  background-color: lightblue;
+}

@@ -7,6 +7,14 @@
     $ID = $_SESSION["employeeID"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
+
+    // for telephone banking, employee enters the client's card number
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+      $clientCardNumber = $_POST['clientCardNumber'];
+      $_SESSION["cardNumber"] = $clientCardNumber;
+      header("location: userInfo.php");
+    }
+
     $title = $_SESSION['title'];
     $address = $_SESSION['address'];
     $startDate = $_SESSION['startDate'];
@@ -24,18 +32,25 @@
    <nav class="navbar navbar-inverse">
     <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+      <a class="navbar-brand">Bank Of Concordia</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="employeeSetting.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
+      <div id="main-wrapper"><h2><center>Hello <?php echo $firstName . $lastName;?></center></h2>
+
+      <form action = "" method = "post">
+        <label>ENTER CLIENT CARD NUMBER: </label>
+        <input class="form-control" type="number" name="clientCardNumber" style="width: 250px; margin-bottom: 10px;" required/>
+        <button class="btn btn-info submit_btn" name="submit" type="submit">Submit</button>
+      </form>
+
+      <div><a href="openClientAccount.php">Create client account</a></div>
+      
       <div id="main-wrapper">
-        <h2>
-          <center>Welcome <?php echo $firstName;?></center>
-        </h2>
         <div>
           <?php 
             echo "<b>Employee Information</b></br>
@@ -49,9 +64,10 @@
                   Email : " . $email . "</br>
                   Phone number : " . $phoneNumber . "</br>
                   Branch ID : " . $branchID . "</br>"
+
           ?>
         </div>
-      <div></br><a href="openClientAccount.php">Create client account</a></div>
+
 
       </div>
    </body>
