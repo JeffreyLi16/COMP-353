@@ -29,12 +29,7 @@
           <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-  </div>
+   
 </nav>
       <div id="main-wrapper">
         <h2>
@@ -42,16 +37,16 @@
         </h2>
         <div>
           <?php 
-            echo "<b>Client Information</b></br>
-                  Card number: " . $card . "</br>
-                  First name : " . $firstName . "</br>
-                  Last Name : " . $lastName . "</br> 
-                  Birth Date : " . $birthDate . "</br> 
-                  Address : " . $address . "</br>
-                  Join Date : " . $joinDate . "</br>
-                  phoneNumber : " . $phoneNumber . "</br>
-                  Email : " . $email . "</br>"
-          ?>
+          //   echo "<b>Client Information</b></br>
+          //         Card number: " . $card . "</br>
+          //         First name : " . $firstName . "</br>
+          //         Last Name : " . $lastName . "</br> 
+          //         Birth Date : " . $birthDate . "</br> 
+          //         Address : " . $address . "</br>
+          //         Join Date : " . $joinDate . "</br>
+          //         phoneNumber : " . $phoneNumber . "</br>
+          //         Email : " . $email . "</br>"
+          // ?>
         </div>  
       </div>
    </body>
