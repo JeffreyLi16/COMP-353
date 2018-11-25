@@ -44,8 +44,8 @@
 
       <form action = "" method = "post">
         <label>ENTER CLIENT CARD NUMBER: </label>
-        <input type="number" name="clientCardNumber" required/>
-        <button class="submit_btn" name="submit" type="submit">Submit</button>
+        <input class="form-control" type="number" name="clientCardNumber" style="width: 250px; margin-bottom: 10px;" required/>
+        <button class="btn btn-info submit_btn" name="submit" type="submit">Submit</button>
       </form>
 
       <div><a href="openClientAccount.php">Create client account</a></div>
