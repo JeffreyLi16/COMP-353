@@ -5,15 +5,20 @@
         header("location:employeeLogin.php");
     }
 
-    $ID = $_SESSION["employeeID"];
-    $firstName = $_SESSION['FirstName'];
-    $lastName = $_SESSION['LastName'];
-    $startDate = $_SESSION['startDate'];
-    $salary = $_SESSION['salary'];
+    if(isset($_SESSION['viewEmployeeID'])){
+        $ID = $_SESSION['viewEmployeeID'];
+    }
+    else{
+        $ID = $_SESSION["employeeID"];
+    }
 
     $sql = "SELECT * FROM Employee WHERE (EmployeeID = '$ID')";
-    $result = mysqli_query($db, $sql);
     $row = mysqli_fetch_assoc($result);
+    $result = mysqli_query($db, $sql);
+    $firstName = $row['FirstName'];
+    $lastName = $row['LastName'];
+    $startDate = $row['startDate'];
+    $salary = $row['salary'];
     $address = $row["Address"];
     $phoneNumber = $row["PhoneNumber"];
     $email = $row["Email"];
@@ -127,6 +132,11 @@
 
                     <button class="save_btn btn btn-success" name="save" type="submit">Update</button>
                     <a href="EmployeeHomePage.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a>
+                    <?php
+                        if(isset($_SESSION['viewEmployeeID'])){
+                            echo "<a href=\"employeeSchedule.php\"><button type=\"button\" class=\"btn btn-info back_btn\">view Schedule</button></a>";
+                        }
+                    ?>
                 </form>
             </center></h3></div>
 

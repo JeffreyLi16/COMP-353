@@ -11,20 +11,36 @@
 
     // for telephone banking, employee enters the client's card number
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-      $clientCardNumber = $_POST['clientCardNumber'];
+      if($_POST['submit'] == 'viewClient'){
+        $clientCardNumber = $_POST['clientCardNumber'];
 
-      $sql = "SELECT * FROM Account WHERE(CardNumber = '$clientCardNumber')";
-      $result = mysqli_query($db, $sql);
-      $row = mysqli_fetch_assoc($result);
-      $validCardNumber = $row['CardNumber'];
-      if($clientCardNumber === $validCardNumber){
-        $_SESSION["cardNumber"] = $clientCardNumber;
-        header("location: userInfo.php");
+        $sql = "SELECT * FROM Account WHERE(CardNumber = '$clientCardNumber')";
+        $result = mysqli_query($db, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $validCardNumber = $row['CardNumber'];
+        if($clientCardNumber === $validCardNumber){
+          $_SESSION["cardNumber"] = $clientCardNumber;
+          header("location: userInfo.php");
+        }
+        else{
+          echo '<script type="text/javascript">alert("The card number is invalid. Please try again.")</script>';
+        }
       }
-      else{
-        echo '<script type="text/javascript">alert("The card number is invalid. Please try again.")</script>';
-      }
+      else if($_POST['submit'] == 'viewEmployee'){
+        $viewEmployeeID = $_POST['viewEmployeeID'];
 
+        $sql = "SELECT * FROM Employee WHERE(EmployeeID = '$viewEmployeeID')";
+        $result = mysqli_query($db, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $validEmployeeID = $row['EmployeeID'];
+        if($viewEmployeeID === $validEmployeeID){
+          $_SESSION["viewEmployeeID"] = $viewEmployeeID;
+          header("location: employeeSetting.php");
+        }
+        else{
+          echo '<script type="text/javascript">alert("The employee ID is invalid. Please try again.")</script>';
+        }
+      }
     }
 
     $title = $_SESSION['title'];
@@ -60,9 +76,18 @@
       <form action = "" method = "post">
         <label>ENTER CLIENT CARD NUMBER: </label>
         <input class="form-control" type="number" name="clientCardNumber" style="width: 250px; margin-bottom: 10px;" required/>
-        <button class="btn btn-info submit_btn" name="submit" type="submit">Submit</button>
+        <button class="btn btn-info submit_btn" name="submit" type="submit" value="viewClient">Submit</button>
       </form>
-    
+      <?php 
+      if($title == "President" || $title == "General Manager" || $title == "Branch Manager"){
+      echo 
+      "<form action = \"\" method = \"post\">
+        <label>ENTER EMPLOYEE ID: </label>
+        <input class=\"form-control\" type=\"number\" name=\"viewEmployeeID\" style=\"width: 250px; margin-bottom: 10px;\" required/>
+        <button class=\"btn btn-info submit_btn\" name=\"submit\" type=\"submit\" value=\"viewEmployee\">Submit</button>
+      </form>";
+      }
+      ?>
     </div>
     <br>
       
