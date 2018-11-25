@@ -29,7 +29,11 @@
           <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> master
 </nav>
       <div id="main-wrapper">
         <h2>
@@ -37,16 +41,16 @@
         </h2>
         <div>
           <?php 
-            echo "<b>Client Information</b></br>
-                  Card number: " . $card . "</br>
-                  First name : " . $firstName . "</br>
-                  Last Name : " . $lastName . "</br> 
-                  Birth Date : " . $birthDate . "</br> 
-                  Address : " . $address . "</br>
-                  Join Date : " . $joinDate . "</br>
-                  phoneNumber : " . $phoneNumber . "</br>
-                  Email : " . $email . "</br>"
-          ?>
+          //   echo "<b>Client Information</b></br>
+          //         Card number: " . $card . "</br>
+          //         First name : " . $firstName . "</br>
+          //         Last Name : " . $lastName . "</br> 
+          //         Birth Date : " . $birthDate . "</br> 
+          //         Address : " . $address . "</br>
+          //         Join Date : " . $joinDate . "</br>
+          //         phoneNumber : " . $phoneNumber . "</br>
+          //         Email : " . $email . "</br>"
+          // ?>
         </div>  
       </div>
 
