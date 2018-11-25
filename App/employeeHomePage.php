@@ -7,6 +7,18 @@
     $ID = $_SESSION["employeeID"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
+
+    // $sql = "SELECT ";
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+      $clientCardNumber = $_POST['clientCardNumber'];
+      $_SESSION["cardNumber"] = $clientCardNumber;
+      header("location: userInfo.php");
+    }
+
+
+
+
+
 ?>
 
 <html>
@@ -20,13 +32,17 @@
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="employeeLogin.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
-      <div id="main-wrapper"><h2><center>welcome <?php echo $firstName;?></center></h2>
+      <div id="main-wrapper"><h2><center>Hello <?php echo $firstName . $lastName;?></center></h2>
+
+      <form action = "" method = "post">
+        <label>ENTER CLIENT CARD NUMBER: </label>
+        <input type="number" name="clientCardNumber" required/>
+        <button class="submit_btn" name="submit" type="submit">Submit</button>
+      </form>
 
       <div><a href="">Create client account</a></div>
 

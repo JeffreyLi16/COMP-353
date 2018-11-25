@@ -23,10 +23,16 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        $mynewpassword = $_POST['newPassword']; 
+        if (isset($_SESSION["employeeID"])){
+            $mynewpassword = null;
+        } 
+        else{
+            $mynewpassword = $_POST['newPassword']; 
+        }
         $mynewaddress = $_POST['newAddress']; 
         $mynewemail = $_POST['newEmail']; 
         $mynewphonenumber = $_POST['newPhoneNumber']; 
+        $alertMessageChanged = "";
 
         if ($mynewpassword == null){
             // $alertMessage = "password remained the same";
@@ -65,13 +71,25 @@
         }
 
         echo $alertMessageChanged = "Your " . $alertMessageChanged . "has been updated.";
-        $url = "homePage.php";
+        $url = "";
+        
+        if (isset($_SESSION["employeeID"])){
+            $url = "employeeHomePage.php";
+            function myAlert($alertMessageChanged, $url){
+                echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
+                echo "<script>document.location = '$url'</script>";
+            }
+            myAlert($alertMessageChanged, $url);
+        } 
+        else{
+            function myAlert($alertMessageChanged, $url){
+                $url = "homePage.php";
+                echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
+                echo "<script>document.location = '$url'</script>";
+            }
+            myAlert($alertMessageChanged, $url);
+        } 
 
-        function myAlert($alertMessageChanged, $url){
-            echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
-            echo "<script>document.location = '$url'</script>";
-        }
-        myAlert($alertMessageChanged, $url);
 
     };
 ?>
@@ -151,9 +169,16 @@
                     
                     <label><strong>Joined Date :</strong></label>
                     <input type="text" value = "<?php echo $row["JoinDate"];?>" disabled/><br><br>
+                    <?php
+                    if (isset($_SESSION["employeeID"])){
 
-                    <label><strong>Password :</strong></label>
-                    <input type = "password" name = "newPassword" placeholder="Enter your new password"/><br/><br />
+                    }                    
+                    else{
+                    echo "<label><strong>Password :</strong></label>
+                    <input type = \"password\" name = \"newPassword\" placeholder=\"Enter your new password\"/><br/><br />";
+                    }
+                    ?>
+                    
                     
                     <label><strong>Address :</strong></label>
                     <input type = "text" name = "newAddress" value="<?php echo $row["Address"];?>"/> <br> <br>
