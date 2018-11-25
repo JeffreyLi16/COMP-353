@@ -173,7 +173,7 @@
 <html>
     <head>
         
-        <link rel="stylesheet" href="css/timepicker.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">   
     </head>
     <body>
@@ -277,7 +277,7 @@
             </tr>
         </table>
     </body>
-    <script src="timepicker.js"></script>
+    <script src="//cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
     <script type="text/javascript">
         var time2 = document.getElementById('time2');
         var time = document.getElementById('time');
