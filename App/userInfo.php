@@ -20,6 +20,22 @@
             $mynewpassword = null;
             $mynewfirstname = $_POST['newFirstName']; 
             $mynewlastname = $_POST['newLastName']; 
+            
+            if($mynewfirstname === $firstName){
+
+            }
+            else{
+                $sql = "UPDATE Client SET FirstName = '$mynewfirstname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
+                $result = mysqli_query($db, $sql);
+     
+            }
+            if($mynewlastname === $lastName){
+    
+            }
+            else{
+                $sql = "UPDATE Client SET LastName = '$mynewlastname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
+                $result = mysqli_query($db, $sql);
+            }
         } 
         else{
             $mynewpassword = $_POST['newPassword']; 
@@ -27,24 +43,7 @@
         $mynewaddress = $_POST['newAddress']; 
         $mynewemail = $_POST['newEmail']; 
         $mynewphonenumber = $_POST['newPhoneNumber']; 
-        $alertMessageChanged = "";
 
-        if($mynewfirstname === $firstName){
-
-        }
-        else{
-            $sql = "UPDATE Client SET FirstName = '$mynewfirstname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
-            $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "First Name - ";
-        }
-        if($mynewlastname === $lastName){
-
-        }
-        else{
-            $sql = "UPDATE Client SET LastName = '$mynewlastname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
-            $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "Last Name - " . $alertMessageChanged;
-        }
 
         if ($mynewpassword == null){
             // $alertMessage = "password remained the same";
@@ -52,7 +51,6 @@
         else {
             $sql = "UPDATE Client SET Password = '$mynewpassword' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "PASSWORD - ";
         }
 
         if ($mynewaddress === $address){
@@ -61,7 +59,6 @@
         else {
             $sql = "UPDATE Client SET Address = '$mynewaddress' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "ADDRESS - " . $alertMessageChanged;
         }
 
         if ($mynewemail === $email){
@@ -70,7 +67,6 @@
         else {
             $sql = "UPDATE Client SET Email = '$mynewemail' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "E-MAIL - " . $alertMessageChanged;
         }
 
         if ($mynewphonenumber === $phoneNumber){
@@ -79,14 +75,13 @@
         else {
             $sql = "UPDATE Client SET  PhoneNumber = '$mynewphonenumber' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "PHONE NUMBER - " . $alertMessageChanged;
         }
 
-        echo $alertMessageChanged = "Your " . $alertMessageChanged . "has been updated.";
+        $alertMessageChanged = "Your changes has been saved.";
         $url = "";
         
         if (isset($_SESSION["employeeID"])){
-            $url = "employeeHomePage.php";
+            $url = "userInfo.php";
             function myAlert($alertMessageChanged, $url){
                 echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
                 echo "<script>document.location = '$url'</script>";
@@ -124,6 +119,12 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="homePage.php">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="viewBills.php">View Bills</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="viewTransfer.php">Transfer</a>
                     </li>
                 </ul>
                 <div class="navbar-nav ml-4">
@@ -174,8 +175,16 @@
                     <input type = "text" name = "newPhoneNumber" value="<?php echo $row["PhoneNumber"];?>"/> <br> <br>
                     
 
-                    <button class="save_btn" name="save" type="submit">Update</button>
-                    <a href="homePage.php"><button type="button" class="back_btn">Cancel</button></a>
+                    <button class="btn btn-success save_btn" name="save" type="submit">Update</button>
+                    <?php
+                        if (isset($_SESSION["employeeID"])){
+                            echo "<a href=\"openClientAccount.php\"><button type=\"button\" class=\"btn btn-info\">Create new account</button></a>";
+                            echo "<a href=\"employeeHomePage.php\"><button type=\"button\" class=\"btn btn-danger back_btn\">Leave</button></a>";
+                        }
+                        else{
+                            echo "<a href=\"homePage.php\"><button type=\"button\" class=\"btn btn-danger back_btn\">Cancel</button></a>";
+                        } 
+                    ?>
                 </form>
             </center></h3></div>
 

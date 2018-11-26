@@ -82,6 +82,9 @@
         <li class="nav-item">
           <a class="nav-link" href="openClientAccount.php">Open Account</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="myschedule.php">My Schedule</a>
+        </li>
       </ul>
       <div class="navbar-nav ml-4">
         <a class="nav-item nav-link" href="employeeSetting.php"> Account </a>
@@ -153,7 +156,7 @@
           </div>
 
           <div class="pull-right"><button type="submit" class="btn btn-info btn-new-account">Submit</button>
-            <a href="employeeHomePage.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a></div>
+          <a href="userInfo.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a></div>
         </form>
       </div>
     </div>

@@ -1,4 +1,5 @@
 <?php   
+    include("config.local.php");
     session_start();
     if(!isset($_SESSION['employeeID'])){
         header("location:employeeLogin.php");
@@ -11,8 +12,19 @@
     // for telephone banking, employee enters the client's card number
     if($_SERVER["REQUEST_METHOD"] == "POST"){
       $clientCardNumber = $_POST['clientCardNumber'];
-      $_SESSION["cardNumber"] = $clientCardNumber;
-      header("location: userInfo.php");
+
+      $sql = "SELECT * FROM Account WHERE(CardNumber = '$clientCardNumber')";
+      $result = mysqli_query($db, $sql);
+      $row = mysqli_fetch_assoc($result);
+      $validCardNumber = $row['CardNumber'];
+      if($clientCardNumber === $validCardNumber){
+        $_SESSION["cardNumber"] = $clientCardNumber;
+        header("location: userInfo.php");
+      }
+      else{
+        echo '<script type="text/javascript">alert("The card number is invalid. Please try again.")</script>';
+      }
+
     }
 
     $title = $_SESSION['title'];
@@ -25,8 +37,10 @@
 ?>
 
 <html>
+
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
 
 </head>
 
@@ -46,6 +60,9 @@
         <li class="nav-item">
           <a class="nav-link" href="openClientAccount.php">Open Account</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="myschedule.php">My Schedule</a>
+        </li>
       </ul>
       <div class="navbar-nav ml-4">
         <a class="nav-item nav-link" href="employeeSetting.php"> Account </a>
@@ -53,36 +70,41 @@
       </div>
     </div>
   </nav>
+  <div id="main-wrapper">
+    <h2>
+      <center>Hello
+        <?php echo $firstName . $lastName;?>
+      </center>
+    </h2>
 
-      <div id="main-wrapper"><h2><center>Hello <?php echo $firstName . $lastName;?></center></h2>
+    <form action="" method="post">
+      <label>ENTER CLIENT CARD NUMBER: </label>
+      <input class="form-control" type="number" name="clientCardNumber" style="width: 250px; margin-bottom: 10px;"
+        required />
+      <button class="btn btn-info submit_btn" name="submit" type="submit">Submit</button>
+    </form>
 
-      <form action = "" method = "post">
-        <label>ENTER CLIENT CARD NUMBER: </label>
-        <input class="form-control" type="number" name="clientCardNumber" style="width: 250px; margin-bottom: 10px;" required/>
-        <button class="btn btn-info submit_btn" name="submit" type="submit">Submit</button>
-      </form>
+  </div>
+  <br>
 
-      <div><a href="openClientAccount.php">Create client account</a></div>
-      
-      <div id="main-wrapper">
-        <div>
-          <?php 
-            echo "<b>Employee Information</b></br>
-                  ID: " . $ID . "</br>
-                  Title : " . $title . "</br> 
-                  First name : " . $firstName . "</br>
-                  Last Name : " . $lastName . "</br>
-                  Address : " . $address . "</br>
-                  Start Date : " . $startDate . "</br>
-                  Salary : " . $salary . "</br>
-                  Email : " . $email . "</br>
-                  Phone number : " . $phoneNumber . "</br>
-                  Branch ID : " . $branchID . "</br>"
-
-          ?>
-        </div>
-
-
+  <!-- <div id="main-wrapper">
+      <div>
+       <?php 
+          echo "<b>Employee Information</b></br>
+                ID: " . $ID . "</br>
+                Title : " . $title . "</br> 
+                First name : " . $firstName . "</br>
+                Last Name : " . $lastName . "</br>
+                Address : " . $address . "</br>
+                Start Date : " . $startDate . "</br>
+                Salary : " . $salary . "</br>
+                Email : " . $email . "</br>
+                Phone number : " . $phoneNumber . "</br>
+                Branch ID : " . $branchID . "</br>"
+        ?>
       </div>
-   </body>
+    </div> -->
+
+</body>
+
 </html>

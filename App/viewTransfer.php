@@ -39,6 +39,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="viewBills.php">View Bills</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="viewTransfer.php">Transfer</a>
+                </li>
             </ul>
             <div class="navbar-nav ml-4">
                 <a class="nav-item nav-link" href="userInfo.php"> Account </a>

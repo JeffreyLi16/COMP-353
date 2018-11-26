@@ -100,6 +100,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="openClientAccount.php">Open Account</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="myschedule.php">My Schedule</a>
+                    </li>
                 </ul>
                 <div class="navbar-nav ml-4">
                     <a class="nav-item nav-link" href="logout.php"> Logout </a>
@@ -135,8 +138,8 @@
                     <input type = "text" name = "newPhoneNumber" value="<?php echo $phoneNumber;?>"/> <br> <br>
                     
 
-                    <button class="save_btn" name="save" type="submit">Update</button>
-                    <a href="EmployeeHomePage.php"><button type="button" class="back_btn">Cancel</button></a>
+                    <button class="save_btn btn btn-success" name="save" type="submit">Update</button>
+                    <a href="EmployeeHomePage.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a>
                 </form>
             </center></h3></div>
 
