@@ -188,7 +188,7 @@
                     <input type = "text" name = "newPhoneNumber" value="<?php echo $phoneNumber;?>"/> <br> <br>
                     
 
-                    <button class="save_btn btn btn-success" name="save" type="submit" value="update">Update</button>
+                    <button class="save_btn btn btn-success" name="submit" type="submit" value="update">Update</button>
                     <a href="EmployeeHomePage.php"><button type="button" class="btn btn-warning back_btn">Cancel</button></a>
                     <?php
                         if(isset($_SESSION['viewEmployeeID'])){
