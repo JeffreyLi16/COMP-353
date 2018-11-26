@@ -22,7 +22,7 @@
             $toAccountBalance = $toAccountRow['Balance'];
 
             $fromAccountNewBalance = $fromAccountBalance - $amount;
-            $toAccountNewBalance = $toAccountBalance - $amount;
+            $toAccountNewBalance = $toAccountBalance + $amount;
 
             if ($fromAccountNewBalance >= 0) {
                 $sql = "UPDATE account SET Balance = '$fromAccountNewBalance' WHERE ID = '$fromAccountID'";

@@ -9,6 +9,13 @@
     $clientID = $_SESSION['clientID'];
     $sql = "SELECT * FROM account WHERE clientID = '$clientID'";
     $getAllAccountsResult = mysqli_query($db,$sql);
+    $arrayAccounts = array();
+    while($row = $getAllAccountsResult->fetch_assoc()) {
+        $arrayAccounts[] = $row;
+    }
+
+    $len = count($arrayAccounts);
+
 
     // Get client's account from session
     $sql = "SELECT * FROM account WHERE cardNumber = '$clientCardNumber'";
@@ -106,7 +113,8 @@
                                             <td>
                                                 <select name=\"accountID\" class=\"form-control\"> ");
                                                     if (isset($getAllAccountsResult)) {
-                                                        while($row = $getAllAccountsResult->fetch_assoc()) {
+                                                        for($x = 0; $x < $len; $x++) {
+                                                            $row = $arrayAccounts[$x];
                                                             echo("
                                                                 <option value=\" " . $row['ID'] . " \">CardNumber: " . $row['CardNumber'] . "&emsp;Balance: " . $row['Balance'] . " </option>
                                                             ");
