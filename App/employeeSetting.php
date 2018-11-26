@@ -8,11 +8,13 @@
     if(isset($_SESSION['viewEmployeeID'])){
         $ID = $_SESSION['viewEmployeeID'];
 
-        if($_POST['submit'] == 'deleteEmployee'){
-            $viewEmployeeID = $_POST['viewEmployeeID'];
-
-            $sql = "DELETE FROM Employee WHERE EmployeeID = '$viewEmployeeID'";
-            $result = mysqli_query($db, $sql);
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($_POST["submit"] == 'deleteEmployee'){
+                $viewEmployeeID = $_SESSION['viewEmployeeID'];
+                $sql = "DELETE FROM Employee WHERE EmployeeID = '$ID';";
+                $result = mysqli_query($db, $sql);
+                header("location:employeeHomePage.php");
+            }
         }
     }
     else{
@@ -32,93 +34,93 @@
     $password = $row["Password"];
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $mynewpassword = $_POST['newPassword'];
-        $mynewaddress = $_POST['newAddress']; 
-        $mynewemail = $_POST['newEmail']; 
-        $mynewphonenumber = $_POST['newPhoneNumber'];
-        $alertMessageChanged = "";
+        if($_POST["submit"] == 'update'){
+            $mynewpassword = $_POST['newPassword'];
+            $mynewaddress = $_POST['newAddress']; 
+            $mynewemail = $_POST['newEmail']; 
+            $mynewphonenumber = $_POST['newPhoneNumber'];
+            $alertMessageChanged = "";
 
-        if(isset($_SESSION['viewEmployeeID'])){
-            $mynewpassword = null;
-            $mynewfirstname = $_POST['newFirstName']; 
-            $mynewlastname = $_POST['newLastName']; 
-            $mynewsalary = $_POST['newSalary']; 
-            if($mynewfirstname === $firstName){
+            if(isset($_SESSION['viewEmployeeID'])){
+                $mynewpassword = null;
+                $mynewfirstname = $_POST['newFirstName']; 
+                $mynewlastname = $_POST['newLastName']; 
+                $mynewsalary = $_POST['newSalary']; 
+                if($mynewfirstname === $firstName){
 
-            }
-            else{
-                $sql = "UPDATE Employee SET FirstName = '$mynewfirstname' WHERE EmployeeID = '$ID'";
-                $result = mysqli_query($db, $sql);
-     
-            }
-            if($mynewlastname === $lastName){
-    
-            }
-            else{
-                $sql = "UPDATE Employee SET LastName = '$mynewlastname' WHERE EmployeeID = '$ID'";
-                $result = mysqli_query($db, $sql);
-            }
-            if($mynewsalary === $salary){
-
-            }
-            else{
-                $sql = "UPDATE Employee SET salary = '$mynewsalary' WHERE EmployeeID = '$ID'";
-                $result = mysqli_query($db, $sql);
-            }
-        }
-
+                }
+                else{
+                    $sql = "UPDATE Employee SET FirstName = '$mynewfirstname' WHERE EmployeeID = '$ID'";
+                    $result = mysqli_query($db, $sql);
         
-        if ($mynewpassword == null){
-            // $alertMessage = "password remained the same";
-        }
-        else {
-            $sql = "UPDATE Employee SET Password = '$mynewpassword' WHERE EmployeeID = '$ID'";
-            $result = mysqli_query($db, $sql);
-        }
-
-        if ($mynewaddress === $address){
-            // $alertMessage = "address remained the same " . $alertMessage;
-        }
-        else {
-            $sql = "UPDATE Employee SET Address = '$mynewaddress' WHERE EmployeeID = '$ID'";
-            $result = mysqli_query($db, $sql);
-        }
-
-        if ($mynewemail === $email){
-            // $alertMessage = "email remained the same" . $alertMessage;
-        }
-        else {
-            $sql = "UPDATE Employee SET Email = '$mynewemail' WHERE EmployeeID = '$ID'";
-            $result = mysqli_query($db, $sql);
-        }
-
-        if ($mynewphonenumber === $phoneNumber){
-            // $alertMessage = "Phone Number" . $alertMessage;
-        }
-        else {
-            $sql = "UPDATE Employee SET  PhoneNumber = '$mynewphonenumber' WHERE EmployeeID = '$ID'";
-            $result = mysqli_query($db, $sql);
-        }
-
-        echo $alertMessageChanged = "Your changes has been saved.";
+                }
+                if($mynewlastname === $lastName){
         
-        if (isset($_SESSION["viewEmployeeID"])){
-            $url = "employeeSetting.php";
-            function myAlert($alertMessageChanged, $url){
-                echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
-                echo "<script>document.location = '$url'</script>";
-            }
-            myAlert($alertMessageChanged, $url);
-        } 
-        else{
-            function myAlert($alertMessageChanged, $url){
-                $url = "employeeHomePage.php";
-                echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
-                echo "<script>document.location = '$url'</script>";
-            }
-            myAlert($alertMessageChanged, $url);
-          }   
+                }
+                else{
+                    $sql = "UPDATE Employee SET LastName = '$mynewlastname' WHERE EmployeeID = '$ID'";
+                    $result = mysqli_query($db, $sql);
+                }
+                if($mynewsalary === $salary){
 
+                }
+                else{
+                    $sql = "UPDATE Employee SET salary = '$mynewsalary' WHERE EmployeeID = '$ID'";
+                    $result = mysqli_query($db, $sql);
+                }
+            }
+        
+            if ($mynewpassword == null){
+                // $alertMessage = "password remained the same";
+            }
+            else {
+                $sql = "UPDATE Employee SET Password = '$mynewpassword' WHERE EmployeeID = '$ID'";
+                $result = mysqli_query($db, $sql);
+            }
+
+            if ($mynewaddress === $address){
+                // $alertMessage = "address remained the same " . $alertMessage;
+            }
+            else {
+                $sql = "UPDATE Employee SET Address = '$mynewaddress' WHERE EmployeeID = '$ID'";
+                $result = mysqli_query($db, $sql);
+            }
+
+            if ($mynewemail === $email){
+                // $alertMessage = "email remained the same" . $alertMessage;
+            }
+            else {
+                $sql = "UPDATE Employee SET Email = '$mynewemail' WHERE EmployeeID = '$ID'";
+                $result = mysqli_query($db, $sql);
+            }
+
+            if ($mynewphonenumber === $phoneNumber){
+                // $alertMessage = "Phone Number" . $alertMessage;
+            }
+            else {
+                $sql = "UPDATE Employee SET  PhoneNumber = '$mynewphonenumber' WHERE EmployeeID = '$ID'";
+                $result = mysqli_query($db, $sql);
+            }
+
+            echo $alertMessageChanged = "Your changes has been saved.";
+            
+            if (isset($_SESSION["viewEmployeeID"])){
+                $url = "employeeSetting.php";
+                function myAlert($alertMessageChanged, $url){
+                    echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
+                    echo "<script>document.location = '$url'</script>";
+                }
+                myAlert($alertMessageChanged, $url);
+            } 
+            else{
+                function myAlert($alertMessageChanged, $url){
+                    $url = "employeeHomePage.php";
+                    echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
+                    echo "<script>document.location = '$url'</script>";
+                }
+                myAlert($alertMessageChanged, $url);
+            }   
+        }
     };
 
 ?>
@@ -186,12 +188,12 @@
                     <input type = "text" name = "newPhoneNumber" value="<?php echo $phoneNumber;?>"/> <br> <br>
                     
 
-                    <button class="save_btn btn btn-success" name="save" type="submit">Update</button>
+                    <button class="save_btn btn btn-success" name="save" type="submit" value="update">Update</button>
                     <a href="EmployeeHomePage.php"><button type="button" class="btn btn-warning back_btn">Cancel</button></a>
                     <?php
                         if(isset($_SESSION['viewEmployeeID'])){
                             echo "<a href=\"employeeSchedule.php\"><button type=\"button\" class=\"btn btn-info back_btn\">view Schedule</button></a>";
-                            echo "<a href=\"employeeSetting.php\"><button type=\"button\" class=\" btn btn-danger back_btn\">DELETE EMPLOYEE</button></a>";
+                            echo "<button class=\"btn btn-danger back_btn\" name=\"submit\" type=\"submit\" value=\"deleteEmployee\">DELETE EMPLOYEE</button>";
                         }
                     ?>
                 </form>
