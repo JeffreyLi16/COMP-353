@@ -28,16 +28,45 @@
         $mynewpassword = $_POST['newPassword'];
         $mynewaddress = $_POST['newAddress']; 
         $mynewemail = $_POST['newEmail']; 
-        $mynewphonenumber = $_POST['newPhoneNumber']; 
+        $mynewphonenumber = $_POST['newPhoneNumber'];
         $alertMessageChanged = "";
 
+        if(isset($_SESSION['viewEmployeeID'])){
+            $mynewpassword = null;
+            $mynewfirstname = $_POST['newFirstName']; 
+            $mynewlastname = $_POST['newLastName']; 
+            $mynewsalary = $_POST['newSalary']; 
+            if($mynewfirstname === $firstName){
+
+            }
+            else{
+                $sql = "UPDATE Employee SET FirstName = '$mynewfirstname' WHERE EmployeeID = '$ID')";
+                $result = mysqli_query($db, $sql);
+     
+            }
+            if($mynewlastname === $lastName){
+    
+            }
+            else{
+                $sql = "UPDATE Employee SET LastName = '$mynewlastname' WHERE EmployeeID = '$ID')";
+                $result = mysqli_query($db, $sql);
+            }
+            if($mynewsalary === $salary){
+
+            }
+            else{
+                $sql = "UPDATE Employee SET salary = '$mynewsalary' WHERE EmployeeID = '$ID')";
+                $result = mysqli_query($db, $sql);
+            }
+        }
+
+        
         if ($mynewpassword == null){
             // $alertMessage = "password remained the same";
         }
         else {
             $sql = "UPDATE Employee SET Password = '$mynewpassword' WHERE EmployeeID = '$ID'";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "PASSWORD - ";
         }
 
         if ($mynewaddress === $address){
@@ -46,7 +75,6 @@
         else {
             $sql = "UPDATE Employee SET Address = '$mynewaddress' WHERE EmployeeID = '$ID'";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "ADDRESS - " . $alertMessageChanged;
         }
 
         if ($mynewemail === $email){
@@ -55,7 +83,6 @@
         else {
             $sql = "UPDATE Employee SET Email = '$mynewemail' WHERE EmployeeID = '$ID'";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "E-MAIL - " . $alertMessageChanged;
         }
 
         if ($mynewphonenumber === $phoneNumber){
@@ -64,18 +91,26 @@
         else {
             $sql = "UPDATE Employee SET  PhoneNumber = '$mynewphonenumber' WHERE EmployeeID = '$ID'";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "PHONE NUMBER - " . $alertMessageChanged;
         }
 
-        echo $alertMessageChanged = "Your " . $alertMessageChanged . "has been updated.";
-        $url = "employeeHomePage.php";
+        echo $alertMessageChanged = "Your changes has been saved.";
         
-        function myAlert($alertMessageChanged, $url){
-            echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
-            echo "<script>document.location = '$url'</script>";
-        }
-        myAlert($alertMessageChanged, $url);
-      
+        if (isset($_SESSION["viewEmployeeID"])){
+            $url = "employeeSetting.php";
+            function myAlert($alertMessageChanged, $url){
+                echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
+                echo "<script>document.location = '$url'</script>";
+            }
+            myAlert($alertMessageChanged, $url);
+        } 
+        else{
+            function myAlert($alertMessageChanged, $url){
+                $url = "employeeHomePage.php";
+                echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
+                echo "<script>document.location = '$url'</script>";
+            }
+            myAlert($alertMessageChanged, $url);
+          }   
 
     };
 
@@ -106,20 +141,35 @@
         <div id="main-wrapper"><h2><center>Update your Account Information</center></h2><br>
             <div><h3><center>
                 <form action = "" method = "post">
-                    <label><strong>First Name :</strong></label> 
-                    <input type="text" value = "<?php echo $firstName;?>" disabled/><br><br>
 
-                    <label><strong>Last Name :</strong></label>
-                    <input type="text" value = "<?php echo $lastName;?>" disabled/><br><br>
+                    <?php
+                        if(isset($_SESSION['viewEmployeeID'])){
+                            echo "<label><strong>First Name :</strong></label> 
+                            <input type=\"text\" name= \"newFirstName\" value = \"$firstName\" /><br><br>";
+    
+                            echo "<label><strong>Last Name :</strong></label>
+                            <input type=\"text\" name= \"newLastName\"value = \"$lastName\" /><br><br>";
+
+                            echo "<label><strong>Salary :</strong></label>
+                            <input type=\"text\" name= \"newSalary\"value = \"$salary\" /><br><br>";
+                        } 
+                        else{
+                            echo "<label><strong>First Name :</strong></label> 
+                            <input type=\"text\" value = \"$firstName\" disabled/><br><br>";
+    
+                            echo "<label><strong>Last Name :</strong></label>
+                            <input type=\"text\" value = \"$lastName\" disabled/><br><br>";
+
+                            echo "<label><strong>Salary :</strong></label>
+                            <input type=\"text\" value = \"$salary\" disabled/><br><br>";
+
+                            echo "<label><strong>Password :</strong></label>
+                            <input type = \"password\" name = \"newPassword\" placeholder=\"Enter your new password\"/><br/><br />";
+                        }
+                    ?>
                     
                     <label><strong>Start Date :</strong></label>
                     <input type="text" value = "<?php echo $startDate;?>" disabled/><br><br>
-
-                    <label><strong>Salary :</strong></label>
-                    <input type="text" value = "<?php echo $salary;?>" disabled/><br><br>
-                    
-                    <label><strong>Password :</strong></label>
-                    <input type = "password" name = "newPassword" placeholder="Enter a new password"/> <br> <br>
 
                     <label><strong>Address :</strong></label>
                     <input type = "text" name = "newAddress" value="<?php echo $address;?>"/> <br> <br>
