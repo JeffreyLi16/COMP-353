@@ -191,7 +191,7 @@
                     <button class="save_btn btn btn-success" name="submit" type="submit" value="update">Update</button>
                     <a href="EmployeeHomePage.php"><button type="button" class="btn btn-warning back_btn">Cancel</button></a>
                     <?php
-                        if(isset($_SESSION['viewEmployeeID'])){
+                        if(isset($_SESSION['viewEmployeeID']) && $ID !== $_SESSION['employeeID']){
                             echo "<a href=\"employeeSchedule.php\"><button type=\"button\" class=\"btn btn-info back_btn\">view Schedule</button></a>";
                             echo "<button class=\"btn btn-danger back_btn\" name=\"submit\" type=\"submit\" value=\"deleteEmployee\">DELETE EMPLOYEE</button>";
                         }
