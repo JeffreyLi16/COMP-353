@@ -20,6 +20,22 @@
             $mynewpassword = null;
             $mynewfirstname = $_POST['newFirstName']; 
             $mynewlastname = $_POST['newLastName']; 
+            
+            if($mynewfirstname === $firstName){
+
+            }
+            else{
+                $sql = "UPDATE Client SET FirstName = '$mynewfirstname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
+                $result = mysqli_query($db, $sql);
+     
+            }
+            if($mynewlastname === $lastName){
+    
+            }
+            else{
+                $sql = "UPDATE Client SET LastName = '$mynewlastname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
+                $result = mysqli_query($db, $sql);
+            }
         } 
         else{
             $mynewpassword = $_POST['newPassword']; 
@@ -27,24 +43,7 @@
         $mynewaddress = $_POST['newAddress']; 
         $mynewemail = $_POST['newEmail']; 
         $mynewphonenumber = $_POST['newPhoneNumber']; 
-        $alertMessageChanged = "";
 
-        if($mynewfirstname === $firstName){
-
-        }
-        else{
-            $sql = "UPDATE Client SET FirstName = '$mynewfirstname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
-            $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "First Name - ";
-        }
-        if($mynewlastname === $lastName){
-
-        }
-        else{
-            $sql = "UPDATE Client SET LastName = '$mynewlastname' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
-            $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "Last Name - " . $alertMessageChanged;
-        }
 
         if ($mynewpassword == null){
             // $alertMessage = "password remained the same";
@@ -52,7 +51,6 @@
         else {
             $sql = "UPDATE Client SET Password = '$mynewpassword' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "PASSWORD - ";
         }
 
         if ($mynewaddress === $address){
@@ -61,7 +59,6 @@
         else {
             $sql = "UPDATE Client SET Address = '$mynewaddress' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "ADDRESS - " . $alertMessageChanged;
         }
 
         if ($mynewemail === $email){
@@ -70,7 +67,6 @@
         else {
             $sql = "UPDATE Client SET Email = '$mynewemail' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "E-MAIL - " . $alertMessageChanged;
         }
 
         if ($mynewphonenumber === $phoneNumber){
@@ -79,10 +75,9 @@
         else {
             $sql = "UPDATE Client SET  PhoneNumber = '$mynewphonenumber' WHERE Client.ClientID = (SELECT ClientID FROM Account WHERE CardNumber = '$card')";
             $result = mysqli_query($db, $sql);
-            $alertMessageChanged = "PHONE NUMBER - " . $alertMessageChanged;
         }
 
-        echo $alertMessageChanged = "Your " . $alertMessageChanged . "has been updated.";
+        $alertMessageChanged = "Your changes has been saved.";
         $url = "";
         
         if (isset($_SESSION["employeeID"])){
