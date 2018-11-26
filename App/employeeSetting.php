@@ -7,6 +7,13 @@
 
     if(isset($_SESSION['viewEmployeeID'])){
         $ID = $_SESSION['viewEmployeeID'];
+
+        if($_POST['submit'] == 'deleteEmployee'){
+            $viewEmployeeID = $_POST['viewEmployeeID'];
+
+            $sql = "DELETE FROM Employee WHERE EmployeeID = '$viewEmployeeID'";
+            $result = mysqli_query($db, $sql);
+        }
     }
     else{
         $ID = $_SESSION["employeeID"];
@@ -40,7 +47,7 @@
 
             }
             else{
-                $sql = "UPDATE Employee SET FirstName = '$mynewfirstname' WHERE EmployeeID = '$ID')";
+                $sql = "UPDATE Employee SET FirstName = '$mynewfirstname' WHERE EmployeeID = '$ID'";
                 $result = mysqli_query($db, $sql);
      
             }
@@ -48,14 +55,14 @@
     
             }
             else{
-                $sql = "UPDATE Employee SET LastName = '$mynewlastname' WHERE EmployeeID = '$ID')";
+                $sql = "UPDATE Employee SET LastName = '$mynewlastname' WHERE EmployeeID = '$ID'";
                 $result = mysqli_query($db, $sql);
             }
             if($mynewsalary === $salary){
 
             }
             else{
-                $sql = "UPDATE Employee SET salary = '$mynewsalary' WHERE EmployeeID = '$ID')";
+                $sql = "UPDATE Employee SET salary = '$mynewsalary' WHERE EmployeeID = '$ID'";
                 $result = mysqli_query($db, $sql);
             }
         }
@@ -113,8 +120,6 @@
           }   
 
     };
-
-
 
 ?>
 
@@ -182,10 +187,11 @@
                     
 
                     <button class="save_btn btn btn-success" name="save" type="submit">Update</button>
-                    <a href="EmployeeHomePage.php"><button type="button" class="btn btn-danger back_btn">Cancel</button></a>
+                    <a href="EmployeeHomePage.php"><button type="button" class="btn btn-warning back_btn">Cancel</button></a>
                     <?php
                         if(isset($_SESSION['viewEmployeeID'])){
                             echo "<a href=\"employeeSchedule.php\"><button type=\"button\" class=\"btn btn-info back_btn\">view Schedule</button></a>";
+                            echo "<a href=\"employeeSetting.php\"><button type=\"button\" class=\" btn btn-danger back_btn\">DELETE EMPLOYEE</button></a>";
                         }
                     ?>
                 </form>
