@@ -5,7 +5,7 @@
     $billID = $_POST['billID'];
    
     // Get a bill subscription 
-    $sql = "UPDATE billing SET automaticTransferDate = '$selectedDate' WHERE id='$billID'";
+    $sql = "UPDATE billing SET automaticTransferDate = '$selectedDate' WHERE billingID='$billID'";
     $result = mysqli_query($db,$sql);
 
     if (!$result) {

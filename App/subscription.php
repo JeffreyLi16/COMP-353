@@ -90,7 +90,7 @@
                             echo("
                                 
                                     <tr>
-                                        <th scope=\"row\">" . $myBill['id'] . "</th>
+                                        <th scope=\"row\">" . $myBill['billingID'] . "</th>
                                         <td>" .  $myBill['dueDate'] . "</td>
                                         <td>" .  $myBill['balance'] . "</td>
                                         <td>" . $myBill['paymentAmount'] . "</td>
@@ -118,19 +118,19 @@
                                                 echo("</select>
                                             </td>                                        
                                             <td> 
-                                                <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['id'] . " \">
+                                                <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['billingID'] . " \">
                                                 <button type=\"submit\" class=\"btn btn-outline-info\"> Update Date </button>
                                             </td>
                                         </form>
                                         <td>
                                             <form action=\"removeSubscription.php\" method=\"POST\">
-                                                <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['id'] . " \">
+                                                <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['billingID'] . " \">
                                                 <button type=\"submit\" class=\"btn btn-outline-info\"> Remove Subscription </button>
                                             </form>
                                         </td>
                                         <!--
                                         <td>
-                                            <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['id'] . " \">
+                                            <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['billingID'] . " \">
                                             <button type=\"submit\" class=\"btn btn-outline-info\"> Pay Now </button>
                                         </td>
                                         -->

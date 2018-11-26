@@ -6,7 +6,7 @@
         $billID = $_POST['billID'];
         if ($billingType == 'Single') {
             // Get all bills from that specific account
-            $sql = "SELECT * FROM billing WHERE id = '$billID'";
+            $sql = "SELECT * FROM billing WHERE billingID = '$billID'";
             $getAllBillsResult = mysqli_query($db,$sql);
             $myBill = mysqli_fetch_array($getAllBillsResult,MYSQLI_ASSOC);
 
@@ -15,7 +15,7 @@
             $sql = "SELECT * FROM account WHERE clientID = '$clientID'";
             $getAllAccountsResult = mysqli_query($db,$sql);
         } elseif ($billingType == 'Monthly') {
-            $sql = "UPDATE billing SET billingType = 'Monthly' WHERE id = '$billID'";
+            $sql = "UPDATE billing SET billingType = 'Monthly' WHERE billingID = '$billID'";
             $result = mysqli_query($db,$sql);
 
             header("location:subscription.php");
@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <div>
-                    <input type="hidden" name="billID" value= " <?php echo($myBill['id']); ?> " >
+                    <input type="hidden" name="billID" value= " <?php echo($myBill['billingID']); ?> " >
                     <button type="submit" class="btn btn-outline-info float-right m-4"> Pay Now </button>
                 </div>
             </div>

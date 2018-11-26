@@ -8,7 +8,7 @@
         // amount to be paid
         $transactionAmount = $_POST['transactionAmount'];
 
-        $sql = "SELECT * FROM billing WHERE id = '$billID'";
+        $sql = "SELECT * FROM billing WHERE billingID = '$billID'";
         $getAllBillsResult = mysqli_query($db,$sql);
 
 
@@ -28,7 +28,7 @@
 
         if($transactionAmount >= $remainingBalance){
 
-            $sql = "UPDATE billing SET paymentAmount='$myBillBalance', isCompleted = 1 WHERE id='$billID'";
+            $sql = "UPDATE billing SET paymentAmount='$myBillBalance', isCompleted = 1 WHERE billingID='$billID'";
             $result = mysqli_query($db,$sql);
     
             $sql = "INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$remainingBalance', DATE(NOW()), NULL, '$accountID', 'payment')";
@@ -43,7 +43,7 @@
         } elseif ($transactionAmount > 0) {
             $totalAmountPaid = $myBill['paymentAmount'] + $transactionAmount;
             $remainingBalance = $myBill['balance'] - $totalAmountPaid;
-            $sql = "UPDATE billing SET paymentAmount='$totalAmountPaid' WHERE id='$billID'";
+            $sql = "UPDATE billing SET paymentAmount='$totalAmountPaid' WHERE billingID='$billID'";
             $result = mysqli_query($db,$sql);
     
             $sql = "INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$transactionAmount', DATE(NOW()), NULL, '$accountID', 'payment')";

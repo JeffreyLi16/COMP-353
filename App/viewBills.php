@@ -81,7 +81,7 @@
                             echo("
                                 <form action=\"payment.php\" method=\"POST\">
                                     <tr>
-                                        <th scope=\"row\">" . $row['id'] . "</th>
+                                        <th scope=\"row\">" . $row['billingID'] . "</th>
                                         <td>" .  $row['dueDate'] . "</td>
                                         <td>" .  $row['balance'] . "</td>
                                         <td>" . $row['paymentAmount'] . "</td>
@@ -97,7 +97,7 @@
                                         </td>
                                     
                                         <td>
-                                            <input type=\"hidden\" name=\"billID\" value=\" " . $row['id'] . " \">
+                                            <input type=\"hidden\" name=\"billID\" value=\" " . $row['billingID'] . " \">
                                             <button type=\"submit\" class=\"btn btn-outline-info\"> Pay Now </button>
                                         </td>
                                     </tr>
