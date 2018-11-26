@@ -36,7 +36,7 @@
 
                 $successMsg = "The fund has been transfered.";
 
-            } {
+            } else {
                 $failMsg = "You don't have enough funds! "; 
             }
         } else {
