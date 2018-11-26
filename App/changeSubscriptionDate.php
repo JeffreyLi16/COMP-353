@@ -1,5 +1,5 @@
 <?php 
-    include('session.php');
+    include('Components/sessionClient.php');
 
     $selectedDate = $_POST['selectedDate'];
     $billID = $_POST['billID'];

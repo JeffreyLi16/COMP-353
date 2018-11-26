@@ -1,5 +1,5 @@
 <?php   
-    include('session.php');
+    include('Components/sessionClient.php');
     $card = $_SESSION["cardNumber"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
@@ -103,21 +103,15 @@
 
 <html>
     <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">        
     <link rel="stylesheet" href="css/userInfo.css">
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">Bank Of Concordia</a>
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                </ul>
-            </div>
+    <?php
+        include('Components/navbar.php');
+    ?>
 
-        </nav>
         <div id="main-wrapper"><h2><center>Update your Account Information</center></h2><br>
             <div><h3><center>
                 <form action = "" method = "post">

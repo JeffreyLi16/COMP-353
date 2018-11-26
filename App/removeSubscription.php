@@ -1,7 +1,6 @@
 <?php 
-    include('session.php');
-
-
+    include('Components/sessionClient.php');
+    
     $billID = $_POST['billID'];
    
     // Get a bill subscription 
