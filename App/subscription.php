@@ -1,6 +1,6 @@
 <?php
     include('session.php');
-    
+
     $clientCardNumber = $_SESSION['cardNumber'];
 
     // Get client's account from session
@@ -11,10 +11,9 @@
     $accountID = $row['ID'];
 
     // Get all bills from that specific account
-    $sql = "SELECT * FROM billing WHERE accountID = '$accountID' AND billingType = 'Single'";
+    $sql = "SELECT * FROM billing WHERE accountID = '$accountID' AND (billingType = 'Monthly' OR billingType = 'Yearly')";
     $getAllBillsResult = mysqli_query($db,$sql);
 
-    
 ?>
 
 <!DOCTYPE html>
@@ -54,9 +53,9 @@
         </div>
     </nav>
     <div class="container">
-        <div class=" text-center my-5">
+    <div class=" text-center my-5">
             <span class="text-monospace" style="font-size: 24px;"> Account Statement </span>
-            <a href="subscription.php" class="btn btn-info float-right" role="button">Subscription</a>
+            <button class="btn btn-info float-right">Subscription</button>
         </div>
         <hr>
         <table class="table table-hover text-center my-5 px-5">
@@ -66,7 +65,6 @@
                     <th scope="col">Due Date</th>
                     <th scope="col">Balance</th>
                     <th scope="col">Total Payment Amount</th>
-                    <th scope="col">Select Billing Type</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
 
@@ -77,22 +75,15 @@
                     if (isset($getAllBillsResult)) {
                         while($row = $getAllBillsResult->fetch_assoc()) {
                             echo("
-                                <form action=\"payment.php\" method=\"POST\">
+                                <form action=\"\" method=\"POST\">
                                     <tr>
                                         <th scope=\"row\">" . $row['id'] . "</th>
                                         <td>" .  $row['dueDate'] . "</td>
                                         <td>" .  $row['balance'] . "</td>
                                         <td>" . $row['paymentAmount'] . "</td>
+                                        <td></td>
                                         <td> 
-                                            <div class=\"form-row\">
-                                                <div class=\"form-group col-md-12 px-5\">
-                                                    <select name=\"billingType\" class=\"form-control\">
-                                                        <option value=\"Single\">Immediate</option>
-                                                        <option value=\"Monthly\">Monthly</option>
-                                                        <option value=\"Yearly\">Yearly</option>
-                                                    </select>
-                                                </div>
-                                            </div> 
+                                            <button class=\"btn btn-outline-info\"> Remove Subscription </button>
                                         </td>
                                         <td>
                                             <input type=\"hidden\" name=\"billID\" value=\" " . $row['id'] . " \">

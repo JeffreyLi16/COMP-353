@@ -106,16 +106,7 @@
     <div class="card">
       <div class="card-body new-account-form">
         <form action="" method="post">
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>ClientID</label>
-              <input type="text" class="form-control" name="clientID">
-            </div>
-            <div class="form-group col-md-6">
-              <label>AccountNumber</label>
-              <input type="text" class="form-control" name="accountNumber">
-            </div>
-          </div>
+          
           <div class="form-row">
             <div class="form-group col-md-12">
               <label>Select New Account Level:</label>
