@@ -1,53 +1,91 @@
 <?php
-    include('Components/sessionEmployee.php');
+  include('Components/sessionEmployee.php');
 
-    $employeeID = $_SESSION["employeeID"];
-    $firstName = $_SESSION['FirstName'];
-    $lastName = $_SESSION['LastName'];
-    $employeeBranchID = $_SESSION['branchID'];
+  $employeeID = $_SESSION["employeeID"];
+  $firstName = $_SESSION['FirstName'];
+  $lastName = $_SESSION['LastName'];
+  $employeeBranchID = $_SESSION['branchID'];
 
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-      
-      $cardNumber = $_SESSION['cardNumber'];
+  if($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $cardNumber = $_SESSION['cardNumber'];
 
-      $sql = "SELECT * FROM client, account WHERE account.CardNumber = '$cardNumber'";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $sql = "SELECT * FROM client, account WHERE account.CardNumber = '$cardNumber'";
+    $result = mysqli_query($db,$sql);
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-      $clientID = $row['ClientID'];
+    $clientID = $row['ClientID'];
 
-      $cardNumber = $_POST['cardNumber'];
-      $accountType = $_POST['accountType'];
-      $accountOption = $_POST['accountOption'];
-      $accountLevel = $_POST['accountLevel'];
-      $serviceType = $_POST['serviceType'];
+    $cardNumber = $_POST['cardNumber'];
+    $accountType = $_POST['accountType'];
+    $accountOption = $_POST['accountOption'];
+    $accountLevel = $_POST['accountLevel'];
+    $serviceType = $_POST['serviceType'];
 
-      // Get ServiceID from client
-      $sql = "SELECT ServiceID FROM Service WHERE ServiceType = '$serviceType'";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    // Get ServiceID from client
+    $sql = "SELECT ServiceID FROM Service WHERE ServiceType = '$serviceType'";
+    $result = mysqli_query($db,$sql);
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-      $serviceID = $row['ServiceID'];
+    $serviceID = $row['ServiceID'];
 
-      $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
-      VALUES ('$cardNumber', '$accountType', '$accountOption', '$accountLevel', 0.00 , '$employeeBranchID', '$clientID', '$serviceID')";
-      $newAccountResult = mysqli_query($db,$sql);
-      
-      if (!$newAccountResult) {
-        printf("Error: %s\n", mysqli_error($db));
-        exit();
-      } else {
-        // Get newly created account information
-        $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
-        $result = mysqli_query($db,$sql);
-        $clientAccountInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        
+    // Get all accounts from the clients
+    if ($accountType = "Credit") {
+      $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
+      $getAllAccountsResult = mysqli_query($db,$sql);
+      $arrayAccounts = array();
+      $count = 0;
+
+      if (isset($getAllAccountsResult)) {
+        while($row = $getAllAccountsResult->fetch_assoc()) {
+          $fromAccountID = $row['AccountID'];
+          $sql = "SELECT * FROM transaction WHERE fromAccountID = '$fromAccountID'";
+          $getAllTransactions = mysqli_query($db,$sql);
+
+          if(isset($getAllTransactions)){
+            while($row2 = $getAllTransactions->fetch_assoc()){
+                $count++;
+            }
+          }
+
+        }
       }
-    
+      
+      if ($count >= 3) {
+        $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
+        VALUES ('$cardNumber', '$accountType', '$accountOption', '$accountLevel', 0.00 , '$employeeBranchID', '$clientID', '$serviceID')";
+        $newAccountResult = mysqli_query($db,$sql);
+        
+        if (!$newAccountResult) {
+          printf("Error: %s\n", mysqli_error($db));
+          exit();
+        } else {
+          // Get newly created account information
+          $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
+          $result = mysqli_query($db,$sql);
+          $clientAccountInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
+          
+        }
+      } else {
+        echo "Not working";
+      }
+    } else {
+      $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
+        VALUES ('$cardNumber', '$accountType', '$accountOption', '$accountLevel', 0.00 , '$employeeBranchID', '$clientID', '$serviceID')";
+        $newAccountResult = mysqli_query($db,$sql);
+        
+        if (!$newAccountResult) {
+          printf("Error: %s\n", mysqli_error($db));
+          exit();
+        } else {
+          // Get newly created account information
+          $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
+          $result = mysqli_query($db,$sql);
+          $clientAccountInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
+          
+        }
+    }
   }
-
-    
-
 ?>
 <html>
 
