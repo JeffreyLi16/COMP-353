@@ -16,6 +16,7 @@
     $result = mysqli_query($db, $sql);
     while($row = mysqli_fetch_assoc($result)){
         $rows[] = $row;
+    }
 ?>
 
 <html>
@@ -53,14 +54,11 @@
                             $hours = $row['Hours'];
                             echo 
                             "<tr>
-                                <form action=\"\" method=\"post\">
                                     <td>$date</td>
                                     <td>$amount</td>
                                     <td>$hours</td>
-                                </form>
                             </tr>";
                         }
-                    }
                 ?>
             </table>
             </center></h3></div>
