@@ -6,16 +6,23 @@
     }
 
     if(isset($_SESSION['viewEmployeeID'])){
-        $ID = $_SESSION['viewEmployeeID'];
-
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            if($_POST["submit"] == 'deleteEmployee'){
-                $viewEmployeeID = $_SESSION['viewEmployeeID'];
-                $sql = "DELETE FROM Employee WHERE EmployeeID = '$ID';";
-                $result = mysqli_query($db, $sql);
-                header("location:employeeHomePage.php");
+        if($_SESSION['viewEmployeeID'] != $_SESSION['employeeID']){
+            $ID = $_SESSION['viewEmployeeID'];
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                if($_POST["submit"] == 'deleteEmployee'){
+                    $viewEmployeeID = $_SESSION['viewEmployeeID'];
+                    $sql = "DELETE FROM Employee WHERE EmployeeID = '$ID';";
+                    $result = mysqli_query($db, $sql);
+                    header("location:employeeHomePage.php");
+                }
             }
         }
+        else if($_SESSION['viewEmployeeID'] == $_SESSION['employeeID']){
+            unset($_SESSION['viewEmployeeID']);
+            $ID = $_SESSION["employeeID"];
+        }
+
+        
     }
     else{
         $ID = $_SESSION["employeeID"];
@@ -140,6 +147,7 @@
                 
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="myschedule.php"><span class="glyphicon glyphicon-calendar"></span> My Schedule</a></li>
+                    <li><a href="payroll.php"><span class=""></span> My Payrolls</a></li>
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                 </ul>
             </div>
@@ -193,6 +201,7 @@
                     <?php
                         if(isset($_SESSION['viewEmployeeID']) && $ID !== $_SESSION['employeeID']){
                             echo "<a href=\"employeeSchedule.php\"><button type=\"button\" class=\"btn btn-info back_btn\">view Schedule</button></a>";
+                            echo "<a href=\"payroll.php\"><button type=\"button\" class=\"btn btn-info back_btn\">view Payroll</button></a>";
                             echo "<button class=\"btn btn-danger back_btn\" name=\"submit\" type=\"submit\" value=\"deleteEmployee\">DELETE EMPLOYEE</button>";
                         }
                     ?>
