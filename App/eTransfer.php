@@ -3,7 +3,7 @@
     
     // Query the client's account
     $clientID = $_SESSION['clientID'];
-    $sql = "SELECT * FROM account WHERE clientID = '$clientID'";
+    $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
     $getFromAccountsResult = mysqli_query($db,$sql);    
     
 
@@ -19,7 +19,7 @@
                 $getToClientRow = mysqli_fetch_array($getToClientResult,MYSQLI_ASSOC);
 
                 $toClientID = $getToClientRow['ClientID'];
-                $sql = "SELECT * FROM account WHERE clientID = '$toClientID'";
+                $sql = "SELECT * FROM account WHERE ClientID = '$toClientID'";
                 $getToAccountsResult = mysqli_query($db,$sql);    
 
             } elseif ($getTransferType == 'PhoneNumber') {
@@ -28,7 +28,7 @@
                 $getToClientRow = mysqli_fetch_array($getToClientResult,MYSQLI_ASSOC);
 
                 $toClientID = $getToClientRow['ClientID'];
-                $sql = "SELECT * FROM account WHERE clientID = '$toClientID'";
+                $sql = "SELECT * FROM account WHERE ClientID = '$toClientID'";
                 $getToAccountsResult = mysqli_query($db,$sql);    
             }
 
@@ -87,7 +87,7 @@
                                 if (isset($getFromAccountsResult)) {
                                     while($fromAccount = $getFromAccountsResult->fetch_assoc()) {
                                         echo("
-                                            <option value=\" " . $fromAccount['ID'] . " \">CardNumber: " . $fromAccount['CardNumber'] . "&emsp;Balance: " . $fromAccount['Balance'] . " </option>
+                                            <option value=\" " . $fromAccount['AccountID'] . " \">CardNumber: " . $fromAccount['CardNumber'] . "&emsp;Balance: " . $fromAccount['Balance'] . " </option>
                                         ");
                                     }
                                 }
@@ -103,7 +103,7 @@
                                 if (isset($getToAccountsResult)) {
                                     while($toAccount = $getToAccountsResult->fetch_assoc()) {
                                         echo("
-                                            <option value=\" " . $toAccount['ID'] . " \">CardNumber: " . $toAccount['CardNumber'] . "&emsp;Balance: " . $toAccount['Balance'] . " </option>
+                                            <option value=\" " . $toAccount['AccountID'] . " \">CardNumber: " . $toAccount['CardNumber'] . "&emsp;Balance: " . $toAccount['Balance'] . " </option>
                                         ");
                                     }
                                 }

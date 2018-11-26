@@ -4,14 +4,14 @@
     $clientCardNumber = $_SESSION['cardNumber'];
 
     // Get client's account from session
-    $sql = "SELECT * FROM account WHERE cardNumber = '$clientCardNumber'";
+    $sql = "SELECT * FROM account WHERE CardNumber = '$clientCardNumber'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     
-    $accountID = $row['ID'];
+    $accountID = $row['AccountID'];
 
     // Get all bills from that specific account
-    $sql = "SELECT * FROM billing WHERE accountID = '$accountID' AND billingType = 'Single'";
+    $sql = "SELECT * FROM billing WHERE AccountID = '$accountID' AND billingType = 'Single'";
     $getAllBillsResult = mysqli_query($db,$sql);
 
     

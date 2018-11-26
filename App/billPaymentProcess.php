@@ -19,41 +19,54 @@
             $myBill = mysqli_fetch_array($getAllBillsResult,MYSQLI_ASSOC);
         }
 
-        $sql = "SELECT * FROM account WHERE ID = '$accountID'";
+        $sql = "SELECT * FROM account WHERE AccountID = '$accountID'";
         $getAccountResult = mysqli_query($db,$sql);
         $getAccount = mysqli_fetch_array($getAccountResult,MYSQLI_ASSOC);
 
         $myBillBalance = $myBill['balance'];
         $remainingBalance = $myBillBalance - $myBill['paymentAmount'];
 
+        
         if($transactionAmount >= $remainingBalance){
-
-            $sql = "UPDATE billing SET paymentAmount='$myBillBalance', isCompleted = 1 WHERE billingID='$billID'";
-            $result = mysqli_query($db,$sql);
-    
-            $sql = "INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$remainingBalance', DATE(NOW()), NULL, '$accountID', 'payment')";
-            $result = mysqli_query($db,$sql);
-
+            
             $updatedBalance = $getAccount['Balance'] - $remainingBalance;
-            $sql = "UPDATE account SET Balance='$updatedBalance' WHERE ID='$accountID'";
-            $result = mysqli_query($db,$sql);
 
-            $msg = "Successful transaction! The bill has been completed.";
+            if ($updatedBalance >= 0) {
+                $sql = "UPDATE account SET Balance='$updatedBalance' WHERE AccountID='$accountID'";
+                $result = mysqli_query($db,$sql);
+                
+                $sql = "UPDATE billing SET paymentAmount='$myBillBalance', isCompleted = 1 WHERE billingID='$billID'";
+                $result = mysqli_query($db,$sql);
+        
+                $sql = "INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$remainingBalance', DATE(NOW()), NULL, '$accountID', 'payment')";
+                $result = mysqli_query($db,$sql);
+                
+                $msg = "Successful transaction! The bill has been completed.";
+            } else {
+                $msg = "You don't have enough funds !";
+            }
 
         } elseif ($transactionAmount > 0) {
-            $totalAmountPaid = $myBill['paymentAmount'] + $transactionAmount;
-            $remainingBalance = $myBill['balance'] - $totalAmountPaid;
-            $sql = "UPDATE billing SET paymentAmount='$totalAmountPaid' WHERE billingID='$billID'";
-            $result = mysqli_query($db,$sql);
-    
-            $sql = "INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$transactionAmount', DATE(NOW()), NULL, '$accountID', 'payment')";
-            $result = mysqli_query($db,$sql);
 
             $updatedBalance = $getAccount['Balance'] - $transactionAmount;
-            $sql = "UPDATE account SET Balance='$updatedBalance' WHERE ID='$accountID'";
-            $result = mysqli_query($db,$sql);
+            if ($updatedBalance >= 0 ) {
+                $sql = "UPDATE account SET Balance='$updatedBalance' WHERE AccountID='$accountID'";
+                $result = mysqli_query($db,$sql);
 
-            $msg = "Successful transaction! You still have " . $remainingBalance . " $ left to pay."; 
+
+                $totalAmountPaid = $myBill['paymentAmount'] + $transactionAmount;
+                $remainingBalance = $myBill['balance'] - $totalAmountPaid;
+                $sql = "UPDATE billing SET paymentAmount='$totalAmountPaid' WHERE billingID='$billID'";
+                $result = mysqli_query($db,$sql);
+        
+                $sql = "INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$transactionAmount', DATE(NOW()), NULL, '$accountID', 'payment')";
+                $result = mysqli_query($db,$sql);
+
+                $msg = "Successful transaction! You still have " . $remainingBalance . " $ left to pay."; 
+            } else {
+                $msg = "You don't have enough funds !";
+            }
+        
         } else {
             $msg = "Unable to proceed with the transaction. Please contact any employee."; 
         }

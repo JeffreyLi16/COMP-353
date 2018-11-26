@@ -31,11 +31,11 @@
       $serviceType = $_POST['serviceType'];
 
       // Get ServiceID from client
-      $sql = "SELECT ID FROM Service WHERE ServiceType = '$serviceType'";
+      $sql = "SELECT ServiceID FROM Service WHERE ServiceType = '$serviceType'";
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-      $serviceID = $row['ID'];
+      $serviceID = $row['ServiceID'];
 
       $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
       VALUES ('$cardNumber', '$accountType', '$accountOption', '$accountLevel', 0.00 , '$employeeBranchID', '$clientID', '$serviceID')";

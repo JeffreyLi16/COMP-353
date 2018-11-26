@@ -7,7 +7,7 @@
 
     // Get client account information
     $clientID = $_SESSION['clientID'];
-    $sql = "SELECT * FROM account WHERE clientID = '$clientID'";
+    $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
     $getAllAccountsResult = mysqli_query($db,$sql);
     $arrayAccounts = array();
     while($row = $getAllAccountsResult->fetch_assoc()) {
@@ -18,14 +18,14 @@
 
 
     // Get client's account from session
-    $sql = "SELECT * FROM account WHERE cardNumber = '$clientCardNumber'";
+    $sql = "SELECT * FROM account WHERE CardNumber = '$clientCardNumber'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     
-    $accountID = $row['ID'];
+    $accountID = $row['AccountID'];
 
     // Get all bills from that specific account
-    $sql = "SELECT * FROM billing WHERE accountID = '$accountID' AND (billingType = 'Monthly')";
+    $sql = "SELECT * FROM billing WHERE AccountID = '$accountID' AND (billingType = 'Monthly')";
     $getAllBillsResult = mysqli_query($db,$sql);
 
 ?>
@@ -116,7 +116,7 @@
                                                         for($x = 0; $x < $len; $x++) {
                                                             $row = $arrayAccounts[$x];
                                                             echo("
-                                                                <option value=\" " . $row['ID'] . " \">CardNumber: " . $row['CardNumber'] . "&emsp;Balance: " . $row['Balance'] . " </option>
+                                                                <option value=\" " . $row['AccountID'] . " \">CardNumber: " . $row['CardNumber'] . "&emsp;Balance: " . $row['Balance'] . " </option>
                                                             ");
                                                         }
                                                     }

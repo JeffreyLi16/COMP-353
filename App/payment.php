@@ -12,7 +12,7 @@
 
             // Query the client's account
             $clientID = $_SESSION['clientID'];
-            $sql = "SELECT * FROM account WHERE clientID = '$clientID'";
+            $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
             $getAllAccountsResult = mysqli_query($db,$sql);
         } elseif ($billingType == 'Monthly') {
             $sql = "UPDATE billing SET billingType = 'Monthly' WHERE billingID = '$billID'";
@@ -80,7 +80,7 @@
                                 if (isset($getAllAccountsResult)) {
                                     while($row = $getAllAccountsResult->fetch_assoc()) {
                                         echo("
-                                            <option value=\" " . $row['ID'] . " \">CardNumber: " . $row['CardNumber'] . "&emsp;Balance: " . $row['Balance'] . " </option>
+                                            <option value=\" " . $row['AccountID'] . " \">CardNumber: " . $row['CardNumber'] . "&emsp;Balance: " . $row['Balance'] . " </option>
                                         ");
                                     }
                                 }

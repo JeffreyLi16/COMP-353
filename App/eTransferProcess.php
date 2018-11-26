@@ -9,13 +9,13 @@
         
         if ($amount > 0) {
             // Get both accounts' balance
-            $sql = "SELECT * FROM account WHERE id='$fromAccountID'";
+            $sql = "SELECT * FROM account WHERE AccountID='$fromAccountID'";
             $fromAccountResult = mysqli_query($db,$sql);
             $fromAccountRow = mysqli_fetch_array($fromAccountResult,MYSQLI_ASSOC);
 
             $fromAccountBalance = $fromAccountRow['Balance'];
 
-            $sql = "SELECT * FROM account WHERE id='$toAccountID'";
+            $sql = "SELECT * FROM account WHERE AccountID='$toAccountID'";
             $toAccountResult = mysqli_query($db,$sql);
             $toAccountRow = mysqli_fetch_array($toAccountResult,MYSQLI_ASSOC);
 
@@ -25,10 +25,10 @@
             $toAccountNewBalance = $toAccountBalance + $amount;
 
             if ($fromAccountNewBalance >= 0) {
-                $sql = "UPDATE account SET Balance = '$fromAccountNewBalance' WHERE ID = '$fromAccountID'";
+                $sql = "UPDATE account SET Balance = '$fromAccountNewBalance' WHERE AccountID = '$fromAccountID'";
                 $fromAccountNewResult = mysqli_query($db,$sql);
 
-                $sql = "UPDATE account SET Balance = '$toAccountNewBalance' WHERE ID = '$toAccountID'";
+                $sql = "UPDATE account SET Balance = '$toAccountNewBalance' WHERE AccountID = '$toAccountID'";
                 $toAccountNewResult = mysqli_query($db,$sql);
 
                 $sql = "INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$amount', DATE(NOW()), '$toAccountID', '$fromAccountID', 'transfer')";
@@ -36,6 +36,8 @@
 
                 $successMsg = "The fund has been transfered.";
 
+            } {
+                $failMsg = "You don't have enough funds! "; 
             }
         } else {
             $failMsg = "Unable to proceed with the transfer. Please contact any employee."; 
