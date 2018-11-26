@@ -1,7 +1,14 @@
 <?php
     include('session.php');
 
+    date_default_timezone_set('America/New_York');
+    $date = date('Y-m-d', time());
     $clientCardNumber = $_SESSION['cardNumber'];
+
+    // Get client account information
+    $clientID = $_SESSION['clientID'];
+    $sql = "SELECT * FROM account WHERE clientID = '$clientID'";
+    $getAllAccountsResult = mysqli_query($db,$sql);
 
     // Get client's account from session
     $sql = "SELECT * FROM account WHERE cardNumber = '$clientCardNumber'";
@@ -11,7 +18,7 @@
     $accountID = $row['ID'];
 
     // Get all bills from that specific account
-    $sql = "SELECT * FROM billing WHERE accountID = '$accountID' AND (billingType = 'Monthly' OR billingType = 'Yearly')";
+    $sql = "SELECT * FROM billing WHERE accountID = '$accountID' AND (billingType = 'Monthly')";
     $getAllBillsResult = mysqli_query($db,$sql);
 
 ?>
@@ -54,8 +61,8 @@
     </nav>
     <div class="container">
     <div class=" text-center my-5">
-            <span class="text-monospace" style="font-size: 24px;"> Account Statement </span>
-            <button class="btn btn-info float-right">Subscription</button>
+            <span class="text-monospace" style="font-size: 24px;"> Subscription </span>
+            
         </div>
         <hr>
         <table class="table table-hover text-center my-5 px-5">
@@ -65,6 +72,9 @@
                     <th scope="col">Due Date</th>
                     <th scope="col">Balance</th>
                     <th scope="col">Total Payment Amount</th>
+                    <th scope="col">Transaction Date</th>
+                    <th scope="col">Select New Date</th>
+                    <th scope="col">Select Card</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
 
@@ -73,24 +83,55 @@
             <tbody>
                 <?php
                     if (isset($getAllBillsResult)) {
-                        while($row = $getAllBillsResult->fetch_assoc()) {
+                        while($myBill = $getAllBillsResult->fetch_assoc()) {
                             echo("
-                                <form action=\"\" method=\"POST\">
+                                
                                     <tr>
-                                        <th scope=\"row\">" . $row['id'] . "</th>
-                                        <td>" .  $row['dueDate'] . "</td>
-                                        <td>" .  $row['balance'] . "</td>
-                                        <td>" . $row['paymentAmount'] . "</td>
-                                        <td></td>
-                                        <td> 
-                                            <button class=\"btn btn-outline-info\"> Remove Subscription </button>
-                                        </td>
+                                        <th scope=\"row\">" . $myBill['id'] . "</th>
+                                        <td>" .  $myBill['dueDate'] . "</td>
+                                        <td>" .  $myBill['balance'] . "</td>
+                                        <td>" . $myBill['paymentAmount'] . "</td>
+                                        <td>" . $myBill['automaticTransferDate'] . "</td>
+                                        <form action=\"changeSubscriptionDate.php\" method=\"POST\">
+                                            <td>
+                                                <div class=\"form-row\">
+                                                <div class=\"form-group col-md-12 px-5\">
+                                                    <input 
+                                                        type=\"date\" 
+                                                        min=\"" . $date . "\"
+                                                        name=\"selectedDate\">
+                                                </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <select name=\"accountID\" class=\"form-control\"> ");
+                                                    if (isset($getAllAccountsResult)) {
+                                                        while($row = $getAllAccountsResult->fetch_assoc()) {
+                                                            echo("
+                                                                <option value=\" " . $row['ID'] . " \">CardNumber: " . $row['CardNumber'] . "&emsp;Balance: " . $row['Balance'] . " </option>
+                                                            ");
+                                                        }
+                                                    }
+                                                echo("</select>
+                                            </td>                                        
+                                            <td> 
+                                                <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['id'] . " \">
+                                                <button type=\"submit\" class=\"btn btn-outline-info\"> Update Date </button>
+                                            </td>
+                                        </form>
                                         <td>
-                                            <input type=\"hidden\" name=\"billID\" value=\" " . $row['id'] . " \">
+                                            <form action=\"\" method=\"POST\">
+                                                <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['id'] . " \">
+                                                <button type=\"submit\" class=\"btn btn-outline-info\"> Remove Subscription </button>
+                                            </form>
+                                        </td>
+                                        <!--
+                                        <td>
+                                            <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['id'] . " \">
                                             <button type=\"submit\" class=\"btn btn-outline-info\"> Pay Now </button>
                                         </td>
+                                        -->
                                     </tr>
-                                </form>
                             ");
                         }
                     }

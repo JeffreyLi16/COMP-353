@@ -68,7 +68,6 @@
                     <th scope="col">Total Payment Amount</th>
                     <th scope="col">Select Billing Type</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
 
                 </tr>
             </thead>
@@ -89,11 +88,11 @@
                                                     <select name=\"billingType\" class=\"form-control\">
                                                         <option value=\"Single\">Immediate</option>
                                                         <option value=\"Monthly\">Monthly</option>
-                                                        <option value=\"Yearly\">Yearly</option>
                                                     </select>
                                                 </div>
                                             </div> 
                                         </td>
+                                    
                                         <td>
                                             <input type=\"hidden\" name=\"billID\" value=\" " . $row['id'] . " \">
                                             <button type=\"submit\" class=\"btn btn-outline-info\"> Pay Now </button>
