@@ -26,6 +26,7 @@
 		
       if($count == 1) {
          $_SESSION['cardNumber'] = $mycardNumber;
+         $_SESSION['clientID'] = $row['ClientID'];
          $_SESSION['FirstName'] = $row['FirstName'];
          $_SESSION['LastName'] = $row['LastName'];
          $_SESSION['birthDate'] = $row['Birthday'];
