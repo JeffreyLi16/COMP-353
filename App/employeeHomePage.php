@@ -4,6 +4,9 @@
     if(!isset($_SESSION['employeeID'])){
         header("location:employeeLogin.php");
     }
+    if(isset($_SESSION['viewEmployeeID'])){
+      unset($_SESSION['viewEmployeeID']);
+  }
 
     $ID = $_SESSION["employeeID"];
     $firstName = $_SESSION['FirstName'];
