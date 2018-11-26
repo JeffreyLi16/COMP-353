@@ -120,7 +120,7 @@
                                             </td>
                                         </form>
                                         <td>
-                                            <form action=\"\" method=\"POST\">
+                                            <form action=\"removeSubscription.php\" method=\"POST\">
                                                 <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['id'] . " \">
                                                 <button type=\"submit\" class=\"btn btn-outline-info\"> Remove Subscription </button>
                                             </form>
