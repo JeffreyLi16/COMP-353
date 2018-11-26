@@ -109,7 +109,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">My Account</a>
+            <a class="navbar-brand" href="homePage.php">Bank Of Concordia</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -132,7 +132,7 @@
                 </div>
             </div>
         </nav>
-        <div id="main-wrapper"><h2><center>Update your Account Information</center></h2><br>
+        <div id="main-wrapper"><h2><center>Update Account Information</center></h2><br>
             <div><h3><center>
                 <form action = "" method = "post">
 
