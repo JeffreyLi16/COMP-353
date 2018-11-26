@@ -36,6 +36,8 @@
 
                 $successMsg = "The fund has been transfered.";
 
+            } else {
+                $failMsg = "You don't have enough funds! "; 
             }
         } else {
             $failMsg = "Unable to proceed with the transfer. Please contact any employee."; 
