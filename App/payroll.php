@@ -40,29 +40,28 @@
 
         </nav>
         <div id="main-wrapper"><h2><center>Payroll History</center></h2><br>
-            <div><h3>
-            <table width=450px; font-size=h3 !important;>
-                <tr>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Hours</th>
-                </tr>
-                <?php
-                    foreach($rows as $row){
-                            $date = $row['Date'];
-                            $amount = $row['Amount'];
-                            $hours = $row['Hours'];
-                            echo 
-                            "<tr>
-                                    <td>$date</td>
-                                    <td>$amount</td>
-                                    <td>$hours</td>
-                            </tr>";
+            <div>
+                <table width=450px;>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Hours</th>
+                    </tr>
+                    <?php
+                        foreach($rows as $row){
+                                $date = $row['Date'];
+                                $amount = $row['Amount'];
+                                $hours = $row['Hours'];
+                                echo 
+                                "<tr>
+                                        <td>$date</td>
+                                        <td>$amount</td>
+                                        <td>$hours</td>
+                                </tr>";
                         }
-                ?>
-            </table>
-            </h3></div>
-
+                    ?>
+                </table>
+            </div>
         </div>
     </body>
 </html>
