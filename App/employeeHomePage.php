@@ -75,7 +75,7 @@
         </ul>
       </div>
     </nav>
-    <h2><center>Hello <?php echo $firstName . $lastName;?></center></h2>
+    <h2><center>Hello <?php echo $firstName . " " . $lastName;?></center></h2>
     <div id="main-wrapper">
 
       <form action = "" method = "post">

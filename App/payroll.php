@@ -16,6 +16,7 @@
     $result = mysqli_query($db, $sql);
     while($row = mysqli_fetch_assoc($result)){
         $rows[] = $row;
+    }
 ?>
 
 <html>
@@ -39,32 +40,28 @@
 
         </nav>
         <div id="main-wrapper"><h2><center>Payroll History</center></h2><br>
-            <div><h3><center>
-            <table border = 1px>
-                <tr>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Hours</th>
-                </tr>
-                <?php
-                    foreach($rows as $row){
-                            $date = $row['Date'];
-                            $amount = $row['Amount'];
-                            $hours = $row['Hours'];
-                            echo 
-                            "<tr>
-                                <form action=\"\" method=\"post\">
-                                    <td>$date</td>
-                                    <td>$amount</td>
-                                    <td>$hours</td>
-                                </form>
-                            </tr>";
+            <div>
+                <table width=450px;>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Hours</th>
+                    </tr>
+                    <?php
+                        foreach($rows as $row){
+                                $date = $row['Date'];
+                                $amount = $row['Amount'];
+                                $hours = $row['Hours'];
+                                echo 
+                                "<tr>
+                                        <td>$date</td>
+                                        <td>$amount</td>
+                                        <td>$hours</td>
+                                </tr>";
                         }
-                    }
-                ?>
-            </table>
-            </center></h3></div>
-
+                    ?>
+                </table>
+            </div>
         </div>
     </body>
 </html>
