@@ -5,8 +5,12 @@
     $date = date('Y-m-d', time());
     $clientCardNumber = $_SESSION['cardNumber'];
 
+    $sql = "SELECT * FROM account WHERE CardNumber = '$clientCardNumber'";
+    $getClientIDResult = mysqli_query($db,$sql);
+    $getClientIDRow = mysqli_fetch_array($getClientIDResult,MYSQLI_ASSOC);
+
     // Get client account information
-    $clientID = $_SESSION['clientID'];
+    $clientID = $getClientIDRow['ClientID'];
     $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
     $getAllAccountsResult = mysqli_query($db,$sql);
     $arrayAccounts = array();
@@ -27,6 +31,23 @@
     // Get all bills from that specific account
     $sql = "SELECT * FROM billing WHERE AccountID = '$accountID' AND (billingType = 'Monthly')";
     $getAllBillsResult = mysqli_query($db,$sql);
+
+   
+    // $sql = "DELIMITER |
+
+    // CREATE EVENT subscrptionTransaction
+    // ON SCHEDULE
+    //     EVERY 1 MINUTE
+    //     STARTS '2018-11-27 17:31:00'
+    // DO
+    // BEGIN
+    //     INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) 
+    //     VALUES (20, DATE(NOW()), 2, 1, 'payment');
+    // END |
+    
+    // DELIMITER;";
+
+    // $result = mysqli_query($db,$sql);
 
 ?>
 
