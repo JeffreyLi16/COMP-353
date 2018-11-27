@@ -1,6 +1,6 @@
 <?php   
     include('session.php');
-    $clientID = $_SESSION["ClientID"];
+    $clientID = $_SESSION["clientID"];
     $card = $_SESSION["cardNumber"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
