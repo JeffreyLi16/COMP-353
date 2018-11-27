@@ -57,8 +57,9 @@
         $newAccountResult = mysqli_query($db,$sql);
         
         if (!$newAccountResult) {
-          printf("Error: %s\n", mysqli_error($db));
-          exit();
+          $alertMessageChanged = "Error: Card Number already exists.";
+          $url = "openClientAccount.php";
+          myAlert($alertMessageChanged, $url);
         } else {
           // Get newly created account information
           $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
@@ -77,8 +78,9 @@
         $newAccountResult = mysqli_query($db,$sql);
         
         if (!$newAccountResult) {
-          printf("Error: %s\n", mysqli_error($db));
-          exit();
+          $alertMessageChanged = "Error: Card Number already exists.";
+          $url = "openClientAccount.php";
+          myAlert($alertMessageChanged, $url);
         } else {
           // Get newly created account information
           $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
