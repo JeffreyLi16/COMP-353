@@ -11,7 +11,7 @@
     $phoneNumber = $_SESSION['phoneNumber'];
     $lasTransDate = $_SESSION['lastTransDate'];
     
-    $sql = "SELECT * FROM Transaction, Account WHERE (AccountID IN  (SELECT AccountID FROM Account WHERE Account.ClientID = '1')) AND (AccountID = ToAccountID OR AccountID = FromAccountID) ORDER BY Date DESC;";
+    $sql = "SELECT * FROM Transaction, Account WHERE (AccountID IN  (SELECT AccountID FROM Account WHERE Account.ClientID = '$clientID')) AND (AccountID = ToAccountID OR AccountID = FromAccountID) ORDER BY Date DESC;";
       $result = mysqli_query($db, $sql);
       
       while($row = mysqli_fetch_assoc($result)){
