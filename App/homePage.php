@@ -4,12 +4,17 @@
     $card = $_SESSION["cardNumber"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
-    $birthDate = $_SESSION['birthDate'];
-    $joinDate = $_SESSION['joinDate'];
-    $address = $_SESSION['address'];
-    $email = $_SESSION['email'];
-    $phoneNumber = $_SESSION['phoneNumber'];
-    $lasTransDate = $_SESSION['lastTransDate'];
+
+
+    $sql = "SELECT Client.* FROM Client, Account WHERE (Client.ClientID = Account.ClientID) AND (CardNumber = '$card')";
+    $result = mysqli_query($db, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $address = $row["Address"];
+    $phoneNumber = $row["PhoneNumber"];
+    $email = $row["Email"];
+    $firstName = $row["FirstName"];
+    $lastName = $row["LastName"];
+
 ?>
 
 <html>

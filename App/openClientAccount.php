@@ -39,7 +39,7 @@
       if (isset($getAllAccountsResult)) {
         while($row = $getAllAccountsResult->fetch_assoc()) {
           $fromAccountID = $row['AccountID'];
-          $sql = "SELECT * FROM transaction WHERE fromAccountID = '$fromAccountID'";
+          $sql = "SELECT * FROM transaction WHERE (fromAccountID = '$fromAccountID' AND (Date between now() - Interval 6 Month and now()));";
           $getAllTransactions = mysqli_query($db,$sql);
 
           if(isset($getAllTransactions)){
@@ -67,7 +67,9 @@
           
         }
       } else {
-        echo "Not working";
+          $alertMessageChanged = "Error: Unsatisfactory amount of transactions in the last 6 months.";
+          $url = "openClientAccount.php";
+          myAlert($alertMessageChanged, $url);
       }
     } else {
       $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
@@ -86,6 +88,10 @@
         }
     }
   }
+  function myAlert($alertMessageChanged, $url){
+    echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
+    echo "<script>document.location = '$url'</script>";
+}
 ?>
 <html>
 

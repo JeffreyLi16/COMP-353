@@ -36,10 +36,10 @@ if (isset($_SESSION['employeeID'])){
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="myschedule.php">My Schedule</a>
-                    </li>
+                    
                 </ul>
                 <div class="navbar-nav ml-4">
+                    <a class="nav-link" href="myschedule.php">My Schedule</a>
                     <a class="nav-item nav-link" href="employeeSetting.php"> Account </a>
                     <a class="nav-item nav-link" href="logout.php"> Logout </a>
                 </div>

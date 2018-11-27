@@ -175,6 +175,18 @@
         <?php
             include('Components/navbar.php');
         ?>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="employeeHomePage.php" class="navbar-brand">Bank Of Concordia</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="employeeSetting.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
+                    <li><a href="payroll.php"><span class=""></span> My Payrolls</a></li>
+                    <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                </ul>
+            </div>
+        </nav>
 
         <div style="margin: 40px;">
             <h2>Schedule History</h2>
