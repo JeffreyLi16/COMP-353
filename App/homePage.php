@@ -1,19 +1,22 @@
 <?php   
-    include('Components/sessionClient.php');
-
+    include('session.php');
+    $clientID = $_SESSION["ClientID"];
     $card = $_SESSION["cardNumber"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
-
-
-    $sql = "SELECT Client.* FROM Client, Account WHERE (Client.ClientID = Account.ClientID) AND (CardNumber = '$card')";
-    $result = mysqli_query($db, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $address = $row["Address"];
-    $phoneNumber = $row["PhoneNumber"];
-    $email = $row["Email"];
-    $firstName = $row["FirstName"];
-    $lastName = $row["LastName"];
+    $birthDate = $_SESSION['birthDate'];
+    $joinDate = $_SESSION['joinDate'];
+    $address = $_SESSION['address'];
+    $email = $_SESSION['email'];
+    $phoneNumber = $_SESSION['phoneNumber'];
+    $lasTransDate = $_SESSION['lastTransDate'];
+    
+    $sql = "SELECT * FROM Transaction, Account WHERE (AccountID IN  (SELECT AccountID FROM Account WHERE Account.ClientID = '$clientID')) AND (AccountID = ToAccountID OR AccountID = FromAccountID) ORDER BY Date DESC;";
+      $result = mysqli_query($db, $sql);
+      
+      while($row = mysqli_fetch_assoc($result)){
+          $rows[] = $row;
+      }
 
 ?>
 
@@ -66,11 +69,42 @@
         echo "</table> </br>";
             
       }
-
+      
       echo "<hr>";
       echo "<h3>List of Transactions: </h3>";
-
+      
       ?>
+
+  <table style=" background-repeat:no-repeat; width:750px; margin:10;" >
+                <tr>
+                    <th>Date</th>
+                    <th>Card Number</th>
+                    <th>Amount</th>
+                    <th>Transaction Type</th>
+                </tr>
+                <?php
+                    foreach($rows as $row){
+                            $date = $row['Date'];
+                            $cardNumber = $row['CardNumber'];
+                            $amount = $row['Amount'];
+                            $transactionType = $row['TransactionType'];
+                            $minus="";
+                            if($row['FromAccountID'] == $row['AccountID']){
+                              $minus = '-';
+                            }
+                            echo 
+                            "<tr>
+                                <form action=\"\" method=\"post\">
+                                    <td>$date</td>
+                                    <td>$cardNumber</td>
+                                    <td>$minus$amount</td>
+                                    <td>$transactionType</td>
+                                </form>
+                            </tr>";
+                        
+                    }
+                ?>
+            </table>
       </div>
    </body>
 </html>
