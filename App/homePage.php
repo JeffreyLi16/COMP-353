@@ -84,7 +84,7 @@
       
       ?>
 
-<table border = 1px>
+  <table style=" background-repeat:no-repeat; width:750px; margin:10;" >
                 <tr>
                     <th>Date</th>
                     <th>Card Number</th>
