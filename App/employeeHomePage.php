@@ -8,6 +8,11 @@
       unset($_SESSION['viewEmployeeID']);
   }
 
+    if (isset($_SESSION['cardNumber']))
+    {
+        unset($_SESSION['cardNumber']);
+    }
+
     $ID = $_SESSION["employeeID"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
@@ -23,6 +28,7 @@
         $validCardNumber = $row['CardNumber'];
         if($clientCardNumber === $validCardNumber){
           $_SESSION["cardNumber"] = $clientCardNumber;
+          $_SESSION['clientID'] = $row['ClientID'];
           header("location: userInfo.php");
         }
         else{
@@ -57,24 +63,15 @@
 
 <html>
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">    
     <link rel="stylesheet" href="css/employee.css">
   </head>
    
   <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">Bank Of Concordia</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="employeeSetting.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
-          <li><a href="myschedule.php"><span class="glyphicon glyphicon-calendar"></span> My Schedule</a></li>
-          <li><a href="payroll.php"><span class=""></span> My Payrolls</a></li>
-          <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-        </ul>
-      </div>
-    </nav>
+    <?php
+        include('Components/navbar.php');
+    ?>
     <h2><center>Hello <?php echo $firstName . " " . $lastName;?></center></h2>
     <div id="main-wrapper">
 

@@ -25,8 +25,8 @@
       // If result matched $myusername and $mypassword, table row must be 1 row
 		
       if($count == 1) {
-         $_SESSION['ClientID'] = $row['ClientID'];
          $_SESSION['cardNumber'] = $mycardNumber;
+         $_SESSION['clientID'] = $row['ClientID'];
          $_SESSION['FirstName'] = $row['FirstName'];
          $_SESSION['LastName'] = $row['LastName'];
          $_SESSION['birthDate'] = $row['Birthday'];

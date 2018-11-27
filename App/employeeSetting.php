@@ -1,9 +1,5 @@
 <?php   
-    include('config.local.php');
-    session_start();
-    if(!isset($_SESSION['employeeID'])){
-        header("location:employeeLogin.php");
-    }
+    include('Components/sessionEmployee.php');
 
     if(isset($_SESSION['viewEmployeeID'])){
         if($_SESSION['viewEmployeeID'] != $_SESSION['employeeID']){
@@ -135,10 +131,14 @@
 
 <html>
     <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">   
-    <link rel="stylesheet" href="css/userInfo.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous">    
+        <link rel="stylesheet" href="css/userInfo.css">
     </head>
     <body>
+        <?php
+            include('Components/navbar.php');
+        ?>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">

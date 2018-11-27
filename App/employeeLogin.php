@@ -1,8 +1,8 @@
 <?php
    //include("config.php");
-   include("config.local.php");
-   session_start();
-   if(isset($_SESSION['cardNumber']) || isset($_SESSION['employeeID'])){
+    include("config.local.php");
+    session_start();
+    if(isset($_SESSION['cardNumber']) || isset($_SESSION['employeeID'])){
     session_destroy();
     session_start();
       } 
@@ -46,7 +46,7 @@
 <html>
    <head>   
       <title>Login</title>
-      <link rel="stylesheet" href="css/login.css"
+      <link rel="stylesheet" href="css/login.css">
    </head>
    <body>
       <div id="main-wrapper"><h2><center>Login</center></h2>

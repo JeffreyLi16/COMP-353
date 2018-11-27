@@ -1,90 +1,119 @@
 <?php
-    include("config.local.php");   
-    session_start();
-    if(!isset($_SESSION['employeeID'])){
-        header("location:employeeLogin.php");
-    }
+  include('Components/sessionEmployee.php');
 
-    $employeeID = $_SESSION["employeeID"];
-    $firstName = $_SESSION['FirstName'];
-    $lastName = $_SESSION['LastName'];
-    $employeeBranchID = $_SESSION['branchID'];
+  $employeeID = $_SESSION["employeeID"];
+  $firstName = $_SESSION['FirstName'];
+  $lastName = $_SESSION['LastName'];
+  $employeeBranchID = $_SESSION['branchID'];
 
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-      
-      $clientID = $_POST['clientID'];
+  if($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $cardNumber = $_SESSION['cardNumber'];
 
-      // Check if the client exists
-      $sql = "SELECT * FROM Client WHERE Client.ClientID = '$clientID'";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $count = mysqli_num_rows($result);
+    $sql = "SELECT * FROM client, account WHERE account.CardNumber = '$cardNumber'";
+    $result = mysqli_query($db,$sql);
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-    if ($count == 0){
-      echo("Client doesn't exist");
-      header("location: openClientAccount.php");
-    } else {
-      $cardNumber = $_POST['accountNumber'];
-      $accountType = $_POST['accountType'];
-      $accountOption = $_POST['accountOption'];
-      $accountLevel = $_POST['accountLevel'];
-      $serviceType = $_POST['serviceType'];
+    $clientID = $row['ClientID'];
 
-      // Get ServiceID from client
-      $sql = "SELECT ID FROM Service WHERE ServiceType = '$serviceType'";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $cardNumber = $_POST['cardNumber'];
+    $accountType = $_POST['accountType'];
+    $accountOption = $_POST['accountOption'];
+    $accountLevel = $_POST['accountLevel'];
+    $serviceType = $_POST['serviceType'];
 
-      $serviceID = $row['ID'];
+    // Get ServiceID from client
+    $sql = "SELECT ServiceID FROM Service WHERE ServiceType = '$serviceType'";
+    $result = mysqli_query($db,$sql);
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-      $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
-      VALUES ('$cardNumber', '$accountType', '$accountOption', '$accountLevel', 0.00 , '$employeeBranchID', '$clientID', '$serviceID')";
-      $newAccountResult = mysqli_query($db,$sql);
-      
-      if (!$newAccountResult) {
-        printf("Error: %s\n", mysqli_error($db));
-        exit();
-      } else {
-        // Get newly created account information
-        $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
-        $result = mysqli_query($db,$sql);
-        $clientAccountInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        
+    $serviceID = $row['ServiceID'];
+
+    // Get all accounts from the clients
+    if ($accountType = "Credit") {
+      $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
+      $getAllAccountsResult = mysqli_query($db,$sql);
+      $arrayAccounts = array();
+      $count = 0;
+
+      if (isset($getAllAccountsResult)) {
+        while($row = $getAllAccountsResult->fetch_assoc()) {
+          $fromAccountID = $row['AccountID'];
+          $sql = "SELECT * FROM transaction WHERE (fromAccountID = '$fromAccountID' AND (Date between now() - Interval 6 Month and now()));";
+          $getAllTransactions = mysqli_query($db,$sql);
+
+          if(isset($getAllTransactions)){
+            while($row2 = $getAllTransactions->fetch_assoc()){
+                $count++;
+            }
+          }
+
+        }
       }
+      
+      if ($count >= 3) {
+        $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
+        VALUES ('$cardNumber', '$accountType', '$accountOption', '$accountLevel', 0.00 , '$employeeBranchID', '$clientID', '$serviceID')";
+        $newAccountResult = mysqli_query($db,$sql);
+        
+        if (!$newAccountResult) {
+          $alertMessageChanged = "Error: Card Number already exists.";
+          $url = "openClientAccount.php";
+          myAlert($alertMessageChanged, $url);
+        } else {
+          // Get newly created account information
+          $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
+          $result = mysqli_query($db,$sql);
+          $clientAccountInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
+          
+        }
+      } else {
+          $alertMessageChanged = "Error: Unsatisfactory amount of transactions in the last 6 months.";
+          $url = "openClientAccount.php";
+          myAlert($alertMessageChanged, $url);
+      }
+    } else {
+      $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
+        VALUES ('$cardNumber', '$accountType', '$accountOption', '$accountLevel', 0.00 , '$employeeBranchID', '$clientID', '$serviceID')";
+        $newAccountResult = mysqli_query($db,$sql);
+        
+        if (!$newAccountResult) {
+          $alertMessageChanged = "Error: Card Number already exists.";
+          $url = "openClientAccount.php";
+          myAlert($alertMessageChanged, $url);
+        } else {
+          // Get newly created account information
+          $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
+          $result = mysqli_query($db,$sql);
+          $clientAccountInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
+          
+        }
     }
   }
-
-    
-
+  function myAlert($alertMessageChanged, $url){
+    echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
+    echo "<script>document.location = '$url'</script>";
+}
 ?>
 <html>
 
 <head>
   <link rel="stylesheet" href="css/openClientAccount.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a href="employeeHomePage.php" class="navbar-brand" href="#">Bank of Concordia</a>
-      </div>
-      <ul class="nav navbar-nav navbar-right">
-
-        <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-        <li><a href="myschedule.php"><span class=""></span> My Schedule</a></li>
-      </ul>
-    </div>
-  </nav>
+  <?php
+        include('Components/navbar.php');
+    ?>
 
   <div class="container" id="open-client-account">
  
     <!-- Print success message -->
     <?php if(isset($clientAccountInfo)) {  
       echo("
-        <div class=\"alert alert-success\" role=\"alert\">
+        <div class=\"alert alert-success my-5 text-center\" role=\"alert\">
           <p> Account with CardNumber " . $clientAccountInfo['CardNumber'] . " has been created !</p>
         </div>
       ");
@@ -96,13 +125,9 @@
       <div class="panel-body new-account-form">
         <form action="" method="post">
           <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>ClientID</label>
-              <input type="text" class="form-control" name="clientID">
-            </div>
-            <div class="form-group col-md-6">
-              <label>AccountNumber</label>
-              <input type="text" class="form-control" name="accountNumber">
+            <div class="form-group col-md-12">
+              <label>Card Number</label>
+              <input type="text" class="form-control" name="cardNumber">
             </div>
           </div>
           <div class="form-row">
@@ -110,9 +135,9 @@
               <label>Select New Account Level:</label>
               <select name="accountLevel" class="form-control">
                 <option></option>
-                <option value="Personal">Personal</option>
-                <option value="Business">Business</option>
-                <option value="Corporate">Corporate</option>
+                <option value="personal">Personal</option>
+                <option value="business">Business</option>
+                <option value="corporate">Corporate</option>
               </select>
             </div>
           </div>
@@ -130,9 +155,11 @@
               <label>Select Account Option:</label>
               <select name="accountOption" class="form-control">
                 <option></option>
-                <option value="Student">Student</option>
-                <option value="No Fee">No Fee</option>
-                <option value="High Saving">High Saving</option>
+                <option value="student">Student</option>
+                <option value="no fee">No Fee</option>
+                <option value="high-savings">High Saving</option>
+                <option value="car">Car</option>
+                <option value="home">Home</option>
               </select>
             </div>
           </div>
