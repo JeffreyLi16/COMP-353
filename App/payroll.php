@@ -40,8 +40,8 @@
 
         </nav>
         <div id="main-wrapper"><h2><center>Payroll History</center></h2><br>
-            <div><h3><center>
-            <table border = 1px>
+            <div><h3>
+            <table width=450px; font-size=h3 !important;>
                 <tr>
                     <th>Date</th>
                     <th>Amount</th>
@@ -61,7 +61,7 @@
                         }
                 ?>
             </table>
-            </center></h3></div>
+            </h3></div>
 
         </div>
     </body>
