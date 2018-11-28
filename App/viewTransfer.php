@@ -36,7 +36,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="text-info">From Account: </label>
-                            <select name="fromAccount" class="form-control">
+                            <select name="fromAccount" class="form-control" required>
                             <?php
                                 if (isset($getFromAccountsResult)) {
                                     while($fromAccount = $getFromAccountsResult->fetch_assoc()) {
@@ -52,7 +52,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="text-info">To Account: </label>
-                            <select name="toAccount" class="form-control">
+                            <select name="toAccount" class="form-control" required>
                             <?php
                                 if (isset($getToAccountsResult)) {
                                     while($toAccount = $getToAccountsResult->fetch_assoc()) {
@@ -68,7 +68,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="text-info">Amount: </label>
-                            <input type="text" class="form-control" name="transferAmount">
+                            <input type="text" class="form-control" name="transferAmount" required>
                         </div>
                         <div class="form-group col-md-6">
                             <button class="btn btn-outline-info float-right my-4"> Transfer Funds </button>
@@ -86,17 +86,17 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label class="text-info">Pay via </label>
-                            <select name="transferType" class="form-control">
+                            <select name="transferType" class="form-control" required>
                                 <option value="Email">Email</option>
                                 <option value="PhoneNumber">Phone Number</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                         <label class="text-info">Input: </label>
-                            <input type="text" class="form-control" name="inputValue">
+                            <input type="text" class="form-control" name="inputValue" required>
                         </div>
                         <div class="form-group col-md-2">
-                            <input type="hidden" name="accountID" value="">
+                            <input type="hidden" name="accountID" value="" required>
                             <button class="btn btn-outline-info float-right my-4"> eTransfer </button>
                         </div>
                     </div>               

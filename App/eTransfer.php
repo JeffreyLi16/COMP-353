@@ -62,7 +62,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="text-info">From Account: </label>
-                            <select name="fromAccount" class="form-control">
+                            <select name="fromAccount" class="form-control" required>
                             <?php
                                 if (isset($getFromAccountsResult)) {
                                     while($fromAccount = $getFromAccountsResult->fetch_assoc()) {
@@ -94,7 +94,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="text-info">Amount: </label>
-                            <input type="text" class="form-control" name="transferAmount">
+                            <input type="text" class="form-control" name="transferAmount" required>
                         </div>
                         <div class="form-group col-md-6">
                             <button class="btn btn-outline-info float-right my-4"> Transfer Funds </button>
