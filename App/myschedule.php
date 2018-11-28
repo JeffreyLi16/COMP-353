@@ -267,6 +267,11 @@
     </body>
 
     <script src="//cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+    <style>
+        ._jw-tpk-container{
+            height: 200px;
+        }
+    </style>
     <script type="text/javascript">
         var time2 = document.getElementById('time2');
         var time = document.getElementById('time');
