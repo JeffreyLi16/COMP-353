@@ -108,12 +108,12 @@
                                                         class=\"form-control\"
                                                         type=\"date\" 
                                                         min=\"" . $date . "\"
-                                                        name=\"selectedDate\">
+                                                        name=\"selectedDate\" required=\"true\">
                                                 </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <select name=\"accountID\" class=\"form-control\"> 
+                                                <select name=\"accountID\" class=\"form-control\" required> 
                                                     <option></option>
                                                 ");
                                                     
