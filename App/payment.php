@@ -2,9 +2,9 @@
     include('Components/sessionClient.php');
     
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $billingType = $_POST['billingType'];
+        $billingSchedule = $_POST['billingType'];
         $billID = $_POST['billID'];
-        if ($billingType == 'Single') {
+        if ($billingSchedule == 'Single') {
             // Get all bills from that specific account
             $sql = "SELECT * FROM billing WHERE billingID = '$billID'";
             $getAllBillsResult = mysqli_query($db,$sql);
@@ -14,7 +14,7 @@
             $clientID = $_SESSION['clientID'];
             $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
             $getAllAccountsResult = mysqli_query($db,$sql);
-        } elseif ($billingType == 'Monthly') {
+        } elseif ($billingSchedule == 'PayLater') {
             $sql = "UPDATE billing SET billingType = 'Monthly' WHERE billingID = '$billID'";
             $result = mysqli_query($db,$sql);
 
@@ -30,7 +30,6 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
 </head>

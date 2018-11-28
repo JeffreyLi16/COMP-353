@@ -5,8 +5,12 @@
     $date = date('Y-m-d', time());
     $clientCardNumber = $_SESSION['cardNumber'];
 
+    $sql = "SELECT * FROM account WHERE CardNumber = '$clientCardNumber'";
+    $getClientIDResult = mysqli_query($db,$sql);
+    $getClientIDRow = mysqli_fetch_array($getClientIDResult,MYSQLI_ASSOC);
+
     // Get client account information
-    $clientID = $_SESSION['clientID'];
+    $clientID = $getClientIDRow['ClientID'];
     $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
     $getAllAccountsResult = mysqli_query($db,$sql);
     $arrayAccounts = array();
@@ -25,8 +29,9 @@
     $accountID = $row['AccountID'];
 
     // Get all bills from that specific account
-    $sql = "SELECT * FROM billing WHERE AccountID = '$accountID' AND (billingType = 'Monthly')";
+    $sql = "SELECT * FROM billing WHERE AccountID = '$accountID' AND (billingType = 'Monthly') AND isCompleted = 0";
     $getAllBillsResult = mysqli_query($db,$sql);
+
 
 ?>
 
@@ -48,7 +53,7 @@
     ?>
     <div class="container">
     <div class=" text-center my-5">
-            <span class="text-monospace" style="font-size: 24px;"> Subscription </span>
+            <span class="text-monospace" style="font-size: 24px;"> Payment Schedule </span>
             
         </div>
         <hr>
@@ -84,14 +89,18 @@
                                                 <div class=\"form-row\">
                                                 <div class=\"form-group col-md-12 px-5\">
                                                     <input 
+                                                        class=\"form-control\"
                                                         type=\"date\" 
                                                         min=\"" . $date . "\"
-                                                        name=\"selectedDate\">
+                                                        name=\"selectedDate\" required=\"true\">
                                                 </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <select name=\"accountID\" class=\"form-control\"> ");
+                                                <select name=\"accountID\" class=\"form-control\" required=\"true\"> 
+                                                    <option></option>
+                                                ");
+                                                    
                                                     if (isset($getAllAccountsResult)) {
                                                         for($x = 0; $x < $len; $x++) {
                                                             $row = $arrayAccounts[$x];
@@ -103,14 +112,14 @@
                                                 echo("</select>
                                             </td>                                        
                                             <td> 
-                                                <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['billingID'] . " \">
-                                                <button type=\"submit\" class=\"btn btn-outline-info\"> Update Date </button>
+                                                <input type=\"hidden\" name=\"billID\" value=\"".$myBill['billingID']."\">
+                                                <button type=\"submit\" class=\"btn btn-outline-info\"> <small>Update Date</small> </button>
                                             </td>
                                         </form>
                                         <td>
                                             <form action=\"removeSubscription.php\" method=\"POST\">
                                                 <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['billingID'] . " \">
-                                                <button type=\"submit\" class=\"btn btn-outline-info\"> Remove Subscription </button>
+                                                <button type=\"submit\" class=\"btn btn-outline-info\"><small>Remove Schedule</small></button>
                                             </form>
                                         </td>
                                         <!--
