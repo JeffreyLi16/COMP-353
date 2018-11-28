@@ -35,7 +35,7 @@
          $_SESSION['email'] = $row['Email'];
          $_SESSION['phoneNumber'] = $row['PhoneNumber'];
          $_SESSION['lastTransDate'] = $row['LastTransDate'];
-         header("location: homepage.php");
+         header("location: homePage.php");
       } else {
          $failMsg = "Your Login Name or Password is invalid";
       }

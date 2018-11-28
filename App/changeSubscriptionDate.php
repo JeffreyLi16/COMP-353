@@ -37,7 +37,7 @@
         DECLARE myBalance double;
         SELECT Balance INTO myBalance FROM Account WHERE AccountID = '$accountID';
         IF myBalance >= $billBalance THEN
-            INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) 
+            INSERT INTO Transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) 
             VALUES ('$billBalance', DATE(NOW()), NULL , '$accountID', 'payment');
 
             UPDATE billing SET paymentAmount='$billBalance', isCompleted = 1 WHERE billingID='$billID';

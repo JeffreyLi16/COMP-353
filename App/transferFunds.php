@@ -25,13 +25,13 @@
             $toAccountNewBalance = $toAccountBalance + $amount;
 
             if ($fromAccountNewBalance >= 0) {
-                $sql = "UPDATE account SET Balance = '$fromAccountNewBalance' WHERE AccountID = '$fromAccountID'";
+                $sql = "UPDATE Account SET Balance = '$fromAccountNewBalance' WHERE AccountID = '$fromAccountID'";
                 $fromAccountNewResult = mysqli_query($db,$sql);
 
-                $sql = "UPDATE account SET Balance = '$toAccountNewBalance' WHERE AccountID = '$toAccountID'";
+                $sql = "UPDATE Account SET Balance = '$toAccountNewBalance' WHERE AccountID = '$toAccountID'";
                 $toAccountNewResult = mysqli_query($db,$sql);
 
-                $sql = "INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$amount', DATE(NOW()), '$toAccountID', '$fromAccountID', 'transfer')";
+                $sql = "INSERT INTO Transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$amount', DATE(NOW()), '$toAccountID', '$fromAccountID', 'transfer')";
                 $result = mysqli_query($db,$sql);
 
                 $successMsg = "The fund has been transfered.";

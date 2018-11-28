@@ -14,7 +14,7 @@
 
         if (!$inputValue == NULL) {
             if ($getTransferType == 'Email') {
-                $sql = "SELECT * FROM client WHERE Email = '$inputValue'";
+                $sql = "SELECT * FROM Client WHERE Email = '$inputValue'";
                 $getToClientResult = mysqli_query($db,$sql);    
                 $getToClientRow = mysqli_fetch_array($getToClientResult,MYSQLI_ASSOC);
 
@@ -31,7 +31,7 @@
                 }
 
             } elseif ($getTransferType == 'PhoneNumber') {
-                $sql = "SELECT * FROM client WHERE PhoneNumber = '$inputValue'";
+                $sql = "SELECT * FROM Client WHERE PhoneNumber = '$inputValue'";
                 $getToClientResult = mysqli_query($db,$sql);    
                 $getToClientRow = mysqli_fetch_array($getToClientResult,MYSQLI_ASSOC);
 

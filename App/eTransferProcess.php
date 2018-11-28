@@ -31,7 +31,7 @@
                 $sql = "UPDATE Account SET Balance = '$toAccountNewBalance' WHERE AccountID = '$toAccountID'";
                 $toAccountNewResult = mysqli_query($db,$sql);
 
-                $sql = "INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$amount', DATE(NOW()), '$toAccountID', '$fromAccountID', 'transfer')";
+                $sql = "INSERT INTO Transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) VALUES ('$amount', DATE(NOW()), '$toAccountID', '$fromAccountID', 'transfer')";
                 $result = mysqli_query($db,$sql);
 
                 $successMsg = "The fund has been transfered.";

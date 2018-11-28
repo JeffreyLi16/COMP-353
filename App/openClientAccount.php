@@ -10,7 +10,7 @@
     
     $cardNumber = $_SESSION['cardNumber'];
 
-    $sql = "SELECT * FROM client, account WHERE account.CardNumber = '$cardNumber'";
+    $sql = "SELECT * FROM Client, Account WHERE Account.CardNumber = '$cardNumber'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
@@ -39,7 +39,7 @@
       if (isset($getAllAccountsResult)) {
         while($row = $getAllAccountsResult->fetch_assoc()) {
           $fromAccountID = $row['AccountID'];
-          $sql = "SELECT * FROM transaction WHERE (fromAccountID = '$fromAccountID' AND (Date between now() - Interval 6 Month and now()));";
+          $sql = "SELECT * FROM Transaction WHERE (FromAccountID = '$fromAccountID' AND (Date between now() - Interval 6 Month and now()));";
           $getAllTransactions = mysqli_query($db,$sql);
 
           if(isset($getAllTransactions)){
