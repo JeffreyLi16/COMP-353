@@ -42,7 +42,7 @@
 
             UPDATE billing SET paymentAmount='$billBalance', isCompleted = 1 WHERE billingID='$billID';
 
-            UPDATE account SET Balance='$newAccountBalance' WHERE AccountID='$accountID';
+            UPDATE Account SET Balance='$newAccountBalance' WHERE AccountID='$accountID';
         END IF;
     END; ";
 

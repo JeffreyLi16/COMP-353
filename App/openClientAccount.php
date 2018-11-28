@@ -52,7 +52,7 @@
       }
       
       if ($count >= 3) {
-        $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
+        $sql = "INSERT INTO Account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
         VALUES ('$cardNumber', '$accountType', '$accountOption', '$accountLevel', 0.00 , '$employeeBranchID', '$clientID', '$serviceID')";
         $newAccountResult = mysqli_query($db,$sql);
         
@@ -73,7 +73,7 @@
           myAlert($alertMessageChanged, $url);
       }
     } else {
-      $sql = "INSERT INTO account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
+      $sql = "INSERT INTO Account (CardNumber, AccountType, AccountOption, AccountLevel, Balance, BranchID, ClientID, ServiceID)
         VALUES ('$cardNumber', '$accountType', '$accountOption', '$accountLevel', 0.00 , '$employeeBranchID', '$clientID', '$serviceID')";
         $newAccountResult = mysqli_query($db,$sql);
         

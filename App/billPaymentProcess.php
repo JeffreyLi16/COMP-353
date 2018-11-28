@@ -32,7 +32,7 @@
             $updatedBalance = $getAccount['Balance'] - $remainingBalance;
 
             if ($updatedBalance >= 0) {
-                $sql = "UPDATE account SET Balance='$updatedBalance' WHERE AccountID='$accountID'";
+                $sql = "UPDATE Account SET Balance='$updatedBalance' WHERE AccountID='$accountID'";
                 $result = mysqli_query($db,$sql);
                 
                 $sql = "UPDATE billing SET paymentAmount='$myBillBalance', isCompleted = 1 WHERE billingID='$billID'";
@@ -50,7 +50,7 @@
 
             $updatedBalance = $getAccount['Balance'] - $transactionAmount;
             if ($updatedBalance >= 0 ) {
-                $sql = "UPDATE account SET Balance='$updatedBalance' WHERE AccountID='$accountID'";
+                $sql = "UPDATE Account SET Balance='$updatedBalance' WHERE AccountID='$accountID'";
                 $result = mysqli_query($db,$sql);
 
 
