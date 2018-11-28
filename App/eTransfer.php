@@ -103,8 +103,9 @@
                             <?php
                                 if (isset($getToAccountsResult)) {
                                     while($toAccount = $getToAccountsResult->fetch_assoc()) {
+                                        $cardNumber = "**** **** **** " . substr($toAccount['CardNumber'], 12);
                                         echo("
-                                            <option value=\" " . $toAccount['AccountID'] . " \">CardNumber: " . $toAccount['CardNumber'] . "&emsp; </option>
+                                            <option value=\" " . $toAccount['AccountID'] . " \">CardNumber: " . $cardNumber . "&emsp; </option>
                                         ");
                                     }
                                 }

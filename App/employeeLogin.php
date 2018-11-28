@@ -37,35 +37,63 @@
          $_SESSION['branchID'] = $row['BranchID'];
          header("location: employeeHomePage.php");
       }else {
-         $error = "Your Login Name or Password is invalid";
-         echo $error;
+         $failMsg = "Your Login Name or Password is invalid";
       }
    }
 ?>
 
 <html>
-   <head>   
-      <title>Login</title>
-      <link rel="stylesheet" href="css/login.css">
-   </head>
-   <body>
-      <div id="main-wrapper"><h2><center>Login</center></h2>
 
-         <div style = "margin:30px">
-               
-            <form action = "" method = "post">
-               <label><strong>Employee ID :</strong></label>
-               <input type = "text" name = "employeeID" placeholder="EmployeeID" required/> <br> <br>
-               
-               <label><strong>Password :</strong></label>
-               <input type = "password" name = "password" placeholder="Enter your password" required/><br/><br />
-               
-               <button class="login_button" name="login" type="submit">Login</button>
-            </form>
-               					
-         </div>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Employee Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+</head>
 
+<body>
+  <div class="container">
+    <?php           
+          if(isset($failMsg)) {  
+            echo("
+                <div class=\"alert alert-danger text-center mt-4\" role=\"alert\">
+                    <span> " . $failMsg . " </span>
+                </div>
+              ");
+            }
+        ?>
+    <div class="card my-5">
+      <div class="card-body mx-3">
+        <h2 class="text-monospace text-center">
+          <span> Employee Login </span>
+          <a href="login.php" class="float-right"><button type="button" class="btn btn-outline-info">Client Login</button></a>
+        </h2>
+        <hr>
+        <div class="mt-5">
+          <form action="employeeLogin.php" method="post">
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label class="col-form-label text-info"><span>Employee ID</span></label>
+              </div>
+              <div class="form-group col-md-10"><input type="text" class="form-control" name="employeeID" placeholder="EmployeeID"
+                  required /> <br> <br></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label class="col-form-label text-info"><span>Password</span></label>
+              </div>
+              <div class="form-group col-md-10"><input type="password" class="form-control" name="password" placeholder="Enter your password"
+                  required /><br /><br /></div>
+            </div>
+            <div class="float-right mx-3 mb-3">
+              <button class="btn btn-info" name="login" type="submit">Login</button>
+            </div>
+        </div>
       </div>
-      <a href="login.php"><button type="button" class="ClientLogin_btn">Client Login</button></a>
-   </body>
+    </div>
+  </div>
+</body>
+
 </html>

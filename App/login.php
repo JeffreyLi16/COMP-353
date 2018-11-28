@@ -36,9 +36,8 @@
          $_SESSION['phoneNumber'] = $row['PhoneNumber'];
          $_SESSION['lastTransDate'] = $row['LastTransDate'];
          header("location: homepage.php");
-      }else {
-         $error = "Your Login Name or Password is invalid";
-         echo $error;
+      } else {
+         $failMsg = "Your Login Name or Password is invalid";
       }
    }
 ?>
@@ -56,6 +55,15 @@
 
 <body>
   <div class="container">
+    <?php           
+      if(isset($failMsg)) {  
+          echo("
+              <div class=\"alert alert-danger text-center mt-4\" role=\"alert\">
+                  <span> " . $failMsg . " </span>
+              </div>
+          ");
+          }
+    ?>
     <div class="card my-5">
       <div class="card-body mx-3">
         <h2 class="text-monospace text-center">
@@ -67,18 +75,20 @@
           <form action="" method="post">
             <div class="form-row">
               <div class="form-group col-md-2">
-                <label><h5 class="text-info">Card Number :</span></h5></div>
+                <label class="col-form-label text-info"><span>Card Number</span></label>
+              </div>
               <div class="form-group col-md-10"><input type="text" class="form-control" name="cardNumber" placeholder="Card Number"
                   required /> <br> <br></div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-2">
-                <label><h5 class="text-info">Password :</h5></label></div>
+                <label class="col-form-label text-info"><span>Password</span></label>
+              </div>
               <div class="form-group col-md-10"><input type="password" class="form-control" name="password" placeholder="Enter your password"
                   required /><br /><br /></div>
             </div>
             <div class="float-right mx-3 mb-3">
-              <button class="btn btn-info" name="login" type="submit">Login</button>
+              <button class="btn btn-info mr-2" name="login" type="submit">Login</button>
               <a href="signup.php"><button type="button" class="btn btn-outline-info">Register</button></a>
             </div>
           </form>

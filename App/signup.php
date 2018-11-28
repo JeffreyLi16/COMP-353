@@ -43,27 +43,58 @@
 
 <!DOCTYPE html>
 <html>
-  <link rel="stylesheet" href="css/login.css">
 
-  <body>
-    <div id="main-wrapper"><h2><center>Sign Up</center></h2>
-      <div style = "margin:30px">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+</head>
 
-        <form action = "" method = "post">
-          <label><strong>Card Number :</strong></label>
-          <input type = "text" name = "cardNumber" placeholder="Card Number" required/> <br> <br>
-          
-          <label><strong>Password :</strong></label>
-          <input type = "password" name = "password" placeholder="Enter your password" required/><br/><br />
-          
-          <label><strong>Confirm Password :</strong></label>
-          <input type = "password" name = "confirmPassword" placeholder="Re-enter your password" required/><br/><br />
-
-          <button class="sign_up_btn" name="register" type="submit">Sign up</button>
-          <a href="login.php"><button type="button" class="back_btn">Return to Login</button></a>
-      </form>
+<body>
+  <div class="container">
+    <div class="card my-5">
+      <div class="card-body mx-3">
+        <h2 class="text-monospace text-center">
+          <span> Sign Up </span>
+          <a href="login.php" class="float-right"><button type="button" class="btn btn-outline-info">Return to Login</button></a>
+        </h2>
+        <hr>
+        <div class="mt-5">
+          <form action="" method="post">
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label class="col-form-label text-info"><span>Card Number</span></label>
+              </div>
+              <div class="form-group col-md-10">
+                <input type="text" class="form-control" name="cardNumber" placeholder="Card Number" required /> <br> <br>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label class="col-form-label text-info"><span>Password</span></label>
+              </div>
+              <div class="form-group col-md-10">
+                <input type="password" class="form-control" name="password" placeholder="Enter your password" required /> <br> <br>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-2">
+              <label class="col-form-label text-info"><span>Confirm Password</span></label>
+              </div>
+              <div class="form-group col-md-10">
+                <input type="password" class="form-control " name="confirmPassword" placeholder="Re-enter your password" required /> <br> <br>
+              </div>
+            </div>
+            
+            <div class="float-right"><button class="btn btn-info" name="register" type="submit">Sign up</button></div>
+          </form>
+        </div>
       </div>
-      <div style = "font-size:11px; color:#cc0000; margin-top:10px"></div>
     </div>
-  </body>
+    <div style="font-size:11px; color:#cc0000; margin-top:10px"></div>
+  </div>
+</body>
 </html>

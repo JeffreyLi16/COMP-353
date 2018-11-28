@@ -73,26 +73,42 @@
     <?php
         include('Components/navbar.php');
     ?>
-    <h2><center>Hello <?php echo $firstName . " " . $lastName;?></center></h2>
-    <div id="main-wrapper">
+    <div class="container">
+      <div class="my-5 w-50" style="margin: auto">
+        <h2 class="text-monospace text-center">Hello <?php echo $firstName . " " . $lastName;?></h2>
+        <hr>
+      </div>
 
-      <form action = "" method = "post">
-        <label>ENTER CLIENT CARD NUMBER: </label>
-        <input class="form-control" type="number" name="clientCardNumber" style="width: 250px; margin-bottom: 10px;" required/>
-        <button class="btn btn-info submit_btn" name="submit" type="submit" value="viewClient">Submit</button>
-      </form>
-      <?php 
-      if($title == "President" || $title == "General Manager" || $title == "Branch Manager"){
-      echo 
-      "<form action = \"\" method = \"post\">
-        <label>ENTER EMPLOYEE ID: </label>
-        <input class=\"form-control\" type=\"number\" name=\"viewEmployeeID\" style=\"width: 250px; margin-bottom: 10px;\" required/>
-        <button class=\"btn btn-info submit_btn\" name=\"submit\" type=\"submit\" value=\"viewEmployee\">Submit</button>
-      </form>";
-      }
-      ?>
+      <div class="card w-50 p-3" style="margin: auto">
+        <div class="card-body">
+          <form action = "" method = "post">
+            <div class="form-row">
+              <label class="text-info">ENTER CLIENT CARD NUMBER: </label>
+              <div class="input-group col-md-12">
+                <input class="form-control" type="number" name="clientCardNumber" required/> 
+                <div class="input-group-append">
+                <button class="btn btn-info float-right" name="submit" type="submit" value="viewClient">Submit</button>
+              </div>
+              </div>
+            </div>
+          </form>
+          <?php 
+          if($title == "President" || $title == "General Manager" || $title == "Branch Manager"){
+          echo 
+          "<form action = \"\" method = \"post\">
+            <div class=\"form-row\">
+              <label class=\"text-info\">ENTER EMPLOYEE ID: </label>
+              <div class=\"input-group col-md-12\"><input class=\"form-control\" type=\"number\" name=\"viewEmployeeID\" required/>
+                <div class=\"input-group-append\"><button class=\"btn btn-info float-right\" name=\"submit\" type=\"submit\" value=\"viewEmployee\">Submit</button></div>
+              </div>
+            </div>
+          </form>";
+          }
+          ?>
+        </div>
+      </div>
+      <br>
     </div>
-    <br>
       
     <!-- <div id="main-wrapper">
       <div>
