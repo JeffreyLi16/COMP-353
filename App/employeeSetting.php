@@ -139,20 +139,7 @@
         <?php
             include('Components/navbar.php');
         ?>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="employeeHomePage.php" class="navbar-brand">Bank of Concordia</a>
-                </div>
-                
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="myschedule.php"><span class="glyphicon glyphicon-calendar"></span> My Schedule</a></li>
-                    <li><a href="payroll.php"><span class=""></span> My Payrolls</a></li>
-                    <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                </ul>
-            </div>
 
-        </nav>
         <div id="main-wrapper"><h2><center>Update your Account Information</center></h2><br>
             <div><h3><center>
                 <form action = "" method = "post">
