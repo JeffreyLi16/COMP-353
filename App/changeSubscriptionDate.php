@@ -26,7 +26,7 @@
     $getBillID = trim($billID," ");
     $transactionID = "Bill$getBillID";
 
-    $sql = "DROP EVENT IF EXISTS $transactionID";
+    /*$sql = "DROP EVENT IF EXISTS $transactionID"; ///NO PERMISSION TO CREATE mySQL EVENT
     $result = mysqli_query($db,$sql);
 
     $sql = " CREATE EVENT $transactionID
@@ -46,7 +46,7 @@
         END IF;
     END; ";
 
-    $result = mysqli_query($db,$sql);
+    $result = mysqli_query($db,$sql);*/
 
     if (!$result) {
         printf("Error: %s\n", mysqli_error($db));
