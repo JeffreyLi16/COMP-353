@@ -1,5 +1,5 @@
 <?php   
-    include('Components/sessionEmployee.php');
+    include('sessionEmployee.php');
 
     if(isset($_SESSION['viewEmployeeID'])){
         $ID = $_SESSION['viewEmployeeID'];
@@ -19,11 +19,11 @@
     <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
             crossorigin="anonymous">    
-        <link rel="stylesheet" href="css/employee.css"> 
+        <link rel="stylesheet" href="employee.css"> 
     </head>
     <body>
        <?php
-       include('Components/navbar.php')
+       include('navbar.php')
        ?>
         <div id="main-wrapper"><h2><center>Payroll History</center></h2><br>
             <div>

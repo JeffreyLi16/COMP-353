@@ -1,5 +1,5 @@
 <?php
-    include('Components/sessionClient.php');
+    include('sessionClient.php');
 
     date_default_timezone_set('America/New_York');
     $date = date('Y-m-d', time());
@@ -49,7 +49,7 @@
 
 <body>
     <?php
-        include('Components/navbar.php');
+        include('navbar.php');
     ?>
     <div class="container">
     <div class=" text-center my-5">

@@ -1,5 +1,5 @@
 <?php
-  include('Components/sessionEmployee.php');
+  include('sessionEmployee.php');
 
   $employeeID = $_SESSION["employeeID"];
   $firstName = $_SESSION['FirstName'];
@@ -98,14 +98,14 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="css/openClientAccount.css">
+  <link rel="stylesheet" href="openClientAccount.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
 </head>
 
 <body>
   <?php
-        include('Components/navbar.php');
+        include('navbar.php');
     ?>
 
   <div class="container" id="open-client-account">

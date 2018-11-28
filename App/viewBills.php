@@ -1,5 +1,5 @@
 <?php
-    include('Components/sessionClient.php');
+    include('sessionClient.php');
     
     $clientCardNumber = $_SESSION['cardNumber'];
 
@@ -32,7 +32,7 @@
 
 <body>
     <?php
-        include('Components/navbar.php');
+        include('navbar.php');
     ?>
     <div class="container">
         <div class=" text-center my-5">

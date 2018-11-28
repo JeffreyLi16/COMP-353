@@ -1,5 +1,5 @@
 <?php   
-    include("Components/sessionEmployee.php");
+    include("sessionEmployee.php");
     if(isset($_SESSION['viewEmployeeID'])){
       unset($_SESSION['viewEmployeeID']);
   }
@@ -62,12 +62,12 @@
   <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">    
-    <link rel="stylesheet" href="css/employee.css">
+    <link rel="stylesheet" href="employee.css">
   </head>
    
   <body>
     <?php
-        include('Components/navbar.php');
+        include('navbar.php');
     ?>
     <div class="container">
       <div class="my-5 w-50" style="margin: auto">

@@ -1,5 +1,5 @@
 <?php   
-    include('Components/sessionEmployee.php');
+    include('sessionEmployee.php');
 
     //fetch schedule history
     $ID = $_SESSION["employeeID"];
@@ -173,7 +173,7 @@
     </head>
     <body>
         <?php
-            include('Components/navbar.php');
+            include('navbar.php');
         ?>
 
         <div style="margin: 40px;">

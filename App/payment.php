@@ -1,5 +1,5 @@
 <?php
-    include('Components/sessionClient.php');
+    include('sessionClient.php');
     
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $billingSchedule = $_POST['billingType'];
@@ -36,7 +36,7 @@
 
 <body>
     <?php
-        include('Components/navbar.php');
+        include('navbar.php');
     ?>
     <div class="container">
        <form action="billPaymentProcess.php" method="POST">

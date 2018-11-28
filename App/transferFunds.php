@@ -1,5 +1,5 @@
 <?php 
-    include('Components/sessionClient.php');
+    include('sessionClient.php');
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $fromAccountID = $_POST['fromAccount'];
@@ -60,7 +60,7 @@
 
 <body>
     <?php
-        include('Components/navbar.php');
+        include('navbar.php');
     ?>
     <div class="container">
         <!-- Print success message -->

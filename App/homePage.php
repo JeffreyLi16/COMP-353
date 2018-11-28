@@ -28,7 +28,7 @@
    <body>
 
     <?php
-        include('Components/navbar.php');
+        include('navbar.php');
     ?>
     <div id="main-wrapper">
       <h2>

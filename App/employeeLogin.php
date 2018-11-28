@@ -1,6 +1,6 @@
 <?php
-   //include("config.php");
-    include("config.local.php");
+    include("config.php");
+    //include("config.local.php");
     session_start();
     if(isset($_SESSION['cardNumber']) || isset($_SESSION['employeeID'])){
     session_destroy();

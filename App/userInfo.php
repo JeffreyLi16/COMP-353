@@ -1,5 +1,5 @@
 <?php   
-    include('Components/sessionClient.php');
+    include('sessionClient.php');
     $card = $_SESSION["cardNumber"];
     $firstName = $_SESSION['FirstName'];
     $lastName = $_SESSION['LastName'];
@@ -105,11 +105,11 @@
     <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">        
-    <link rel="stylesheet" href="css/userInfo.css">
+    <link rel="stylesheet" href="userInfo.css">
     </head>
     <body>
     <?php
-        include('Components/navbar.php');
+        include('navbar.php');
     ?>
 
         <div id="main-wrapper"><h2><center>Update your Account Information</center></h2><br>

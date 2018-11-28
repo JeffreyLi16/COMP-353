@@ -1,5 +1,5 @@
 <?php
-    include('Components/sessionClient.php');
+    include('sessionClient.php');
 
     // Query the client's account
     $clientID = $_SESSION['clientID'];
@@ -25,7 +25,7 @@
 
 <body>
     <?php
-        include('Components/navbar.php');
+        include('navbar.php');
     ?>
     <div class="container">
        <div class="card my-5">
