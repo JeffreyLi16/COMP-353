@@ -10,8 +10,6 @@
 
     $accountID = $_POST['accountID'];
 
-    
-
     // Get the bill balance
     $sql = "SELECT * FROM billing WHERE billingID = '$billID'";
     $myBillResult = mysqli_query($db,$sql);
@@ -25,19 +23,25 @@
     $accountBalance = $myAccountRow['Balance'];
 
     $newAccountBalance = $accountBalance - $billBalance;
+    $getBillID = trim($billID," ");
+    $transactionID = "Bill$getBillID";
 
-    $sql = "DELIMITER |
-    CREATE EVENT SUBSCRIPTIONTRANSACTION
-    ON SCHEDULE
-        EVERY 1 MINUTE
-        STARTS '2018-11-27 17:46:00'
+    $sql = " CREATE EVENT $transactionID
+    ON SCHEDULE AT '$selectedDate 19:45:00'
+
     DO
     BEGIN
-        INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) 
-        VALUES ('$billBalance', DATE(NOW()), NULL , '$accountID', 'payment');
-    END |
-    
-    DELIMITER ;";
+        DECLARE myBalance double;
+        SELECT Balance INTO myBalance FROM account WHERE AccountID = '$accountID';
+        IF myBalance >= $billBalance THEN
+            INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) 
+            VALUES ('$billBalance', DATE(NOW()), NULL , '$accountID', 'payment');
+
+            UPDATE billing SET paymentAmount='$billBalance', isCompleted = 1 WHERE billingID='$billID';
+
+            UPDATE account SET Balance='$newAccountBalance' WHERE AccountID='$accountID';
+        END IF;
+    END; ";
 
     $result = mysqli_query($db,$sql);
 
@@ -46,6 +50,6 @@
         exit();
       }
     
-    // header("location:subscription.php");
+    header("location:subscription.php");
     
 ?>

@@ -36,7 +36,8 @@ if (isset($_SESSION['employeeID'])){
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                    
+                        <a class="nav-link" href="makeBills.php">Create Bills</a>
+                    </li>
                 </ul>
                 <div class="navbar-nav ml-4">
                     <a class="nav-link" href="myschedule.php">My Schedule</a>

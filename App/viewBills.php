@@ -11,7 +11,7 @@
     $accountID = $row['AccountID'];
 
     // Get all bills from that specific account
-    $sql = "SELECT * FROM billing WHERE AccountID = '$accountID' AND billingType = 'Single'";
+    $sql = "SELECT * FROM billing WHERE AccountID = '$accountID' AND billingType = 'Single' AND isCompleted = 0";
     $getAllBillsResult = mysqli_query($db,$sql);
 
     
@@ -37,7 +37,7 @@
     <div class="container">
         <div class=" text-center my-5">
             <span class="text-monospace" style="font-size: 24px;"> Account Statement </span>
-            <a href="subscription.php" class="btn btn-info float-right" role="button">Subscription</a>
+            <a href="subscription.php" class="btn btn-info float-right" role="button">Payment Schedule</a>
         </div>
         <hr>
         <table class="table table-hover text-center my-5 px-5">
@@ -68,7 +68,7 @@
                                                 <div class=\"form-group col-md-12 px-5\">
                                                     <select name=\"billingType\" class=\"form-control\">
                                                         <option value=\"Single\">Immediate</option>
-                                                        <option value=\"Monthly\">Monthly</option>
+                                                        <option value=\"PayLater\">Pay Later</option>
                                                     </select>
                                                 </div>
                                             </div> 
@@ -76,7 +76,7 @@
                                     
                                         <td>
                                             <input type=\"hidden\" name=\"billID\" value=\" " . $row['billingID'] . " \">
-                                            <button type=\"submit\" class=\"btn btn-outline-info\"> Pay Now </button>
+                                            <button type=\"submit\" class=\"btn btn-outline-info\"> Proceed </button>
                                         </td>
                                     </tr>
                                 </form>

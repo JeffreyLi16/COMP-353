@@ -29,7 +29,7 @@
     $accountID = $row['AccountID'];
 
     // Get all bills from that specific account
-    $sql = "SELECT * FROM billing WHERE AccountID = '$accountID' AND (billingType = 'Monthly')";
+    $sql = "SELECT * FROM billing WHERE AccountID = '$accountID' AND (billingType = 'Monthly') AND isCompleted = 0";
     $getAllBillsResult = mysqli_query($db,$sql);
 
    
@@ -105,6 +105,7 @@
                                                 <div class=\"form-row\">
                                                 <div class=\"form-group col-md-12 px-5\">
                                                     <input 
+                                                        class=\"form-control\"
                                                         type=\"date\" 
                                                         min=\"" . $date . "\"
                                                         name=\"selectedDate\">
@@ -112,7 +113,10 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <select name=\"accountID\" class=\"form-control\"> ");
+                                                <select name=\"accountID\" class=\"form-control\"> 
+                                                    <option></option>
+                                                ");
+                                                    
                                                     if (isset($getAllAccountsResult)) {
                                                         for($x = 0; $x < $len; $x++) {
                                                             $row = $arrayAccounts[$x];
@@ -124,14 +128,14 @@
                                                 echo("</select>
                                             </td>                                        
                                             <td> 
-                                                <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['billingID'] . " \">
-                                                <button type=\"submit\" class=\"btn btn-outline-info\"> Update Date </button>
+                                                <input type=\"hidden\" name=\"billID\" value=\"".$myBill['billingID']."\">
+                                                <button type=\"submit\" class=\"btn btn-outline-info\"> <small>Update Date</small> </button>
                                             </td>
                                         </form>
                                         <td>
                                             <form action=\"removeSubscription.php\" method=\"POST\">
                                                 <input type=\"hidden\" name=\"billID\" value=\" " . $myBill['billingID'] . " \">
-                                                <button type=\"submit\" class=\"btn btn-outline-info\"> Remove Subscription </button>
+                                                <button type=\"submit\" class=\"btn btn-outline-info\"><small>Remove Schedule</small></button>
                                             </form>
                                         </td>
                                         <!--
