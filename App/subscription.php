@@ -69,7 +69,7 @@
     ?>
     <div class="container">
     <div class=" text-center my-5">
-            <span class="text-monospace" style="font-size: 24px;"> Subscription </span>
+            <span class="text-monospace" style="font-size: 24px;"> Payment Schedule </span>
             
         </div>
         <hr>
@@ -113,7 +113,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <select name=\"accountID\" class=\"form-control\" required> 
+                                                <select name=\"accountID\" class=\"form-control\" required=\"true\"> 
                                                     <option></option>
                                                 ");
                                                     

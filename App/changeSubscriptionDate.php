@@ -26,6 +26,9 @@
     $getBillID = trim($billID," ");
     $transactionID = "Bill$getBillID";
 
+    $sql = "DROP EVENT IF EXISTS $transactionID";
+    $result = mysqli_query($db,$sql);
+
     $sql = " CREATE EVENT $transactionID
     ON SCHEDULE AT '$selectedDate 19:45:00'
 
