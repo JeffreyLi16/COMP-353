@@ -69,7 +69,7 @@
     ?>
     <div class="container">
     <div class=" text-center my-5">
-            <span class="text-monospace" style="font-size: 24px;"> Subscription </span>
+            <span class="text-monospace" style="font-size: 24px;"> Payment Schedule </span>
             
         </div>
         <hr>
@@ -108,12 +108,13 @@
                                                         class=\"form-control\"
                                                         type=\"date\" 
                                                         min=\"" . $date . "\"
-                                                        name=\"selectedDate\">
+                                                        name=\"selectedDate\"
+                                                        required>
                                                 </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <select name=\"accountID\" class=\"form-control\"> 
+                                                <select name=\"accountID\" class=\"form-control\" required> 
                                                     <option></option>
                                                 ");
                                                     

@@ -44,29 +44,48 @@
 ?>
 
 <html>
-   <head>   
-      <title>Login</title>
-      <link rel="stylesheet" href="css/login.css">
-   </head>
-   <body>
-      <div id="main-wrapper"><h2><center>Login</center></h2>
 
-         <div style = "margin:30px">
-               
-            <form action = "" method = "post">
-               <label><strong>Card Number :</strong></label>
-               <input type = "text" name = "cardNumber" placeholder="Card Number" required/> <br> <br>
-               
-               <label><strong>Password :</strong></label>
-               <input type = "password" name = "password" placeholder="Enter your password" required/><br/><br />
-               
-               <button class="login_button" name="login" type="submit">Login</button>
-               <a href="signup.php"><button type="button" class="register_btn">Register</button></a>
-            </form>
-               					
-         </div>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+</head>
 
-      </div>
-      <a href="employeeLogin.php"><button type="button" class="employeeLogin_btn">Employee Login</button></a>
-   </body>
+<body>
+  <div class="container">
+    <div class="card my-5">
+      <div class="card-body mx-3">
+        <h2 class="text-monospace text-center">
+          <span> Login </span>
+          <a href="employeeLogin.php" class="float-right"><button type="button" class="btn btn-outline-info">Employee Login</button></a>
+        </h2>
+        <hr>
+        <div class="mt-5">
+          <form action="" method="post">
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label><h5 class="text-info">Card Number :</span></h5></div>
+              <div class="form-group col-md-10"><input type="text" class="form-control" name="cardNumber" placeholder="Card Number"
+                  required /> <br> <br></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label><h5 class="text-info">Password :</h5></label></div>
+              <div class="form-group col-md-10"><input type="password" class="form-control" name="password" placeholder="Enter your password"
+                  required /><br /><br /></div>
+            </div>
+            <div class="float-right mx-3 mb-3">
+              <button class="btn btn-info" name="login" type="submit">Login</button>
+              <a href="signup.php"><button type="button" class="btn btn-outline-info">Register</button></a>
+            </div>
+          </form>
+        </div>
+        </div>
+    </div>
+  </div>
+</body>
+
 </html>
