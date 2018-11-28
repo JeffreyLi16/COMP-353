@@ -3,7 +3,7 @@
 if (isset($_SESSION['employeeID'])){ 
     if (isset($_SESSION['cardNumber'])) {?>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="homePage.php">Bank of Concordia</a>
+            <a class="navbar-brand" href="employeeHomePage.php">Bank of Concordia</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@ if (isset($_SESSION['employeeID'])){
     <?php } else { ?>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="homePage.php">Bank of Concordia</a>
+            <a class="navbar-brand" href="employeeHomePage.php">Bank of Concordia</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

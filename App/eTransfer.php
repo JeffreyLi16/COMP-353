@@ -18,21 +18,42 @@
                 $getToClientResult = mysqli_query($db,$sql);    
                 $getToClientRow = mysqli_fetch_array($getToClientResult,MYSQLI_ASSOC);
 
-                $toClientID = $getToClientRow['ClientID'];
-                $sql = "SELECT * FROM account WHERE ClientID = '$toClientID'";
-                $getToAccountsResult = mysqli_query($db,$sql);    
+                // Check if the email exists
+                $count = mysqli_num_rows($getToClientResult);
+                if ($count == 1 ) {
+                    $toClientID = $getToClientRow['ClientID'];
+                    $sql = "SELECT * FROM account WHERE ClientID = '$toClientID'";
+                    $getToAccountsResult = mysqli_query($db,$sql);   
+                } else {
+                    $alertMessageChanged = "Error: The email is invalid.";
+                    $url = "viewTransfer.php";
+                    myAlert($alertMessageChanged, $url);
+                }
 
             } elseif ($getTransferType == 'PhoneNumber') {
                 $sql = "SELECT * FROM client WHERE PhoneNumber = '$inputValue'";
                 $getToClientResult = mysqli_query($db,$sql);    
                 $getToClientRow = mysqli_fetch_array($getToClientResult,MYSQLI_ASSOC);
 
-                $toClientID = $getToClientRow['ClientID'];
-                $sql = "SELECT * FROM account WHERE ClientID = '$toClientID'";
-                $getToAccountsResult = mysqli_query($db,$sql);    
+                // Check if the phone number exists
+                $count = mysqli_num_rows($getToClientResult);
+                if ($count == 1 ) {
+                    $toClientID = $getToClientRow['ClientID'];
+                    $sql = "SELECT * FROM account WHERE ClientID = '$toClientID'";
+                    $getToAccountsResult = mysqli_query($db,$sql);    
+                } else { 
+                    $alertMessageChanged = "Error: The phone number is invalid.";
+                    $url = "viewTransfer.php";
+                    myAlert($alertMessageChanged, $url);
+                }
             }
 
         }
+    }
+
+    function myAlert($alertMessageChanged, $url){
+        echo '<script type="text/javascript">alert("'. $alertMessageChanged .'")</script>';
+        echo "<script>document.location = '$url'</script>";
     }
 ?>
 

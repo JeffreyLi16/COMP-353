@@ -8,6 +8,7 @@
       unset($_SESSION['viewEmployeeID']);
   }
 
+    // Unset the client's cardnumber session when the employee goes to employee home page
     if (isset($_SESSION['cardNumber']))
     {
         unset($_SESSION['cardNumber']);

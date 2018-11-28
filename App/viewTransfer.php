@@ -86,14 +86,14 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label class="text-info">Pay via </label>
-                            <select name="transferType" class="form-control">
+                            <select name="transferType" class="form-control" required="true">
                                 <option value="Email">Email</option>
                                 <option value="PhoneNumber">Phone Number</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                         <label class="text-info">Input: </label>
-                            <input type="text" class="form-control" name="inputValue">
+                            <input type="text" class="form-control" name="inputValue" required="true">
                         </div>
                         <div class="form-group col-md-2">
                             <input type="hidden" name="accountID" value="">
