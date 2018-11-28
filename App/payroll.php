@@ -1,9 +1,5 @@
 <?php   
-    include('config.local.php');
-    session_start();
-    if(!isset($_SESSION['employeeID'])){
-        header("location:employeeLogin.php");
-    }
+    include('Components/sessionEmployee.php');
 
     if(isset($_SESSION['viewEmployeeID'])){
         $ID = $_SESSION['viewEmployeeID'];

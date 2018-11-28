@@ -1,11 +1,6 @@
 <?php   
-    session_start();
-    include('config.local.php');
-    if(!isset($_SESSION['employeeID'])){
-        header("location:employeeLogin.php");
-    }
+    include('Components/sessionEmployee.php');
     
-
     //fetch schedule history
     $ID = $_SESSION["viewEmployeeID"];
 
