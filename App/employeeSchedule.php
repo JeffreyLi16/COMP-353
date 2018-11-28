@@ -25,21 +25,14 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">   
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous">    
+        <link rel="stylesheet" href="css/employee.css"> 
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="employeeHomePage.php" class="navbar-brand">Bank Of Concordia</a>
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="employeeSetting.php"><span class="glyphicon glyphicon-edit"></span> Account</a></li>
-                    <<li><a href="payroll.php"><span class=""></span> My Payrolls</a></li>
-                    <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                </ul>
-            </div>
-        </nav>
+        <?php
+        include('Components/navbar.php');
+        ?>
 
         <div style="margin: 40px;">
             <h2>Schedule History</h2>
