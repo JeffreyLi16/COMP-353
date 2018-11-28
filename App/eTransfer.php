@@ -104,7 +104,7 @@
                                 if (isset($getToAccountsResult)) {
                                     while($toAccount = $getToAccountsResult->fetch_assoc()) {
                                         echo("
-                                            <option value=\" " . $toAccount['AccountID'] . " \">CardNumber: " . $toAccount['CardNumber'] . "&emsp;Balance: " . $toAccount['Balance'] . " </option>
+                                            <option value=\" " . $toAccount['AccountID'] . " \">CardNumber: " . $toAccount['CardNumber'] . "&emsp; </option>
                                         ");
                                     }
                                 }
