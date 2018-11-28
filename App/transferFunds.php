@@ -9,13 +9,13 @@
         
         if ($amount > 0) {
             // Get both accounts' balance
-            $sql = "SELECT * FROM account WHERE AccountID='$fromAccountID'";
+            $sql = "SELECT * FROM Account WHERE AccountID='$fromAccountID'";
             $fromAccountResult = mysqli_query($db,$sql);
             $fromAccountRow = mysqli_fetch_array($fromAccountResult,MYSQLI_ASSOC);
 
             $fromAccountBalance = $fromAccountRow['Balance'];
 
-            $sql = "SELECT * FROM account WHERE AccountID='$toAccountID'";
+            $sql = "SELECT * FROM Account WHERE AccountID='$toAccountID'";
             $toAccountResult = mysqli_query($db,$sql);
             $toAccountRow = mysqli_fetch_array($toAccountResult,MYSQLI_ASSOC);
 

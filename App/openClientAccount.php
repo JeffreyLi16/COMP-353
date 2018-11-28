@@ -31,7 +31,7 @@
 
     // Get all accounts from the clients
     if ($accountType = "Credit") {
-      $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
+      $sql = "SELECT * FROM Account WHERE ClientID = '$clientID'";
       $getAllAccountsResult = mysqli_query($db,$sql);
       $arrayAccounts = array();
       $count = 0;
@@ -62,7 +62,7 @@
           myAlert($alertMessageChanged, $url);
         } else {
           // Get newly created account information
-          $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
+          $sql = "SELECT * FROM Account WHERE CardNumber = '$cardNumber'";
           $result = mysqli_query($db,$sql);
           $clientAccountInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
           
@@ -83,7 +83,7 @@
           myAlert($alertMessageChanged, $url);
         } else {
           // Get newly created account information
-          $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
+          $sql = "SELECT * FROM Account WHERE CardNumber = '$cardNumber'";
           $result = mysqli_query($db,$sql);
           $clientAccountInfo = mysqli_fetch_array($result,MYSQLI_ASSOC);
           

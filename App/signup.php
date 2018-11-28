@@ -24,7 +24,9 @@
             
             if(mysqli_query($db,$sql)){
               echo '<script type="text/javascript">alert("Registration Succesful")</script>';
-              header("location: login.php");
+              function redirect($url){
+                echo "<script>document.location = '$url'</script>";}
+              redirect('login.php');
             }
           }
           else{

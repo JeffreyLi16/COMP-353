@@ -12,7 +12,7 @@
 
             // Query the client's account
             $clientID = $_SESSION['clientID'];
-            $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
+            $sql = "SELECT * FROM Account WHERE ClientID = '$clientID'";
             $getAllAccountsResult = mysqli_query($db,$sql);
         } elseif ($billingSchedule == 'PayLater') {
             $sql = "UPDATE billing SET billingType = 'Monthly' WHERE billingID = '$billID'";

@@ -19,7 +19,7 @@
             $myBill = mysqli_fetch_array($getAllBillsResult,MYSQLI_ASSOC);
         }
 
-        $sql = "SELECT * FROM account WHERE AccountID = '$accountID'";
+        $sql = "SELECT * FROM Account WHERE AccountID = '$accountID'";
         $getAccountResult = mysqli_query($db,$sql);
         $getAccount = mysqli_fetch_array($getAccountResult,MYSQLI_ASSOC);
 

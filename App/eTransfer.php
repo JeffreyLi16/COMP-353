@@ -3,7 +3,7 @@
     
     // Query the client's account
     $clientID = $_SESSION['clientID'];
-    $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
+    $sql = "SELECT * FROM Account WHERE ClientID = '$clientID'";
     $getFromAccountsResult = mysqli_query($db,$sql);    
     
 
@@ -22,7 +22,7 @@
                 $count = mysqli_num_rows($getToClientResult);
                 if ($count == 1 ) {
                     $toClientID = $getToClientRow['ClientID'];
-                    $sql = "SELECT * FROM account WHERE ClientID = '$toClientID'";
+                    $sql = "SELECT * FROM Account WHERE ClientID = '$toClientID'";
                     $getToAccountsResult = mysqli_query($db,$sql);   
                 } else {
                     $alertMessageChanged = "Error: The email is invalid.";
@@ -39,7 +39,7 @@
                 $count = mysqli_num_rows($getToClientResult);
                 if ($count == 1 ) {
                     $toClientID = $getToClientRow['ClientID'];
-                    $sql = "SELECT * FROM account WHERE ClientID = '$toClientID'";
+                    $sql = "SELECT * FROM Account WHERE ClientID = '$toClientID'";
                     $getToAccountsResult = mysqli_query($db,$sql);    
                 } else { 
                     $alertMessageChanged = "Error: The phone number is invalid.";

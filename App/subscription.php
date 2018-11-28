@@ -5,13 +5,13 @@
     $date = date('Y-m-d', time());
     $clientCardNumber = $_SESSION['cardNumber'];
 
-    $sql = "SELECT * FROM account WHERE CardNumber = '$clientCardNumber'";
+    $sql = "SELECT * FROM Account WHERE CardNumber = '$clientCardNumber'";
     $getClientIDResult = mysqli_query($db,$sql);
     $getClientIDRow = mysqli_fetch_array($getClientIDResult,MYSQLI_ASSOC);
 
     // Get client account information
     $clientID = $getClientIDRow['ClientID'];
-    $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
+    $sql = "SELECT * FROM Account WHERE ClientID = '$clientID'";
     $getAllAccountsResult = mysqli_query($db,$sql);
     $arrayAccounts = array();
     while($row = $getAllAccountsResult->fetch_assoc()) {
@@ -22,7 +22,7 @@
 
 
     // Get client's account from session
-    $sql = "SELECT * FROM account WHERE CardNumber = '$clientCardNumber'";
+    $sql = "SELECT * FROM Account WHERE CardNumber = '$clientCardNumber'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     

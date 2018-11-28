@@ -10,7 +10,7 @@
         $selectedDate = $_POST['selectedDate'];
 
         // Get Account ID
-        $sql = "SELECT * FROM account WHERE CardNumber = '$cardNumber'";
+        $sql = "SELECT * FROM Account WHERE CardNumber = '$cardNumber'";
         $getAccountResult = mysqli_query($db,$sql);
         $getAccountRow = mysqli_fetch_array($getAccountResult,MYSQLI_ASSOC);
         $count = mysqli_num_rows($getAccountResult);

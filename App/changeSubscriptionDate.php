@@ -17,7 +17,7 @@
     $billBalance = $myBillRow['balance'];
 
     // Get account balance 
-    $sql = "SELECT * FROM account WHERE AccountID = '$accountID'";
+    $sql = "SELECT * FROM Account WHERE AccountID = '$accountID'";
     $myAccountResult = mysqli_query($db,$sql);
     $myAccountRow = mysqli_fetch_array($myAccountResult,MYSQLI_ASSOC);
     $accountBalance = $myAccountRow['Balance'];
@@ -35,7 +35,7 @@
     DO
     BEGIN
         DECLARE myBalance double;
-        SELECT Balance INTO myBalance FROM account WHERE AccountID = '$accountID';
+        SELECT Balance INTO myBalance FROM Account WHERE AccountID = '$accountID';
         IF myBalance >= $billBalance THEN
             INSERT INTO transaction (Amount, DATE, ToAccountID, FromAccountID, TransactionType) 
             VALUES ('$billBalance', DATE(NOW()), NULL , '$accountID', 'payment');

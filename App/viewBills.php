@@ -4,7 +4,7 @@
     $clientCardNumber = $_SESSION['cardNumber'];
 
     // Get client's account from session
-    $sql = "SELECT * FROM account WHERE CardNumber = '$clientCardNumber'";
+    $sql = "SELECT * FROM Account WHERE CardNumber = '$clientCardNumber'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     

@@ -3,10 +3,10 @@
 
     // Query the client's account
     $clientID = $_SESSION['clientID'];
-    $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
+    $sql = "SELECT * FROM Account WHERE ClientID = '$clientID'";
     $getFromAccountsResult = mysqli_query($db,$sql);
 
-    $sql = "SELECT * FROM account WHERE ClientID = '$clientID'";
+    $sql = "SELECT * FROM Account WHERE ClientID = '$clientID'";
     $getToAccountsResult = mysqli_query($db,$sql);
 ?>
 
