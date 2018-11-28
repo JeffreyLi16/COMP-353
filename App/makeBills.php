@@ -21,7 +21,7 @@
 
             // Create Bill
             $sql = "INSERT INTO billing (billingType, accountID, balance, paymentAmount, dueDate, automaticTransferDate, isCompleted)
-                VALUES ('Single', '$accountID', $billBalance, 0, $selectedDate, NULL, 0)";
+                VALUES ('Single', '$accountID', $billBalance, 0, '$selectedDate', NULL, 0)";
             $makeBillResult = mysqli_query($db,$sql);
 
             $successMsg = "The bill has been created for the card holder of $cardNumber.";
@@ -73,19 +73,19 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="text-info">Enter Card Number: </label>
-                            <input type="text" class="form-control" name="cardNumber">
+                            <input type="text" class="form-control" name="cardNumber" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="text-info">Bill Amount: </label>
-                            <input type="text" class="form-control" name="billBalance">
+                            <input type="text" class="form-control" name="billBalance" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="text-info">Due Date: </label>
-                            <input 
+                            <input required
                                 class="form-control"
                                 type="date" 
                                 min="<?php echo $date ?>"
