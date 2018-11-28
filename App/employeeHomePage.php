@@ -82,7 +82,7 @@
       <div class="card w-50 p-3" style="margin: auto">
         <div class="card-body">
           <form action = "" method = "post">
-            <div class="form-row">
+            <div class="form-row pb-3">
               <label class="text-info">ENTER CLIENT CARD NUMBER: </label>
               <div class="input-group col-md-12">
                 <input class="form-control" type="number" name="clientCardNumber" required/> 
